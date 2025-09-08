@@ -1,6 +1,9 @@
 import { listDogs, createDog } from '../actions';
 import DeleteButton from '../ui/DeleteButton';
 
+// Force dynamic rendering to prevent caching
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
 	// Load dogs from server action
 	const dogs = await listDogs();
