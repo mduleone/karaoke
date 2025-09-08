@@ -27,24 +27,26 @@ jobs:
 
       - name: Setup Harper
         env:
+          DEFAULTS_MODE: 'dev'
           TC_AGREEMENT: 'yes'
           HDB_ADMIN_USERNAME: 'admin'
           HDB_ADMIN_PASSWORD: 'password'
           ROOTPATH: '/tmp/hdb'
           OPERATIONSAPI_NETWORK_PORT: 9925
+          REPLICATION_HOSTNAME: 'localhost'
           LOGGING_LEVEL: 'debug'
           LOGGING_STDSTREAMS: true
           THREADS_COUNT: 1
           THREADS_DEBUG: false
         run: harperdb install
 
-      - name: Deploy data
-        run: |
-          harperdb start
-          sleep 10
-          harperdb deploy project=basic-data package=HarperDB/basic-data-example replicated=true
-          sleep 10
-          harperdb stop
+      # - name: Deploy data
+      #   run: |
+      #     harperdb start
+      #     sleep 10
+      #     harperdb deploy project=basic-data package=HarperDB/basic-data-example replicated=true
+      #     sleep 10
+      #     harperdb stop
 
       - name: Build project
         run: npm run build
