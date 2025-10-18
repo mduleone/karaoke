@@ -1,0 +1,77 @@
+.page {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  padding: 0;
+  top: 100%;
+  right: 0;
+  min-width: toRem(248);
+  z-index: 1000;
+}
+
+.formSection {
+  padding: toRem(16);
+  background-color: #fff;
+  border-radius: toRem(8);
+  box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.1);
+  border: toRem(1) solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(4);
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: toRem(4);
+  font-size: toRem(14);
+  font-weight: 500;
+  color: #374151;
+}
+
+.textInput {
+  width: 100%;
+  padding: toRem(12);
+  border: toRem(1) solid #d1d5db;
+  border-radius: toRem(4);
+  font-size: toRem(18);
+  box-sizing: border-box;
+}
+
+.submitButton {
+  background-color: #403b8a;
+  color: #fff;
+  padding: toRem(12) toRem(24);
+  border: none;
+  border-radius: toRem(4);
+  font-size: toRem(16);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  flex: 1;
+}
+
+.submitButton:hover {
+  background-color: #352f78;
+}
+
+.clearButton {
+  background-color: #b6b4d3;
+  color: #14123c;
+  padding: toRem(12) toRem(24);
+  border: none;
+  border-radius: toRem(4);
+  font-size: toRem(16);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  flex: 1;
+}
+
+.clearButton:hover {
+  background-color: #a09fbb;
+}
+
+.buttonRow {
+  display: flex;
+  gap: toRem(4);
+}

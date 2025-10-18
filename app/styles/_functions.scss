@@ -1,0 +1,7 @@
+@use "sass:math";
+
+$base-font-size: 16; // Your global base font size
+
+@function toRem($pixels) {
+  @return math.div($pixels, $base-font-size) * 1rem;
+}

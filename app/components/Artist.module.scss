@@ -1,0 +1,20 @@
+.artistSection {
+  padding: 0 toRem(8) toRem(12);
+  border-bottom: toRem(1) solid #ccc;
+}
+
+.artistName {
+  font-size: toRem(18);
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding: toRem(8) 0 toRem(4);
+  z-index: 1;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+}

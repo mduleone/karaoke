@@ -6,6 +6,9 @@ const nextConfig = {
 
 		return config;
 	},
+	sassOptions: {
+    additionalData: `@use "./app/styles/global-utilities.scss" as *;`,
+	},
 };
 
 module.exports = nextConfig;

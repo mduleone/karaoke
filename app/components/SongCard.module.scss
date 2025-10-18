@@ -1,0 +1,76 @@
+.songCard {
+  border-radius: toRem(3);
+  padding: toRem(8);
+  border: toRem(1) solid #222;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(2);
+  width: 100%;
+  background-color: #fff;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.songCard:focus-visible {
+  outline: toRem(2) solid #403b8a;
+  outline-offset: toRem(2);
+}
+
+.favorite {
+  background-color: #60ed84aa;
+  border-color: #60ed84aa;
+}
+
+.avoid {
+  background-color: #ec9098aa;
+  border-color: #ec9098aa;
+}
+
+.songTitle {
+  font-size: toRem(16);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.songArtist {
+  font-size: toRem(14);
+}
+
+.songMeta {
+  font-size: toRem(14);
+  display: flex;
+  align-items: center;
+  color: #555;
+}
+
+.tags {
+  font-size: toRem(14);
+  display: flex;
+  gap: toRem(8);
+  list-style: none;
+  padding: 0;
+}
+
+.tag {
+  background-color: #eee;
+  font-weight: bold;
+  border-radius: toRem(6);
+  padding: 0 toRem(6);
+}
+
+.duet {
+  background-color: #3aa4cd;
+  color: #fff;
+}
+
+.learn {
+  background-color: #eef52c;
+}
+
+.retry {
+  background-color: #ff9800;
+}

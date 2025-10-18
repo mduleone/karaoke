@@ -1,0 +1,70 @@
+.songList {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - toRem(80));
+}
+
+.filters {
+  background-color: #fff;
+  flex: 1;
+}
+
+.searchBox {
+  font-size: toRem(18);
+  width: 100%;
+}
+
+.artistList {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+}
+
+.settingsPanelToggle {
+  margin-top: toRem(8);
+  background-color: #403b8a;
+  color: white;
+  border: none;
+  padding: toRem(8) toRem(12);
+  border-radius: toRem(4);
+  width: 100%;
+  cursor: pointer;
+}
+
+.settingsPanel {
+  max-height: 0;
+  overflow: hidden; 
+  margin: toRem(8) 0;
+  transition: max-height 0.5s ease-in-out;
+  display: flex;
+  justify-content: space-around;
+}
+
+.visible {
+  max-height: toRem(100);
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: toRem(1) solid #403b8a;
+  border-radius: toRem(4);
+  cursor: pointer;
+  font-size: toRem(16);
+  padding: toRem(8) toRem(12);
+  flex-direction: column;
+  background-color: #eee;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.enabled {
+  background-color: #94d185;
+  color: #000;
+}
+
+.recentlyAdded {
+  gap: toRem(8);
+}
