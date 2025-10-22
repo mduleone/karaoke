@@ -45,12 +45,13 @@
   display: flex;
   align-items: center;
   background: none;
-  border: toRem(1) solid #403b8a;
+  border: toRem(1) solid #000;
   border-radius: toRem(100);
   cursor: pointer;
   font-size: toRem(16);
   gap: toRem(2);
   transition: background-color 0.3s, color 0.3s;
+  color: #000;
 }
 
 .noGap {

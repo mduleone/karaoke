@@ -51,14 +51,15 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 		Boolean
 	).length;
 
+	const confirmationMessage = `You're about to sing:\n` + `${song.artist} - ${song.title}`;
 	const singSongAction: MouseEventHandler<HTMLButtonElement> = useCallback(
 		async (event) => {
 			event.preventDefault();
-			if (canEditSong) {
+			if (canEditSong && window.confirm(confirmationMessage)) {
 				await singSong(song.id, username, pin);
 			}
 		},
-		[song.id, username, pin, canEditSong]
+		[song.id, username, pin, canEditSong, confirmationMessage]
 	);
 
 	const CardComponent = canEditSong ? 'div' : 'button';
