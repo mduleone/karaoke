@@ -1,11 +1,16 @@
 'use client';
 
 import { useCallback, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
+
 import { createSong } from '../actions';
 import Modal from './Modal';
 import SongForm from './SongForm';
-
+import '../utils/font-awesome';
 import styles from './AddSongButton.module.scss';
+
+config.autoAddCss = false;
 
 type AddSongButtonProps = {
 	className?: string;
@@ -28,7 +33,7 @@ const AddSongButton: React.FC<AddSongButtonProps> = ({ className }) => {
 	return (
 		<>
 			<button type="button" onClick={handleOpen} className={`${className} ${styles.addButton}`}>
-				Add Song
+				<FontAwesomeIcon icon={['fas', 'plus']} />
 			</button>
 			<Modal show={isOpen} onClose={handleClose}>
 				<SongForm formAction={formAction} />

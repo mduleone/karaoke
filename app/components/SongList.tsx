@@ -84,19 +84,17 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 	return (
 		<div className={styles.songList}>
 			<div className={styles.filters}>
-				<div>
-					<label htmlFor="search">
-						<input
-							id="search"
-							type="text"
-							onChange={(e) => setSearchQuery(e.target.value)}
-							value={searchQuery}
-							name="search"
-							placeholder="Song or Artist Search..."
-							className={styles.searchBox}
-						/>
-					</label>
-				</div>
+				<label htmlFor="search">
+					<input
+						id="search"
+						type="text"
+						onChange={(e) => setSearchQuery(e.target.value)}
+						value={searchQuery}
+						name="search"
+						placeholder="Song or Artist Search..."
+						className={styles.searchBox}
+					/>
+				</label>
 				<button type="button" onClick={() => setShowSettings((p) => !p)} className={styles.settingsPanelToggle}>
 					{showSettings ? 'Hide' : 'Show'} Filters
 				</button>

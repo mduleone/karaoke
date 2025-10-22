@@ -193,65 +193,75 @@ export async function updateSong(formData) {
 	revalidatePath('/[username]');
 }
 
-export async function listDogs() {
-	// Original database logic - uncomment when ready
-	try {
-		const dogs = [];
-		if (tables?.Dog) {
-			for await (const dog of tables.Dog.search()) {
-				dogs.push({ id: dog.id, name: dog.name, breed: dog.breed, age: dog.age, color: dog.color });
+export const singSong = async (songID, username, pin) => {
+	if (typeof tables === 'undefined' || !tables.SingingRecord || !tables.SimpleUser) {
+		throw new Error('Database not available');
+	}
+	
+	const userRecord = await tables.SimpleUser.get(username);
+	if (!userRecord) {
+		return { statusCode: 401, error: new Error(`User does not exist!`) };
+	}
+	
+	const hash = userRecord.pinHash;
+	const pinMatches = await bcrypt.compare(pin, hash);
+	if (!pinMatches) {
+		return { statusCode: 403, error: new Error(`You're not ${username}!`) };
+	}
+
+	const sungAt = Date.now();
+
+	await tables.SingingRecord.create({
+		songID,
+		username,
+		sungAt,
+	});
+}
+
+export const listSingingRecordsForUser = async (forUser) => {
+		try {
+			const songs = [];
+			if (tables?.SingingRecord) {
+				for await (const song of tables.SingingRecord.search()) {
+					const { id, username, songID, sungAt } = song;
+
+					const {artist, title } = await tables.Songs.get(songID);
+
+					if (artist && title && username === forUser) {
+						songs.push({
+							artist,
+							title,
+							id,
+							songID,
+							sungAt,
+						});
+					}
+				}
 			}
+			return songs;
+		} catch (error) {
+			console.error('Error listing songs:', error);
+			return [];
 		}
-		return dogs;
-	} catch (error) {
-		console.error('Error listing dogs:', error);
-		return [];
-	}
-}
+};
 
-export async function getDog(id) {
-	try {
-		if (typeof tables === 'undefined' || !tables.Dog) {
-			return null;
-		}
-		return await tables.Dog.get(id);
-	} catch (error) {
-		console.error('Error getting dog:', error);
-		return null;
-	}
-}
-
-export async function createDog(formData) {
-	// Extract form values
-	const name = formData.get('name');
-	const breed = formData.get('breed');
-	const age = parseInt(formData.get('age'));
-	const color = formData.get('color');
-
-	// Validate required fields
-	if (!name || !breed || !age || !color) {
-		throw new Error('All fields are required');
-	}
-
-	if (typeof tables === 'undefined' || !tables.Dog) {
+export async function deleteSingingRecord(singingRecordId, username, pin) {
+	if (typeof tables === 'undefined' || !tables.SingingRecord || !tables.SimpleUser) {
 		throw new Error('Database not available');
 	}
 
-	await tables.Dog.create({ name, breed, age, color });
-
-	// Revalidate the dogs page to show updated data
-	revalidatePath('/dogs');
-}
-
-export async function deleteDog(dogId) {
-	console.log('Deleting dog with id:', dogId);
-
-	if (typeof tables === 'undefined' || !tables.Dog) {
-		throw new Error('Database not available');
+	const userRecord = await tables.SimpleUser.get(username);
+	if (!userRecord) {
+		return { statusCode: 401, error: new Error(`User does not exist!`) };
 	}
 
-	await tables.Dog.delete(dogId);
+	const hash = userRecord.pinHash;
+	const pinMatches = await bcrypt.compare(pin, hash);
+	if (!pinMatches) {
+		return { statusCode: 403, error: new Error(`You're not ${username}!`) };
+	}
 
-	// Revalidate the dogs page to show updated data
-	revalidatePath('/dogs');
+	await tables.SingingRecord.delete(singingRecordId);
+
+	revalidatePath('/[username]/history');
 }

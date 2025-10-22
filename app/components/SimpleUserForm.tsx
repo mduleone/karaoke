@@ -3,11 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useSimpleUserContext } from '../context/simple-user';
 import styles from './SimpleUserForm.module.scss';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
 	const { username, pin, setUsername, setPin } = useSimpleUserContext();
 	const router = useRouter();
+	const formRef = useRef<HTMLDivElement>(null);
 
 	const clear = useCallback(() => {
 		setUsername('');
@@ -15,8 +16,21 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
 		router.replace(`/`);
 	}, [setUsername, setPin, router]);
 
+	useEffect(() => {
+		const clickListener = (event) => {
+			if (formRef.current && !formRef.current.contains(event.target)) {
+				onClose();
+			}
+		};
+
+		document.addEventListener('click', clickListener);
+		return () => {
+			document.removeEventListener('click', clickListener);
+		};
+	}, [onClose]);
+
 	return (
-		<div className={styles.page}>
+		<div ref={formRef} className={styles.page}>
 			<div className={styles.formSection}>
 				<div>
 					<label className={styles.formLabel} htmlFor="username">

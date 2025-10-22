@@ -21,3 +21,11 @@ type SimpleUser @table @export {
 	pinHash: String
 	createdAt: Float @createdTime @indexed
 }
+
+type SingingRecord @table @export {
+	id: ID @primaryKey
+	songID: ID! @indexed
+	username: String! @indexed
+	sungAt: Float! @indexed
+	__createdtime__: Float @createdTime @indexed
+}

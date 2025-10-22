@@ -3,7 +3,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useParams, usePathname } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import AddSongButton from './AddSongButton';
 import SimpleUserForm from './SimpleUserForm';
@@ -16,6 +17,17 @@ config.autoAddCss = false;
 const Header = () => {
 	const { username, pin } = useSimpleUserContext();
 	const [showUserForm, setShowUserForm] = useState(false);
+	const params = useParams();
+	const pathname = usePathname();
+
+	const onCloseUserForm = useCallback(() => {
+		setShowUserForm(false);
+	}, []);
+
+	const isMatt = params.username === 'matt' || typeof params.username === 'undefined';
+	const isHistory = pathname.endsWith('/history');
+	const historyHref = `/${isMatt ? 'matt' : params.username}/history`;
+	const songListHref = `/${isMatt ? '' : params.username}`;
 
 	return (
 		<header className={styles.header}>
@@ -32,6 +44,11 @@ const Header = () => {
 						</li>
 					)}
 					<li className={styles.userIcon}>
+						<Link className={styles.userIconButton} href={isHistory ? songListHref : historyHref}>
+							<FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
+						</Link>
+					</li>
+					<li className={styles.userIcon}>
 						<button
 							type="button"
 							className={styles.userIconButton}
@@ -40,7 +57,7 @@ const Header = () => {
 						>
 							<FontAwesomeIcon icon={['fas', 'user']} />
 						</button>
-						{showUserForm && <SimpleUserForm onClose={() => setShowUserForm(false)} />}
+						{showUserForm && <SimpleUserForm onClose={onCloseUserForm} />}
 					</li>
 				</ul>
 			</nav>

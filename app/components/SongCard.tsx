@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useState } from 'react';
-import { updateSong } from '../actions';
+import { MouseEventHandler, useCallback, useState } from 'react';
+import { updateSong, singSong } from '../actions';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
@@ -27,7 +27,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 	const isGenericListAndUserIsMatt = username === 'matt' && params.username === undefined;
 	const notMyUser = username !== params?.username;
 	const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
-	const cantEditSong = !signedIn || isWrongUserToEdit;
+	const canEditSong = signedIn && !isWrongUserToEdit;
 
 	const openModal = () => setIsModalOpen(true);
 	const closeModal = useCallback(() => setIsModalOpen(false), []);
@@ -44,9 +44,22 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 		Boolean
 	).length;
 
+	const singSongAction: MouseEventHandler<HTMLButtonElement> = useCallback(
+		async (event) => {
+			event.preventDefault();
+			if (canEditSong) {
+				await singSong(song.id, username, pin);
+			}
+		},
+		[song.id, username, pin, canEditSong]
+	);
+
+	const CardComponent = canEditSong ? 'div' : 'button';
+	const cardComponentProps = canEditSong ? {} : { onClick: openModal };
+
 	return (
 		<li>
-			<button type="button" className={cardStyles} onClick={openModal}>
+			<CardComponent {...cardComponentProps} className={cardStyles}>
 				<p className={styles.songTitle}>
 					<span>{title}</span>
 					{favorite && <span>❤️</span>}
@@ -54,16 +67,28 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 				</p>
 				{withArtist && <p className={styles.songMeta}>{artist}</p>}
 				{withAddedDate && <p className={styles.songMeta}>Added: {createdDate}</p>}
-				{tagsCount > 0 && (
-					<ul className={styles.tags}>
-						{duet && <li className={`${styles.tag} ${styles.duet}`}>Duet</li>}
-						{learn && <li className={`${styles.tag} ${styles.learn}`}>Learn</li>}
-						{retry && <li className={`${styles.tag} ${styles.retry}`}>Retry</li>}
-					</ul>
-				)}
-			</button>
+				<div className={styles.tagsAndSing}>
+					{canEditSong && (
+						<div className={styles.songButtons}>
+							<button type="button" className={styles.songButton} onClick={openModal}>
+								Edit
+							</button>
+							<button type="button" className={styles.songButton} onClick={singSongAction}>
+								Sing
+							</button>
+						</div>
+					)}
+					{tagsCount > 0 && (
+						<ul className={styles.tags}>
+							{duet && <li className={`${styles.tag} ${styles.duet}`}>Duet</li>}
+							{learn && <li className={`${styles.tag} ${styles.learn}`}>Learn</li>}
+							{retry && <li className={`${styles.tag} ${styles.retry}`}>Retry</li>}
+						</ul>
+					)}
+				</div>
+			</CardComponent>
 			<Modal show={isModalOpen} onClose={closeModal}>
-				<SongForm formAction={formAction} song={song} disabled={cantEditSong} onClose={closeModal} />
+				<SongForm formAction={formAction} song={song} disabled={!canEditSong} onClose={closeModal} />
 			</Modal>
 		</li>
 	);

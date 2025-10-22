@@ -1,0 +1,30 @@
+.songList {
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - toRem(80));
+}
+
+.filters {
+  background-color: #fff;
+  flex: 1;
+}
+
+.searchBox {
+  font-size: toRem(18);
+  width: 100%;
+}
+
+.historyList {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+  padding: 0;
+  list-style: none;
+  gap: toRem(8);
+
+  li:last-child {
+    margin-bottom: toRem(16);
+  }
+}

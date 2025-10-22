@@ -30,32 +30,12 @@ export class Songs extends tables.Songs {
 		target.checkPermission = false;
 		return super.get(target);
 	}
-
-	async put(target, data) {
-		target.checkPermission = false;
-		const { secretKey, ...rest } = data;
-		if (secretKey === 'something') {
-			return super.put(target, rest);
-		}
-		return { status: 403, headers: { secretKey } };
-	}
-
-	async post(target, data) {
-		target.checkPermission = false;
-		const { secretKey, ...rest } = data;
-		if (secretKey === 'something') {
-			return super.post(target, rest);
-		}
-		return { status: 403, headers: { secretKey } };
-	}
 }
 
 export class SimpleUser extends tables.SimpleUser {
 	static loadAsInstance = false;
+}
 
-	async get(target) {
-		target.checkPermission = false;
-		console.log('Getting SimpleUser with target:', target);
-		return super.get(target);
-	}
+export class SingingRecord extends tables.SingingRecord {
+	static loadAsInstance = false;
 }

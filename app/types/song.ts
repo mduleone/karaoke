@@ -9,6 +9,13 @@ export type SongType = {
 	notes: string;
 	id: string;
 	tags: string[];
-	__createdtime__: string;
-	__updatedtime__: string;
+	__createdtime__: number;
+	__updatedtime__: number;
+};
+
+export type SongHistoryType = {
+	artist: string;
+	title: string;
+	id: string;
+	sungAt: number;
 };

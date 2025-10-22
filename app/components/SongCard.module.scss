@@ -9,12 +9,15 @@
   background-color: #fff;
   color: inherit;
   text-align: left;
-  cursor: pointer;
 }
 
 .songCard:focus-visible {
   outline: toRem(2) solid #403b8a;
   outline-offset: toRem(2);
+}
+
+button.songCard {
+  cursor: pointer;
 }
 
 .favorite {
@@ -73,4 +76,31 @@
 
 .retry {
   background-color: #ff9800;
+}
+
+.tagsAndSing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.songButtons {
+  display: flex;
+  gap: toRem(4);
+}
+
+.songButton {
+  background-color: #403b8a;
+  color: #fff;
+  border: none;
+  padding: toRem(6) toRem(12);
+  border-radius: toRem(4);
+  font-size: toRem(14);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #352f78;
+  }
 }
