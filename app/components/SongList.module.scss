@@ -36,16 +36,9 @@
 }
 
 .settingsPanel {
-  max-height: 0;
-  overflow: hidden; 
-  margin: toRem(8) 0;
-  transition: max-height 0.5s ease-in-out;
   display: flex;
   justify-content: space-around;
-}
-
-.visible {
-  max-height: toRem(100);
+  margin: toRem(8) 0;
 }
 
 .settingsButton {
@@ -53,18 +46,23 @@
   align-items: center;
   background: none;
   border: toRem(1) solid #403b8a;
-  border-radius: toRem(4);
+  border-radius: toRem(100);
   cursor: pointer;
   font-size: toRem(16);
-  padding: toRem(8) toRem(12);
-  flex-direction: column;
-  background-color: #eee;
+  gap: toRem(2);
   transition: background-color 0.3s, color 0.3s;
 }
 
+.noGap {
+  gap: 0;
+
+  * + * {
+    margin-left: toRem(-2);
+  }
+}
+
 .enabled {
-  background-color: #94d185;
-  color: #000;
+  background-color: #00000022;
 }
 
 .recentlyAdded {

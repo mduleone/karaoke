@@ -1,13 +1,18 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
 
 import Artist from './Artist';
 import SongCard from './SongCard';
 import type { SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
+import '../utils/font-awesome';
 
 import styles from './SongList.module.scss';
+
+config.autoAddCss = false;
 
 const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
 	const artistCompare = artistA.localeCompare(artistB);
@@ -22,8 +27,6 @@ const artistSorter = ({ artist: artistA }, { artist: artistB }) => artistA.local
 
 const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 	'use client';
-
-	const [showSettings, setShowSettings] = useState(false);
 
 	const {
 		searchQuery,
@@ -78,7 +81,6 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 		});
 	}, [filteredSongs]);
 
-	const settingsClasses = `${styles.settingsPanel}${showSettings ? ` ${styles.visible}` : ''}`;
 	const listClasses = `${styles.artistList}${byRecentlyAdded ? ` ${styles.recentlyAdded}` : ''}`;
 
 	return (
@@ -95,27 +97,22 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 						className={styles.searchBox}
 					/>
 				</label>
-				<button type="button" onClick={() => setShowSettings((p) => !p)} className={styles.settingsPanelToggle}>
-					{showSettings ? 'Hide' : 'Show'} Filters
-				</button>
-				<div className={settingsClasses}>
+				<div className={styles.settingsPanel}>
 					<button
 						type="button"
 						onClick={() => setFavoritesOnly((p) => !p)}
 						aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
 						className={`${styles.settingsButton}${favoritesOnly ? ` ${styles.enabled}` : ''}`}
 					>
-						<span>Only</span>
-						❤️
+						Only <FontAwesomeIcon icon={['fas', 'heart']} />
 					</button>
 					<button
 						type="button"
 						onClick={() => setDuetsOnly((p) => !p)}
 						aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
-						className={`${styles.settingsButton}${duetsOnly ? ` ${styles.enabled}` : ''}`}
+						className={`${styles.settingsButton} ${styles.noGap}${duetsOnly ? ` ${styles.enabled}` : ''}`}
 					>
-						<span>Only</span>
-						👥
+						<FontAwesomeIcon icon={['fas', 'user-plus']} /> <FontAwesomeIcon icon={['fas', 'user']} />
 					</button>
 					<button
 						type="button"
@@ -123,7 +120,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 						aria-label={`${showAvoid ? 'Hide' : 'Show'} avoided songs`}
 						className={`${styles.settingsButton}${showAvoid ? '' : ` ${styles.enabled}`}`}
 					>
-						<span>Hide</span>❌
+						Hide <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
 					</button>
 					<button
 						type="button"
@@ -131,7 +128,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 						aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
 						className={`${styles.settingsButton}${byRecentlyAdded ? ` ${styles.enabled}` : ''}`}
 					>
-						<span>Recents</span>🔝
+						<FontAwesomeIcon icon={['fas', 'clock-rotate-left']} /> Added
 					</button>
 				</div>
 				<div>

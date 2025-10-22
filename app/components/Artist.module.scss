@@ -14,6 +14,11 @@
   z-index: 1;
 }
 
+.count {
+  font-size: toRem(14);
+  color: #888;
+}
+
 .songList {
   display: flex;
   flex-direction: column;

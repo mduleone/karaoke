@@ -1,13 +1,20 @@
 'use client';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
+
 import { MouseEventHandler, useCallback, useState } from 'react';
+import { useParams } from 'next/navigation';
+
 import { updateSong, singSong } from '../actions';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
 import styles from './SongCard.module.scss';
 import { useSimpleUserContext } from '../context/simple-user';
-import { useParams } from 'next/navigation';
+import '../utils/font-awesome';
+
+config.autoAddCss = false;
 
 type SongProps = {
 	song: SongType;
@@ -62,8 +69,8 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 			<CardComponent {...cardComponentProps} className={cardStyles}>
 				<p className={styles.songTitle}>
 					<span>{title}</span>
-					{favorite && <span>❤️</span>}
-					{avoid && <span>❌</span>}
+					{favorite && <FontAwesomeIcon icon={['fas', 'heart']} />}
+					{avoid && <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />}
 				</p>
 				{withArtist && <p className={styles.songMeta}>{artist}</p>}
 				{withAddedDate && <p className={styles.songMeta}>Added: {createdDate}</p>}
@@ -71,10 +78,10 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 					{canEditSong && (
 						<div className={styles.songButtons}>
 							<button type="button" className={styles.songButton} onClick={openModal}>
-								Edit
+								<FontAwesomeIcon icon={['fas', 'pencil']} />
 							</button>
 							<button type="button" className={styles.songButton} onClick={singSongAction}>
-								Sing
+								<FontAwesomeIcon icon={['fas', 'microphone-lines']} />
 							</button>
 						</div>
 					)}

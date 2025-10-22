@@ -73,7 +73,8 @@
 .tags {
   display: flex;
   flex-wrap: wrap;
-  gap: toRem(8);
+  gap: toRem(16);
+  row-gap: toRem(8);
   justify-content: center;
 };
 
@@ -84,26 +85,54 @@
   font-weight: 500;
   color: #374151;
   align-items: center;
-  padding: toRem(2) toRem(16);
-  gap: toRem(8);
+  padding: toRem(12) toRem(16);
+  gap: toRem(2);
   border: toRem(1) solid #d1d5db;
   border-radius: toRem(100);
+  transition: background-color 0.2s ease-in-out;
+
+  &:has(input[type="checkbox"]:checked) {
+    background-color: #00000022;
+  }
+
+  &:focus-within {
+    outline-offset: toRem(2);
+    outline-width: toRem(2);
+    outline-style: solid;
+  }
+
+  &.noGap {
+    gap: 0;
+
+    *+* {
+      margin-left: toRem(-2);
+    }
+  }
+}
+
+.checkboxInput {
+  position: absolute;
+  height: 0;
+  width: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .submitButton {
-  background-color: #403b8a;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
   padding: toRem(12) toRem(24);
-  border: none;
+  border: toRem(1) #000 solid;
   border-radius: toRem(4);
   font-size: toRem(16);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
-
 .submitButton:hover {
-  background-color: #352f78;
+  background-color: #00000022;
 }
 
 .lyricsLinks {

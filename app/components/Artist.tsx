@@ -5,13 +5,15 @@ import styles from './Artist.module.scss';
 
 type ArtistProps = {
 	artist: string;
-	duet: boolean;
+	duet?: boolean;
 	songs: SongType[];
 };
 
-const Artist = ({ artist, duet, songs }: ArtistProps) => (
+const Artist = ({ artist, songs }: ArtistProps) => (
 	<ul className={styles.artistSection}>
-		<p className={styles.artistName}>{artist}</p>
+		<p className={styles.artistName}>
+			{artist} <span className={styles.count}>[{songs.length}]</span>
+		</p>
 		<ul className={styles.songList}>
 			{songs.map((song) => (
 				<SongCard key={song.id} song={song} />

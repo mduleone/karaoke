@@ -45,7 +45,7 @@ const Header = () => {
 					)}
 					<li className={styles.userIcon}>
 						<Link className={styles.userIconButton} href={isHistory ? songListHref : historyHref}>
-							<FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
+							<FontAwesomeIcon icon={['fas', 'list-ol']} />
 						</Link>
 					</li>
 					<li className={styles.userIcon}>

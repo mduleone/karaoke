@@ -1,10 +1,16 @@
 'use client';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
 import Link from 'next/link';
+import { useRef } from 'react';
+
+import '../utils/font-awesome';
 import type { SongType } from '../types/song';
 import styles from './SongForm.module.scss';
-import { useRef } from 'react';
 import { useSimpleUserContext } from '../context/simple-user';
+
+config.autoAddCss = false;
 
 type SongFormProps = {
 	formAction?: (formData: FormData) => Promise<void>;
@@ -109,7 +115,7 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
 					</div>
 					<div className={styles.tags}>
 						<label className={styles.checkboxLabel} htmlFor="favorite" aria-label="Favorite">
-							❤️
+							<FontAwesomeIcon icon={['fas', 'heart']} />
 							<input
 								type="checkbox"
 								id="favorite"
@@ -118,14 +124,23 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
 								ref={favoriteRef}
 								onChange={onChangeToggleOppositeExtremity(avoidRef)}
 								disabled={disabled}
+								className={styles.checkboxInput}
 							/>
 						</label>
-						<label className={styles.checkboxLabel} htmlFor="duet" aria-label="Duet">
-							👥
-							<input type="checkbox" id="duet" name="duet" defaultChecked={song?.duet} disabled={disabled} />
+						<label className={`${styles.checkboxLabel} ${styles.noGap}`} htmlFor="duet" aria-label="Duet">
+							<FontAwesomeIcon icon={['fas', 'user-plus']} />
+							<FontAwesomeIcon icon={['fas', 'user']} />
+							<input
+								type="checkbox"
+								id="duet"
+								name="duet"
+								defaultChecked={song?.duet}
+								disabled={disabled}
+								className={styles.checkboxInput}
+							/>
 						</label>
 						<label className={styles.checkboxLabel} htmlFor="avoid" aria-label="Avoid this song">
-							❌
+							<FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
 							<input
 								type="checkbox"
 								id="avoid"
@@ -134,15 +149,30 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
 								ref={avoidRef}
 								onChange={onChangeToggleOppositeExtremity(favoriteRef)}
 								disabled={disabled}
+								className={styles.checkboxInput}
 							/>
 						</label>
 						<label className={styles.checkboxLabel} htmlFor="learn">
 							Learn
-							<input type="checkbox" id="learn" name="learn" defaultChecked={song?.learn} disabled={disabled} />
+							<input
+								type="checkbox"
+								id="learn"
+								name="learn"
+								defaultChecked={song?.learn}
+								disabled={disabled}
+								className={styles.checkboxInput}
+							/>
 						</label>
 						<label className={styles.checkboxLabel} htmlFor="retry">
 							Try Again
-							<input type="checkbox" id="retry" name="retry" defaultChecked={song?.retry} disabled={disabled} />
+							<input
+								type="checkbox"
+								id="retry"
+								name="retry"
+								defaultChecked={song?.retry}
+								disabled={disabled}
+								className={styles.checkboxInput}
+							/>
 						</label>
 					</div>
 					<button
