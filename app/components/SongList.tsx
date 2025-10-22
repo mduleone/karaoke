@@ -142,7 +142,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 					Songs
 				</div>
 			</div>
-			<div className={listClasses}>
+			<ul className={listClasses}>
 				{byRecentlyAdded
 					? sortedSongsByAddedDate.map((song) => <SongCard key={song.id} song={song} withArtist withAddedDate />)
 					: filteredSongsByArtist.map((artistGroup) => (
@@ -153,7 +153,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 								songs={artistGroup.songs}
 							/>
 						))}
-			</div>
+			</ul>
 		</div>
 	);
 };

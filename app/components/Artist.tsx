@@ -10,14 +10,14 @@ type ArtistProps = {
 };
 
 const Artist = ({ artist, duet, songs }: ArtistProps) => (
-	<section className={styles.artistSection}>
+	<ul className={styles.artistSection}>
 		<p className={styles.artistName}>{artist}</p>
-		<div className={styles.songList}>
+		<ul className={styles.songList}>
 			{songs.map((song) => (
-				<SongCard key={`${song.artist}-${song.title}`} song={song} />
+				<SongCard key={song.id} song={song} />
 			))}
-		</div>
-	</section>
+		</ul>
+	</ul>
 );
 
 export default Artist;

@@ -45,7 +45,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 	).length;
 
 	return (
-		<>
+		<li>
 			<button type="button" className={cardStyles} onClick={openModal}>
 				<p className={styles.songTitle}>
 					<span>{title}</span>
@@ -65,7 +65,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 			<Modal show={isModalOpen} onClose={closeModal}>
 				<SongForm formAction={formAction} song={song} disabled={cantEditSong} onClose={closeModal} />
 			</Modal>
-		</>
+		</li>
 	);
 };
 

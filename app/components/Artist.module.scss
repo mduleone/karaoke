@@ -1,6 +1,7 @@
 .artistSection {
   padding: 0 toRem(8) toRem(12);
   border-bottom: toRem(1) solid #ccc;
+  list-style: none;
 }
 
 .artistName {
@@ -17,4 +18,6 @@
   display: flex;
   flex-direction: column;
   gap: toRem(8);
+  padding: 0;
+  list-style: none;
 }
