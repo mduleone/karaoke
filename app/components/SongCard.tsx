@@ -56,10 +56,10 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 		async (event) => {
 			event.preventDefault();
 			if (canEditSong && window.confirm(confirmationMessage)) {
-				await singSong(song.id, username, pin);
+				await singSong(song.id, song.artist, song.title, username, pin);
 			}
 		},
-		[song.id, username, pin, canEditSong, confirmationMessage]
+		[song.id, song.artist, song.title, username, pin, canEditSong, confirmationMessage]
 	);
 
 	const CardComponent = canEditSong ? 'div' : 'button';

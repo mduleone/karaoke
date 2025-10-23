@@ -32,11 +32,11 @@ const getSortableDateString = (date: Date) => {
 const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
 	'use client';
 	const { username, pin } = useSimpleUserContext();
-	const params = useParams();
+	const { username: paramsUsername } = useParams() as { username?: string };
 
 	const signedIn = Boolean(username && pin);
-	const isGenericListAndUserIsMatt = username === 'matt' && params.username === undefined;
-	const notMyUser = username !== params?.username;
+	const isGenericListAndUserIsMatt = username === 'matt' && paramsUsername === undefined;
+	const notMyUser = username !== paramsUsername;
 	const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
 	const canDeleteSongs = signedIn && !isWrongUserToEdit;
 
@@ -65,12 +65,11 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
 			}, [])
 			.toSorted((dateA, dateB) => dateB.dateSorter.localeCompare(dateA.dateSorter));
 	}, [songs]);
-
-	const userLink = `/${username === 'matt' ? '' : username}`;
+	const displayUsername = paramsUsername && paramsUsername.charAt(0).toLocaleUpperCase() + paramsUsername.slice(1);
 
 	return (
-		<div className={styles.songList}>
-			<h1>Singing History</h1>
+		<>
+			<h2 className={styles.heading}>{displayUsername}&rsquo;s History</h2>
 			<ul className={styles.historyList}>
 				{sortedSongsByAddedDate.map((dateGroup) => (
 					<HistoryDate
@@ -81,7 +80,7 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
 					/>
 				))}
 			</ul>
-		</div>
+		</>
 	);
 };
 

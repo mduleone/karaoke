@@ -8,10 +8,9 @@
   font-size: toRem(18);
   font-weight: bold;
   position: sticky;
-  top: 0;
+  top: toRem(226);
   background-color: #fff;
   padding: toRem(8) 0 toRem(4);
-  z-index: 1;
 }
 
 .count {

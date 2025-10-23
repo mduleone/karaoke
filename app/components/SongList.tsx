@@ -89,73 +89,71 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 
 	return (
 		<>
-			<h2>{isMatt ? 'Matt' : displayUsername}&rsquo;s List</h2>
-			<div className={styles.songList}>
-				<div className={styles.filters}>
-					<label htmlFor="search">
-						<input
-							id="search"
-							type="text"
-							onChange={(e) => setSearchQuery(e.target.value)}
-							value={searchQuery}
-							name="search"
-							placeholder="Song or Artist Search..."
-							className={styles.searchBox}
-						/>
-					</label>
-					<div className={styles.settingsPanel}>
-						<button
-							type="button"
-							onClick={() => setFavoritesOnly((p) => !p)}
-							aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
-							className={`${styles.settingsButton}${favoritesOnly ? ` ${styles.enabled}` : ''}`}
-						>
-							Only <FontAwesomeIcon icon={['fas', 'heart']} />
-						</button>
-						<button
-							type="button"
-							onClick={() => setDuetsOnly((p) => !p)}
-							aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
-							className={`${styles.settingsButton} ${styles.noGap}${duetsOnly ? ` ${styles.enabled}` : ''}`}
-						>
-							<FontAwesomeIcon icon={['fas', 'user-plus']} /> <FontAwesomeIcon icon={['fas', 'user']} />
-						</button>
-						<button
-							type="button"
-							onClick={() => setShowAvoid((p) => !p)}
-							aria-label={`${showAvoid ? 'Hide' : 'Show'} avoided songs`}
-							className={`${styles.settingsButton}${showAvoid ? '' : ` ${styles.enabled}`}`}
-						>
-							Hide <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
-						</button>
-						<button
-							type="button"
-							onClick={() => setByRecentlyAdded((p) => !p)}
-							aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
-							className={`${styles.settingsButton}${byRecentlyAdded ? ` ${styles.enabled}` : ''}`}
-						>
-							<FontAwesomeIcon icon={['fas', 'clock-rotate-left']} /> Added
-						</button>
-					</div>
-					<div>
-						Showing{' '}
-						{filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `all ${songs.length}`}{' '}
-						Songs
-					</div>
+			<div className={styles.filters}>
+				<h2>{isMatt ? 'Matt' : displayUsername}&rsquo;s List</h2>
+				<label htmlFor="search">
+					<input
+						id="search"
+						type="text"
+						onChange={(e) => setSearchQuery(e.target.value)}
+						value={searchQuery}
+						name="search"
+						placeholder="Song or Artist Search..."
+						className={styles.searchBox}
+					/>
+				</label>
+				<div className={styles.settingsPanel}>
+					<button
+						type="button"
+						onClick={() => setFavoritesOnly((p) => !p)}
+						aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
+						className={`${styles.settingsButton}${favoritesOnly ? ` ${styles.enabled}` : ''}`}
+					>
+						Only <FontAwesomeIcon icon={['fas', 'heart']} />
+					</button>
+					<button
+						type="button"
+						onClick={() => setDuetsOnly((p) => !p)}
+						aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
+						className={`${styles.settingsButton} ${styles.noGap}${duetsOnly ? ` ${styles.enabled}` : ''}`}
+					>
+						<FontAwesomeIcon icon={['fas', 'user-plus']} /> <FontAwesomeIcon icon={['fas', 'user']} />
+					</button>
+					<button
+						type="button"
+						onClick={() => setShowAvoid((p) => !p)}
+						aria-label={`${showAvoid ? 'Hide' : 'Show'} avoided songs`}
+						className={`${styles.settingsButton}${showAvoid ? '' : ` ${styles.enabled}`}`}
+					>
+						Hide <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
+					</button>
+					<button
+						type="button"
+						onClick={() => setByRecentlyAdded((p) => !p)}
+						aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
+						className={`${styles.settingsButton}${byRecentlyAdded ? ` ${styles.enabled}` : ''}`}
+					>
+						<FontAwesomeIcon icon={['fas', 'clock-rotate-left']} /> Added
+					</button>
 				</div>
-				<ul className={listClasses}>
-					{byRecentlyAdded
-						? sortedSongsByAddedDate.map((song) => <SongCard key={song.id} song={song} withArtist withAddedDate />)
-						: filteredSongsByArtist.map((artistGroup) => (
-								<Artist
-									key={`${artistGroup.artist}-${artistGroup.duet ? 'duet' : 'solo'}`}
-									artist={artistGroup.artist}
-									duet={artistGroup.duet}
-									songs={artistGroup.songs}
-								/>
-							))}
-				</ul>
+				<div>
+					Showing{' '}
+					{filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `all ${songs.length}`}{' '}
+					Songs
+				</div>
 			</div>
+			<ul className={listClasses}>
+				{byRecentlyAdded
+					? sortedSongsByAddedDate.map((song) => <SongCard key={song.id} song={song} withArtist withAddedDate />)
+					: filteredSongsByArtist.map((artistGroup) => (
+							<Artist
+								key={`${artistGroup.artist}-${artistGroup.duet ? 'duet' : 'solo'}`}
+								artist={artistGroup.artist}
+								duet={artistGroup.duet}
+								songs={artistGroup.songs}
+							/>
+						))}
+			</ul>
 		</>
 	);
 };

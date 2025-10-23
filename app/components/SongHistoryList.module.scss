@@ -1,26 +1,20 @@
-.songList {
-  display: flex;
-  flex-direction: column;
-  max-height: calc(100dvh - toRem(80));
-}
-
-.filters {
-  background-color: #fff;
-  flex: 1;
-}
-
-.searchBox {
-  font-size: toRem(18);
+.heading {
   width: 100%;
+  background-color: #fff;
+  z-index: 100;
+  padding-top: toRem(16);
+  position: sticky;
+  top: toRem(66);
+  max-lines: 1;
+  text-overflow: clip;
+  --webkit-line-clamp: 1;
 }
 
 .historyList {
-  overflow: scroll;
   display: flex;
   flex-direction: column;
-  position: relative;
   flex: 1;
-  padding: 0;
+  padding: toRem(66) 0 0;
   list-style: none;
   gap: toRem(8);
 

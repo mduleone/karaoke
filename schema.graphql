@@ -26,6 +26,8 @@ type SingingRecord @table @export {
 	id: ID @primaryKey
 	songID: ID! @indexed
 	username: String! @indexed
+	songArtist: String @indexed
+	songName: String @indexed
 	sungAt: Float! @indexed
 	__createdtime__: Float @createdTime @indexed
 }

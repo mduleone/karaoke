@@ -193,17 +193,18 @@ export async function updateSong(formData) {
 	revalidatePath('/[username]');
 }
 
-export const singSong = async (songID, username, pin) => {
+export const singSong = async (songID, songArtist, songName, username, pin) => {
 	if (typeof tables === 'undefined' || !tables.SingingRecord || !tables.SimpleUser) {
 		throw new Error('Database not available');
 	}
-	
+
 	const userRecord = await tables.SimpleUser.get(username);
 	if (!userRecord) {
 		return { statusCode: 401, error: new Error(`User does not exist!`) };
 	}
-	
+
 	const hash = userRecord.pinHash;
+	console.log(pin, hash);
 	const pinMatches = await bcrypt.compare(pin, hash);
 	if (!pinMatches) {
 		return { statusCode: 403, error: new Error(`You're not ${username}!`) };
@@ -213,10 +214,12 @@ export const singSong = async (songID, username, pin) => {
 
 	await tables.SingingRecord.create({
 		songID,
+		songName,
+		songArtist,
 		username,
 		sungAt,
 	});
-}
+};
 
 export const listSingingRecordsForUser = async (forUser) => {
 		try {
@@ -225,7 +228,13 @@ export const listSingingRecordsForUser = async (forUser) => {
 				for await (const song of tables.SingingRecord.search()) {
 					const { id, username, songID, sungAt } = song;
 
-					const {artist, title } = await tables.Songs.get(songID);
+					let artist, title;
+					try {
+						({artist, title } = await tables.Songs.get(songID));
+					} catch (e) {
+						console.error(`Couldn't find song ${songID}`);
+						console.error(e);
+					}
 
 					if (artist && title && username === forUser) {
 						songs.push({
