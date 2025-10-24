@@ -204,7 +204,6 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
 	}
 
 	const hash = userRecord.pinHash;
-	console.log(pin, hash);
 	const pinMatches = await bcrypt.compare(pin, hash);
 	if (!pinMatches) {
 		return { statusCode: 403, error: new Error(`You're not ${username}!`) };
