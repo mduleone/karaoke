@@ -7,10 +7,11 @@ type ArtistProps = {
 	artist: string;
 	duet?: boolean;
 	songs: SongType[];
+	addToRefMap?: (name: string) => (instance: HTMLElement) => void;
 };
 
-const Artist = ({ artist, songs }: ArtistProps) => (
-	<ul className={styles.artistSection}>
+const Artist = ({ artist, songs, addToRefMap }: ArtistProps) => (
+	<ul className={styles.artistSection} ref={addToRefMap?.(artist)}>
 		<p className={styles.artistName}>
 			{artist} <span className={styles.count}>[{songs.length}]</span>
 		</p>

@@ -8,21 +8,21 @@ import SimpleUserProvider from './context/simple-user';
 import Footer from './components/Footer';
 
 export const metadata = {
-	title: "Matt's Karaoke List",
+  title: "Matt's Karaoke List",
 };
 
 export default function RootLayout({ children }) {
-	return (
-		<html lang="en">
-			<body className={styles.body}>
-				<SimpleUserProvider>
-					<KaraokeSearchProvider>
-						<Header />
-						<main className={styles.main}>{children}</main>
-						<Footer />
-					</KaraokeSearchProvider>
-				</SimpleUserProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body className={styles.body}>
+        <SimpleUserProvider>
+          <KaraokeSearchProvider>
+            <Header />
+            <main className={styles.main}>{children}</main>
+            <Footer />
+          </KaraokeSearchProvider>
+        </SimpleUserProvider>
+      </body>
+    </html>
+  );
 }

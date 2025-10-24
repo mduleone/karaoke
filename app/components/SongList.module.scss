@@ -23,7 +23,7 @@
 
 .settingsPanelToggle {
   margin-top: toRem(8);
-  background-color: #403b8a;
+  background-color: #0D2A36;
   color: white;
   border: none;
   padding: toRem(8) toRem(12);
@@ -48,6 +48,21 @@
   font-size: toRem(16);
   gap: toRem(2);
   transition: background-color 0.3s, color 0.3s;
+  color: #000;
+}
+
+.scrollLetters {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: toRem(-18);
+  top: toRem(80);
+}
+
+.scrollLetter {
+  appearance: none;
+  border: none;
+  background: none;
   color: #000;
 }
 

@@ -20,9 +20,10 @@ type SongProps = {
 	song: SongType;
 	withArtist?: boolean;
 	withAddedDate?: boolean;
+	addToRefMap?: (name: string) => (instance: HTMLElement) => void;
 };
 
-const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps) => {
+const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
 	const { artist, title, favorite, duet, learn, retry, avoid, tags, __createdtime__ } = song;
 	const cardStyles = `${styles.songCard}${avoid ? ` ${styles.avoid}` : ''}${favorite ? ` ${styles.favorite}` : ''}`;
 	const createdDate = new Date(__createdtime__).toLocaleDateString();
@@ -66,7 +67,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false }: SongProps
 	const cardComponentProps = canEditSong ? {} : { onClick: openModal };
 
 	return (
-		<li>
+		<li ref={addToRefMap?.(title)}>
 			<CardComponent {...cardComponentProps} className={cardStyles}>
 				<p className={styles.songTitle}>
 					<span>{title}</span>

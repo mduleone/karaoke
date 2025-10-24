@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "harperdb-nextjs dev",
 		"build": "harperdb-nextjs build",
+		"local-build": "LOCAL_BUILD_FOR_DEPLOY=true harperdb-nextjs build",
 		"start": "harperdb-nextjs start",
 		"lint": "next lint",
 		"format": "prettier --write ."
@@ -29,6 +30,5 @@
 		"eslint-config-prettier": "10.1.5",
 		"prettier": "3.5.3",
 		"sass": "1.93.2"
-	},
-	"prettier": "@harperdb/code-guidelines/prettier"
+	}
 }

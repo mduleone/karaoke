@@ -2,9 +2,9 @@ import { listSongs } from './actions';
 import SongList from './components/SongList';
 
 export default async function Page() {
-	const songs = await listSongs();
+  const songs = await listSongs();
 
-	return (
-		<SongList songs={songs} />
-	);
+  return (
+    <SongList songs={songs} />
+  );
 }
