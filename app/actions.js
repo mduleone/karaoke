@@ -6,7 +6,28 @@ import('harperdb');
 
 const saltRounds = 10;
 
-export const listSongs = async (forUser) => {
+const CLUSTER_URL_FOR_SONGS = 'https://karaoke-cluster.karaoke.harperfabric.com:9926/Songs/';
+
+const listSongsLocalBuild = async (forUser) => {
+	try {
+		const songsFetch = await fetch(CLUSTER_URL_FOR_SONGS, { method: 'GET' });
+		const songsRaw = await songsFetch.json();
+
+		const songs = songsRaw.filter(({ username, artist, title }) => {
+			const shouldRenderSongForUser = forUser
+				? username === forUser || (forUser === 'matt' && !username)
+				: !username || username === 'matt';
+			return !!artist && !!title && shouldRenderSongForUser;
+		});
+
+		return songs;
+	} catch (error) {
+		console.error('Error listing songs:', error);
+		return [];
+	}
+}
+
+const listSongsServer = async (forUser) => {
 	try {
 		const songs = [];
 		if (tables?.Songs) {
@@ -51,6 +72,14 @@ export const listSongs = async (forUser) => {
 		console.error('Error listing songs:', error);
 		return [];
 	}
+}
+
+export const listSongs = async (forUser) => {
+	if (process.env.LOCAL_BUILD_FOR_DEPLOY === 'true') {
+		return await listSongsLocalBuild(forUser);
+	}
+
+	return await listSongsServer(forUser);
 }
 
 export async function getSong(id) {
