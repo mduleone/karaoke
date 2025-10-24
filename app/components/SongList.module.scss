@@ -68,9 +68,10 @@
 
 .noGap {
   gap: 0;
+  padding: toRem(1) toRem(8);
 
   * + * {
-    margin-left: toRem(-2);
+    margin-left: toRem(-4);
   }
 }
 

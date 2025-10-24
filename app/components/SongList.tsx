@@ -13,6 +13,7 @@ import '../utils/font-awesome';
 
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
+import { slugToString } from '../utils/string';
 
 config.autoAddCss = false;
 
@@ -100,7 +101,8 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 
   const listClasses = `${styles.artistList}${byRecentlyAdded ? ` ${styles.recentlyAdded}` : ''}`;
   const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
-  const displayUsername = paramsUsername && paramsUsername.charAt(0).toLocaleUpperCase() + paramsUsername.slice(1);
+  const stringName = slugToString(paramsUsername);
+  const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
 
   return (
     <>
