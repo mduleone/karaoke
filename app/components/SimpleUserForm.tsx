@@ -8,6 +8,8 @@ import styles from './SimpleUserForm.module.scss';
 import { slugToString, stringToSlug } from '../utils/string';
 import { login as loginAction, createAccount as createAccountAction } from '../actions';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
+import Link from 'next/link';
+import cx from '../utils/classnames';
 
 const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const { username, pin, setUsername, setPin } = useSimpleUserContext();
@@ -120,13 +122,16 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           </div>
           <button className={styles.share} type="button" onClick={handleCopy}>
             <div className={styles.copyButtonText}>
-              <p>Copy to Clipboard</p>
+              Copy to Clipboard
               <FontAwesomeIcon
                 aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
                 icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
               />
             </div>
           </button>
+          <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
+            Go to your list
+          </Link>
           <div className={styles.buttonRow}>
             <button type="button" className={styles.submitButton} onClick={onLogout}>
               Logout

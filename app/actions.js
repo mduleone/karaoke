@@ -77,11 +77,12 @@ const listSongsServer = async (forUser) => {
 };
 
 export const listSongs = async (forUser) => {
+  const lowerCaseUsername = forUser?.toLocaleLowerCase();
   if (process.env.LOCAL_BUILD_FOR_DEPLOY === 'true') {
-    return await listSongsLocalBuild(forUser);
+    return await listSongsLocalBuild(lowerCaseUsername);
   }
 
-  return await listSongsServer(forUser);
+  return await listSongsServer(lowerCaseUsername);
 };
 
 export async function getSong(id) {
@@ -104,7 +105,7 @@ export async function createSong(formData) {
     throw new Error('Username and PIN are required');
   }
 
-  const username = usernameValue.trim();
+  const username = usernameValue.toLocaleLowerCase().trim();
   const pin = pinValue.trim();
 
   const userRecord = await tables.SimpleUser.get(username);
@@ -170,7 +171,7 @@ export async function updateSong(formData) {
     throw new Error('Username and PIN are required');
   }
 
-  const username = usernameValue.trim();
+  const username = usernameValue.toLocaleLowerCase().trim();
   const pin = pinValue.trim();
 
   const userRecord = await tables.SimpleUser.get(username);
@@ -223,11 +224,13 @@ export async function updateSong(formData) {
 }
 
 export const singSong = async (songID, songArtist, songName, username, pin) => {
+  const lowerCaseUsername = username?.toLocaleLowerCase();
+
   if (typeof tables === 'undefined' || !tables.SingingRecord || !tables.SimpleUser) {
     throw new Error('Database not available');
   }
 
-  const userRecord = await tables.SimpleUser.get(username);
+  const userRecord = await tables.SimpleUser.get(lowerCaseUsername);
   if (!userRecord) {
     return { statusCode: 401, error: new Error(`User does not exist!`) };
   }
@@ -235,7 +238,7 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
   const hash = userRecord.pinHash;
   const pinMatches = await bcrypt.compare(pin, hash);
   if (!pinMatches) {
-    return { statusCode: 403, error: new Error(`You're not ${username}!`) };
+    return { statusCode: 403, error: new Error(`You're not ${lowerCaseUsername}!`) };
   }
 
   const sungAt = Date.now();
@@ -244,12 +247,13 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
     songID,
     songName,
     songArtist,
-    username,
+    username: lowerCaseUsername,
     sungAt,
   });
 };
 
 export const listSingingRecordsForUser = async (forUser) => {
+  const lowerCaseUsername = forUser?.toLocaleLowerCase();
   try {
     const songs = [];
     if (tables?.SingingRecord) {
@@ -264,7 +268,7 @@ export const listSingingRecordsForUser = async (forUser) => {
           console.error(e);
         }
 
-        if (artist && title && username === forUser) {
+        if (artist && title && username === lowerCaseUsername) {
           songs.push({
             artist,
             title,
@@ -307,8 +311,9 @@ export async function login(username, pin) {
   if (typeof tables === 'undefined' || !tables.SimpleUser) {
     throw new Error('Database not available');
   }
+  const lowerCaseUsername = username.toLocaleLowerCase();
 
-  const userRecord = await tables.SimpleUser.get(username);
+  const userRecord = await tables.SimpleUser.get(lowerCaseUsername);
   if (!userRecord) {
     return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist' };
   }
@@ -326,14 +331,15 @@ export async function createAccount(username, pin) {
   if (typeof tables === 'undefined' || !tables.SimpleUser) {
     throw new Error('Database not available');
   }
+  const lowerCaseUsername = username.toLocaleLowerCase();
 
-  const userRecord = await tables.SimpleUser.get(username);
+  const userRecord = await tables.SimpleUser.get(lowerCaseUsername);
   if (userRecord) {
     return { statusCode: 401, status: 'Unauthorized', message: 'User already exists' };
   }
 
   const pinHash = await bcrypt.hash(pin, saltRounds);
-  await tables.SimpleUser.create({ username, pinHash });
+  await tables.SimpleUser.create({ username: lowerCaseUsername, pinHash });
 
   return { statusCode: 200, status: 'OK' };
 }
