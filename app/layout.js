@@ -6,14 +6,22 @@ import KaraokeSearchProvider from './context/karaoke';
 import Header from './components/Header';
 import SimpleUserProvider from './context/simple-user';
 import Footer from './components/Footer';
+import ToastProvider from './components/ToastProvider';
 
 export const metadata = {
-  title: "Matt's Karaoke List",
+  title: "My Karaoke List",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
+        <link rel="shortcut icon" href="/images/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+        <meta name="apple-mobile-web-app-title" content="myKaraoke" />
+      </head>
       <body className={styles.body}>
         <SimpleUserProvider>
           <KaraokeSearchProvider>
@@ -22,6 +30,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </KaraokeSearchProvider>
         </SimpleUserProvider>
+        <ToastProvider />
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import Modal from './Modal';
 import SongForm from './SongForm';
 import styles from './AddSongButton.module.scss';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
+import { toast } from 'react-toastify';
 
 type AddSongButtonProps = {
   className?: string;
@@ -20,8 +21,13 @@ const AddSongButton: React.FC<AddSongButtonProps> = ({ className }) => {
 
   const formAction = useCallback(
     async (formData: FormData) => {
-      await createSong(formData);
+      const success = await createSong(formData);
       handleClose();
+      if (success.statusCode !== 200) {
+        toast.error(success.message);
+      } else {
+        toast.success(`Added ${formData.get('artist')} - ${formData.get('title')}`);
+      }
     },
     [handleClose],
   );

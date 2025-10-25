@@ -11,6 +11,7 @@ import styles from './SongCard.module.scss';
 import { useSimpleUserContext } from '../context/simple-user';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
 import cx from '../utils/classnames';
+import { toast } from 'react-toastify';
 
 type SongProps = {
   song: SongType;
@@ -38,8 +39,13 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
 
   const formAction = useCallback(
     async (formData: FormData) => {
-      await updateSong(formData);
+      const success = await updateSong(formData);
       closeModal();
+      if (success.statusCode !== 200) {
+        toast.error(success.message);
+      } else {
+        toast.success(`Updated ${formData.get('artist')} - ${formData.get('title')}`);
+      }
     },
     [closeModal],
   );
@@ -61,7 +67,12 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
     async (event) => {
       event.preventDefault();
       if (canEditSong && window.confirm(confirmationMessage)) {
-        await singSong(song.id, song.artist, song.title, username, pin);
+        const success = await singSong(song.id, song.artist, song.title, username, pin);
+        if (success.statusCode !== 200) {
+          toast.error(success.message);
+        } else {
+          toast.success(`You sang ${song.artist} - ${song.title}`);
+        }
       }
     },
     [song.id, song.artist, song.title, username, pin, canEditSong, confirmationMessage],

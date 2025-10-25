@@ -114,7 +114,7 @@ export async function createSong(formData) {
     const hash = userRecord.pinHash;
     const pinMatches = await bcrypt.compare(pin, hash);
     if (!pinMatches) {
-      return { statusCode: 403, error: new Error(`You're not ${username}!`) };
+      return { statusCode: 403, status: 'Access denied', message: `You're not ${username}!` };
     }
   } else {
     return { statusCode: 401, status: 'Unauthorized', message: 'Unauthorized' };
@@ -161,6 +161,8 @@ export async function createSong(formData) {
   // Revalidate the page to show updated data
   revalidatePath('/');
   revalidatePath('/[username]');
+
+  return { statusCode: 200, status: 'OK' };
 }
 
 export async function updateSong(formData) {
@@ -176,13 +178,13 @@ export async function updateSong(formData) {
 
   const userRecord = await tables.SimpleUser.get(username);
   if (!userRecord) {
-    return { statusCode: 401, error: new Error(`User does not exist!`) };
+    return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist!' };
   }
 
   const hash = userRecord.pinHash;
   const pinMatches = await bcrypt.compare(pin, hash);
   if (!pinMatches) {
-    return { statusCode: 403, error: new Error(`You're not ${username}!`) };
+    return { statusCode: 403, status: 'Access denied', message: `You're not ${username}!` };
   }
   // Extract form values
   const id = formData.get('id');
@@ -221,6 +223,8 @@ export async function updateSong(formData) {
   // Revalidate the page to show updated data
   revalidatePath('/');
   revalidatePath('/[username]');
+
+  return { statusCode: 200, status: 'OK' };
 }
 
 export const singSong = async (songID, songArtist, songName, username, pin) => {
@@ -232,13 +236,13 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
 
   const userRecord = await tables.SimpleUser.get(lowerCaseUsername);
   if (!userRecord) {
-    return { statusCode: 401, error: new Error(`User does not exist!`) };
+    return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist!' };
   }
 
   const hash = userRecord.pinHash;
   const pinMatches = await bcrypt.compare(pin, hash);
   if (!pinMatches) {
-    return { statusCode: 403, error: new Error(`You're not ${lowerCaseUsername}!`) };
+    return { statusCode: 403, status: 'Access Denied', message: `Error recording singing ${songArtist} - ${songTitle}` };
   }
 
   const sungAt = Date.now();
@@ -250,6 +254,8 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
     username: lowerCaseUsername,
     sungAt,
   });
+
+  return { statusCode: 200, status: 'OK' };
 };
 
 export const listSingingRecordsForUser = async (forUser) => {
