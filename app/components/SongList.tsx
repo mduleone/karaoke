@@ -1,7 +1,5 @@
 'use client';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { config } from '@fortawesome/fontawesome-svg-core';
 import { useParams } from 'next/navigation';
 import { useCallback, useMemo } from 'react';
 
@@ -9,13 +7,10 @@ import Artist from './Artist';
 import SongCard from './SongCard';
 import type { ArtistType, SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
-import '../utils/font-awesome';
-
+import { FontAwesomeIcon } from './FontAwesomeProvider';
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
 import { slugToString } from '../utils/string';
-
-config.autoAddCss = false;
 
 const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const artistCompare = artistA.localeCompare(artistB);

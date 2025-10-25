@@ -1,4 +1,4 @@
-.page {
+.modal {
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -30,17 +30,15 @@
 
 .textInput {
   width: 100%;
-  padding: toRem(12);
+  padding: toRem(4) toRem(8);
   border: toRem(1) solid #d1d5db;
   border-radius: toRem(4);
   font-size: toRem(18);
   box-sizing: border-box;
 }
 
-.submitButton {
-  background-color: #0D2A36;
-  color: #fff;
-  padding: toRem(12) toRem(24);
+.button {
+  padding: toRem(4) toRem(8);
   border: none;
   border-radius: toRem(4);
   font-size: toRem(16);
@@ -48,30 +46,74 @@
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   flex: 1;
+  
+  &:disabled {
+    opacity: .8;
+    cursor: inherit;
+
+    &:hover {
+      background-color: inherit;
+    }
+  }
 }
 
-.submitButton:hover {
-  background-color: #1a526a;
+.submitButton {
+  @extend .button;
+  background-color: #0D2A36;
+  color: #fff;
+
+  &:hover {
+    background-color: #1a526a;
+
+    &:disabled {
+      background-color: #0D2A36;
+    }
+  }
 }
 
 .clearButton {
+  @extend .button;
   background-color: #a9bec7;
   color: #14123c;
-  padding: toRem(12) toRem(24);
-  border: none;
-  border-radius: toRem(4);
-  font-size: toRem(16);
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  flex: 1;
-}
-
-.clearButton:hover {
-  background-color: #8ea5af;
+  
+  &:hover {
+    background-color: #8ea5af;
+    
+    &:disabled {
+      background-color: #a9bec7;
+    }
+  }
 }
 
 .buttonRow {
   display: flex;
   gap: toRem(4);
+}
+
+.error {
+  color: #cc0001;
+}
+
+.share {
+  @extend .clearButton;
+  padding: toRem(8);
+}
+
+.copyButtonText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shareUrl {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: toRem(195);
+  text-align: left;
+}
+
+.pinWarning {
+  color: #000;
+  text-align: center;
 }

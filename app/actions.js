@@ -25,7 +25,7 @@ const listSongsLocalBuild = async (forUser) => {
     console.error('Error listing songs:', error);
     return [];
   }
-}
+};
 
 const listSongsServer = async (forUser) => {
   try {
@@ -47,7 +47,9 @@ const listSongsServer = async (forUser) => {
           __createdtime__,
           __updatedtime__,
         } = song;
-        const shouldRenderSongForUser = forUser ? (username === forUser || (forUser === 'matt' && !username)) : (!username || username === 'matt');
+        const shouldRenderSongForUser = forUser
+          ? username === forUser || (forUser === 'matt' && !username)
+          : !username || username === 'matt';
 
         if (artist && title && shouldRenderSongForUser) {
           songs.push({
@@ -72,7 +74,7 @@ const listSongsServer = async (forUser) => {
     console.error('Error listing songs:', error);
     return [];
   }
-}
+};
 
 export const listSongs = async (forUser) => {
   if (process.env.LOCAL_BUILD_FOR_DEPLOY === 'true') {
@@ -80,7 +82,7 @@ export const listSongs = async (forUser) => {
   }
 
   return await listSongsServer(forUser);
-}
+};
 
 export async function getSong(id) {
   try {
@@ -111,13 +113,11 @@ export async function createSong(formData) {
     const hash = userRecord.pinHash;
     const pinMatches = await bcrypt.compare(pin, hash);
     if (!pinMatches) {
-      return { statusCode: 403,  error: new Error(`You're not ${username}!`) };
+      return { statusCode: 403, error: new Error(`You're not ${username}!`) };
     }
   } else {
-    const pinHash = await bcrypt.hash(pin, saltRounds);
-    await tables.SimpleUser.create({ username, pinHash });
+    return { statusCode: 401, status: 'Unauthorized', message: 'Unauthorized' };
   }
-
 
   // Extract form values
   const artistValue = formData.get('artist');
@@ -179,7 +179,7 @@ export async function updateSong(formData) {
   }
 
   const hash = userRecord.pinHash;
-  const pinMatches = await bcrypt.compare(pin, hash)
+  const pinMatches = await bcrypt.compare(pin, hash);
   if (!pinMatches) {
     return { statusCode: 403, error: new Error(`You're not ${username}!`) };
   }
@@ -250,36 +250,36 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
 };
 
 export const listSingingRecordsForUser = async (forUser) => {
-    try {
-      const songs = [];
-      if (tables?.SingingRecord) {
-        for await (const song of tables.SingingRecord.search()) {
-          const { id, username, songID, sungAt } = song;
+  try {
+    const songs = [];
+    if (tables?.SingingRecord) {
+      for await (const song of tables.SingingRecord.search()) {
+        const { id, username, songID, sungAt } = song;
 
-          let artist, title;
-          try {
-            ({artist, title } = await tables.Songs.get(songID));
-          } catch (e) {
-            console.error(`Couldn't find song ${songID}`);
-            console.error(e);
-          }
+        let artist, title;
+        try {
+          ({ artist, title } = await tables.Songs.get(songID));
+        } catch (e) {
+          console.error(`Couldn't find song ${songID}`);
+          console.error(e);
+        }
 
-          if (artist && title && username === forUser) {
-            songs.push({
-              artist,
-              title,
-              id,
-              songID,
-              sungAt,
-            });
-          }
+        if (artist && title && username === forUser) {
+          songs.push({
+            artist,
+            title,
+            id,
+            songID,
+            sungAt,
+          });
         }
       }
-      return songs;
-    } catch (error) {
-      console.error('Error listing songs:', error);
-      return [];
     }
+    return songs;
+  } catch (error) {
+    console.error('Error listing songs:', error);
+    return [];
+  }
 };
 
 export async function deleteSingingRecord(singingRecordId, username, pin) {
@@ -301,4 +301,39 @@ export async function deleteSingingRecord(singingRecordId, username, pin) {
   await tables.SingingRecord.delete(singingRecordId);
 
   revalidatePath('/[username]/history');
+}
+
+export async function login(username, pin) {
+  if (typeof tables === 'undefined' || !tables.SimpleUser) {
+    throw new Error('Database not available');
+  }
+
+  const userRecord = await tables.SimpleUser.get(username);
+  if (!userRecord) {
+    return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist' };
+  }
+
+  const hash = userRecord.pinHash;
+  const pinMatches = await bcrypt.compare(pin, hash);
+  if (!pinMatches) {
+    return { statusCode: 401, status: 'Unauthorized', message: 'Invalid username/pin combination' };
+  }
+
+  return { statusCode: 200, status: 'OK' };
+}
+
+export async function createAccount(username, pin) {
+  if (typeof tables === 'undefined' || !tables.SimpleUser) {
+    throw new Error('Database not available');
+  }
+
+  const userRecord = await tables.SimpleUser.get(username);
+  if (userRecord) {
+    return { statusCode: 401, status: 'Unauthorized', message: 'User already exists' };
+  }
+
+  const pinHash = await bcrypt.hash(pin, saltRounds);
+  await tables.SimpleUser.create({ username, pinHash });
+
+  return { statusCode: 200, status: 'OK' };
 }
