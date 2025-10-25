@@ -1,0 +1,24 @@
+{
+  "name": "myKaraoke.info",
+  "short_name": "myKaraoke",
+  "theme_color": "#0D2A36",
+  "background_color": "#0D2A36",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "id": "/",
+  "start_url": "/",
+  "splash_pages": null,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://mykaraoke.info",
+      "id": "/"
+    },
+    {
+      "platform": "webapp",
+      "url": "https://karaoke-cluster.karaoke.harperfabric.com:9926",
+      "id": "/"
+    }
+  ]
+}
