@@ -80,7 +80,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     });
   }, [filteredSongs]);
 
-  const { lettersRefMap, addToRefMap, lettersMapState } = useAlphabetScroller(sortedSongsByAddedDate);
+  const { lettersRefMap, addToRefMap, lettersMapState } = useAlphabetScroller(filteredSongsByArtist);
 
   const handleLetterClick = useCallback(
     (letter: string) => {

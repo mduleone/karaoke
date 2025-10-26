@@ -17,7 +17,7 @@ const useAlphabetScroller = (sortedList: SongType[] | ArtistType[], byTitle: boo
 
     if (isArtists(sortedList)) {
       const list = sortedList.reduce((map, { artist }) => {
-        const letter = artist[0].toUpperCase();
+        const letter = artist[0].toLocaleUpperCase();
         if (/[0-9]/.test(letter)) {
           map['#'] = [];
         } else {
