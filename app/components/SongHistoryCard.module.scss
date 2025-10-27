@@ -1,14 +1,15 @@
 .songCard {
   border-radius: toRem(6);
   padding: 0 toRem(4);
-  border: toRem(1) solid #222;
+  border: toRem(1) solid $text-color;
   display: flex;
   flex-direction: column;
   gap: toRem(2);
-  width: 100%;
-  background-color: #fff;
+  width: calc(100% - toRem(48));
+  background-color: $song-background-color;
   color: inherit;
   text-align: left;
+  margin: 0 auto;
 }
 
 .songCard:focus-visible {
@@ -38,5 +39,5 @@
   font-size: toRem(14);
   display: flex;
   align-items: center;
-  color: #555;
+  color: #ccc;
 }

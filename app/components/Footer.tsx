@@ -9,7 +9,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <p>
         Made with <FontAwesomeIcon style={{ color: '#cc0001' }} icon={['fas', 'heart']} /> by{' '}
-        <Link href="https://matt.dule.one/" target="_blank">
+        <Link href="https://matt.dule.one/" target="_blank" className={styles.link}>
           Matt
         </Link>{' '}
         © {new Date().getFullYear()}

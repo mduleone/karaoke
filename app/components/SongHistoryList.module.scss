@@ -1,8 +1,8 @@
 .heading {
   width: 100%;
-  background-color: #fff;
+  background-color: $background-color;
   z-index: 100;
-  padding-top: toRem(16);
+  padding: toRem(16) toRem(24) 0;
   position: sticky;
   top: toRem(64);
   max-lines: 1;
@@ -16,9 +16,4 @@
   flex: 1;
   padding: toRem(64) 0 0;
   list-style: none;
-  gap: toRem(8);
-
-  li:last-child {
-    margin-bottom: toRem(16);
-  }
 }

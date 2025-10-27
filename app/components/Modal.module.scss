@@ -4,21 +4,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: toRem(16);
   background-color: rgba(0, 0, 0, 0.55);
   z-index: 1000;
+  
+  @media (min-width: toRem(800)) {
+    padding: toRem(16);
+  }
 }
 
 .modal {
   position: relative;
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: $background-color;
   box-shadow: 0 toRem(12) toRem(32) rgba(0, 0, 0, 0.2);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   border-radius: 0;
+
+  @media (min-width: toRem(800)) {
+    width: min(100%, toRem(800));
+    height: auto;
+    max-height: 70vh;
+    min-height: toRem(500);
+    border-radius: toRem(12);
+  }
 }
 
 .closeButton {
@@ -29,7 +40,7 @@
   background: transparent;
   font-size: toRem(22);
   cursor: pointer;
-  color: #333;
+  color: $text-color;
 }
 
 .closeButton:focus-visible {
@@ -43,14 +54,4 @@
   display: flex;
   flex-direction: column;
   gap: toRem(16);
-}
-
-@media (min-width: toRem(800)) {
-  .modal {
-    width: min(100%, toRem(800));
-    height: auto;
-    max-height: 70vh;
-    min-height: toRem(500);
-    border-radius: toRem(12);
-  }
 }

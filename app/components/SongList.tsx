@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from './FontAwesomeProvider';
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
 import { slugToString } from '../utils/string';
+import cx from '../utils/classnames';
 
 const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const artistCompare = artistA.localeCompare(artistB);
@@ -87,14 +88,14 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       const rect = lettersRefMap[letter][0].getBoundingClientRect();
       const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop);
       window.scrollTo({
-        top: top - 224,
+        top: top - 206,
         behavior: 'smooth',
       });
     },
     [lettersRefMap],
   );
 
-  const listClasses = `${styles.artistList}${byRecentlyAdded ? ` ${styles.recentlyAdded}` : ''}`;
+  const listClasses = cx(styles.artistList, { [styles.recentlyAdded]: byRecentlyAdded });
   const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
   const stringName = slugToString(paramsUsername);
   const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
@@ -121,7 +122,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
             className={`${styles.settingsButton}${favoritesOnly ? ` ${styles.enabled}` : ''}`}
           >
-            Only <FontAwesomeIcon icon={['fas', 'heart']} />
+            Favorites <FontAwesomeIcon icon={['fas', 'heart']} />
           </button>
           <button
             type="button"
@@ -148,26 +149,26 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} /> Added
           </button>
         </div>
-        {!byRecentlyAdded && (
-          <div className={styles.scrollLetters}>
-            {lettersMapState.map((letter) => (
-              <button
-                key={letter}
-                type="button"
-                onClick={() => handleLetterClick(letter)}
-                className={styles.scrollLetter}
-              >
-                {letter}
-              </button>
-            ))}
-          </div>
-        )}
-        <div>
+        <div className={styles.displayCount}>
           Showing{' '}
           {filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `all ${songs.length}`}{' '}
           Songs
         </div>
       </div>
+      {!byRecentlyAdded && (
+        <div className={styles.scrollLetters}>
+          {lettersMapState.map((letter) => (
+            <button
+              key={letter}
+              type="button"
+              onClick={() => handleLetterClick(letter)}
+              className={styles.scrollLetter}
+            >
+              {letter}
+            </button>
+          ))}
+        </div>
+      )}
       <ul className={listClasses}>
         {byRecentlyAdded
           ? sortedSongsByAddedDate.map((song) => (

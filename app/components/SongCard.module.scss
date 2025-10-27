@@ -1,12 +1,13 @@
 .songCard {
   border-radius: toRem(6);
   padding: 0 toRem(4);
-  border: toRem(1) solid #222;
+  margin: 0 auto;
+  border: toRem(1) solid $text-color;
   display: flex;
   flex-direction: column;
   gap: toRem(2);
-  width: 100%;
-  background-color: #fff;
+  width: calc(100% - toRem(50));
+  background-color: $song-background-color;
   color: inherit;
   text-align: left;
 }
@@ -25,12 +26,12 @@ button.songCard {
 }
 
 .favorite {
-  background-color: #60ed84aa;
+  background-color: #60ed8411;
   border-color: #60ed84aa;
 }
 
 .avoid {
-  background-color: #ec9098aa;
+  background-color: #ec909811;
   border-color: #ec9098aa;
 }
 
@@ -51,7 +52,7 @@ button.songCard {
   font-size: toRem(14);
   display: flex;
   align-items: center;
-  color: #555;
+  color: #ccc;
 }
 
 .tags {
@@ -76,10 +77,12 @@ button.songCard {
 
 .learn {
   background-color: #eef52c;
+  color: $dark-text-color;
 }
 
 .retry {
   background-color: #ff9800;
+  color: $dark-text-color;
 }
 
 .tagsAndActions {
@@ -99,9 +102,9 @@ button.songCard {
 }
 
 .songButton {
-  background-color: transparent;
-  color: #000;
-  border: toRem(1) #000 solid;
+  background-color: $button-color;
+  color: $text-color;
+  border: toRem(1) solid $text-color;
   padding: toRem(2) toRem(12);
   border-radius: toRem(4);
   font-size: toRem(14);
@@ -109,6 +112,6 @@ button.songCard {
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
-    background-color: #00000022;
+    background-color: $button-hover-color;
   }
 }

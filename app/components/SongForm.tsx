@@ -31,7 +31,7 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
   const FormComponent = disabled ? 'div' : 'form';
 
   return (
-    <div className={styles.page}>
+    <div className={styles.container}>
       <div className={styles.formSection}>
         <h2 className={styles.formHeading}>{song ? (disabled ? 'Song Info' : 'Edit Song') : 'Add New Song'}</h2>
         <FormComponent action={disabled ? undefined : formAction} className={styles.form}>
@@ -100,11 +100,10 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
             <label className={styles.formLabel} htmlFor="notes">
               Notes
             </label>
-            <input
-              type="text"
+            <textarea
               id="notes"
               name="notes"
-              className={styles.textInput}
+              className={styles.textArea}
               defaultValue={song?.notes}
               disabled={disabled}
             />

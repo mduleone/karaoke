@@ -1,4 +1,4 @@
-.page {
+.container {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
 
 .formSection {
   padding: toRem(8);
-  background-color: #fff;
+  background-color: $song-background-color;
   border-radius: toRem(8);
   box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.1);
   border: toRem(1) solid #e5e7eb;
@@ -43,14 +43,13 @@
   margin: 0 0 toRem(24) 0;
   font-size: toRem(24);
   font-weight: 600;
-  color: #1e293b;
+  color: $text-color;
 }
 
 .form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(toRem(200), 1fr));
+  display: flex;
+  flex-direction: column;
   gap: toRem(16);
-  align-items: end;
 }
 
 .formLabel {
@@ -58,12 +57,28 @@
   margin-bottom: toRem(8);
   font-size: toRem(14);
   font-weight: 500;
-  color: #374151;
+  color: $sub-text-color;
 }
 
 .textInput {
   width: 100%;
-  padding: toRem(12);
+  padding: toRem(4);
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  font-size: toRem(18);
+  box-sizing: border-box;
+  background-color: $song-background-color;
+  color: $text-color;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+}
+
+.textArea {
+  width: 100%;
+  padding: toRem(4);
   border: toRem(1) solid #d1d5db;
   border-radius: toRem(4);
   font-size: toRem(18);
@@ -76,6 +91,8 @@
   gap: toRem(16);
   row-gap: toRem(8);
   justify-content: center;
+  max-width: toRem(220);
+  margin: 0 auto;
 };
 
 .checkboxLabel {
@@ -83,7 +100,7 @@
   margin-bottom: toRem(8);
   font-size: toRem(14);
   font-weight: 500;
-  color: #374151;
+  color: $text-color;
   align-items: center;
   padding: toRem(12) toRem(16);
   gap: toRem(2);
@@ -92,7 +109,7 @@
   transition: background-color 0.2s ease-in-out;
 
   &:has(input[type="checkbox"]:checked) {
-    background-color: #00000022;
+    background-color: $toggle-enabled-color;
   }
 
   &:focus-within {
@@ -121,8 +138,8 @@
 }
 
 .submitButton {
-  background-color: #fff;
-  color: #000;
+  background-color: $button-color;
+  color: $text-color;
   padding: toRem(12) toRem(24);
   border: toRem(1) #000 solid;
   border-radius: toRem(4);
@@ -132,7 +149,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 .submitButton:hover {
-  background-color: #00000022;
+  background-color: $letter-scroller-background-color;
 }
 
 .lyricsLinks {
@@ -144,5 +161,5 @@
   display: inline-block;
   margin-top: toRem(8);
   font-size: toRem(14);
-  color: #0D2A36;
+  color: $sub-text-color;
 }

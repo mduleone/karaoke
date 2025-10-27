@@ -31,7 +31,7 @@ const Header = () => {
         <ul className={styles.navList}>
           <li className={styles.leftNavItem}>
             <Link href="/" className={styles.navLink}>
-              myKaraokeList
+              myKaraoke
             </Link>
           </li>
           {username && pin && (

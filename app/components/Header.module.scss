@@ -1,7 +1,6 @@
 .header {
-  background-color: #0D2A36;
+  background-color: $background-color;
   color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: fixed;
   width: 100%;
   top: 0;
@@ -11,7 +10,7 @@
 .nav {
   max-width: toRem(1200);
   margin: 0 auto;
-  padding: 0 toRem(16);
+  padding: 0 toRem(24);
 }
 
 .navList {

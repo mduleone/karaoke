@@ -1,8 +1,8 @@
 {
   "name": "myKaraoke.info",
   "short_name": "myKaraoke",
-  "theme_color": "#0D2A36",
-  "background_color": "#0D2A36",
+  "theme_color": "#051923",
+  "background_color": "#051923",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",

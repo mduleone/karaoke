@@ -1,15 +1,31 @@
 .filters {
-  background-color: #fff;
+  background-color: $background-color;
+  color: $text-color;
   flex: 1;
   position: sticky;
   top: toRem(64);
   z-index: 1;
-  padding-top: toRem(16);
+  padding: 0 toRem(24);
 }
 
 .searchBox {
-  font-size: toRem(18);
   width: 100%;
+  padding: toRem(4);
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  font-size: toRem(18);
+  box-sizing: border-box;
+  background-color: transparent;
+  color: $text-color;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+}
+
+.displayCount {
+  flex: 1;
 }
 
 .artistList {
@@ -19,17 +35,7 @@
   padding: toRem(64) 0 0;
   width: 100%;
   list-style: none;
-}
-
-.settingsPanelToggle {
-  margin-top: toRem(8);
-  background-color: #0D2A36;
-  color: white;
-  border: none;
-  padding: toRem(8) toRem(12);
-  border-radius: toRem(4);
-  width: 100%;
-  cursor: pointer;
+  background-color: $background-color;
 }
 
 .settingsPanel {
@@ -42,28 +48,41 @@
   display: flex;
   align-items: center;
   background: none;
-  border: toRem(1) solid #000;
+  border: toRem(1) solid $text-color;
   border-radius: toRem(100);
   cursor: pointer;
   font-size: toRem(16);
   gap: toRem(2);
   transition: background-color 0.3s, color 0.3s;
-  color: #000;
+  color: $text-color;
 }
 
 .scrollLetters {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  right: toRem(-18);
-  top: toRem(80);
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: toRem(100);
+  background-color: $letter-scroller-background-color;
+  z-index: 1;
 }
 
 .scrollLetter {
   appearance: none;
   border: none;
   background: none;
-  color: #000;
+  color: $text-color;
+  font-size: toRem(12);
+
+  &:first-child {
+    padding-top: toRem(4);
+  }
+
+  &:last-child {
+    padding-bottom: toRem(4);
+  }
 }
 
 .noGap {
@@ -76,7 +95,7 @@
 }
 
 .enabled {
-  background-color: #00000022;
+  background-color: $toggle-enabled-color;
 }
 
 .recentlyAdded {
