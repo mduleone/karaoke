@@ -14,9 +14,8 @@
   position: sticky;
   background-color: $background-color;
   top: toRem(118);
-  padding: 0 toRem(24) toRem(4);
+  padding: 0 toRem(24);
   z-index: 1;
-  box-shadow: 0 toRem(8) toRem(2) toRem(-5) #ffffff88;
 }
 
 .songList {

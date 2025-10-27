@@ -5,7 +5,6 @@ import styles from './Artist.module.scss';
 
 type ArtistProps = {
   artist: string;
-  duet?: boolean;
   songs: SongType[];
   addToRefMap?: (name: string) => (instance: HTMLElement) => void;
 };

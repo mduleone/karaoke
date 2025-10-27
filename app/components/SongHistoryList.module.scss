@@ -8,6 +8,7 @@
   max-lines: 1;
   text-overflow: clip;
   --webkit-line-clamp: 1;
+  border-bottom: toRem(1) solid $text-color;
 }
 
 .historyList {

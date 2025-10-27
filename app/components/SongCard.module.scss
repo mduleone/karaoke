@@ -2,7 +2,7 @@
   border-radius: toRem(6);
   padding: 0 toRem(4);
   margin: 0 auto;
-  border: toRem(1) solid $text-color;
+  border: toRem(1) solid #888;
   display: flex;
   flex-direction: column;
   gap: toRem(2);
@@ -17,7 +17,7 @@
 }
 
 .songCard:focus-visible {
-  outline: toRem(2) solid #0D2A36;
+  outline: toRem(2) solid #0d2a36;
   outline-offset: toRem(2);
 }
 

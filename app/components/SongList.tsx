@@ -59,11 +59,10 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     return filteredSongs
       .reduce((agg, curr) => {
         let next = [...agg];
-        let artist = next.find((el) => el.artist === curr.artist && el.duet === curr.duet);
+        let artist = next.find((el) => el.artist === curr.artist);
         if (!artist) {
           artist = {
             artist: curr.artist,
-            duet: curr.duet,
             songs: [],
           };
           next = [...next, artist];
@@ -175,9 +174,8 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             ))
           : filteredSongsByArtist.map((artistGroup) => (
               <Artist
-                key={`${artistGroup.artist}-${artistGroup.duet ? 'duet' : 'solo'}`}
+                key={artistGroup.artist}
                 artist={artistGroup.artist}
-                duet={artistGroup.duet}
                 songs={artistGroup.songs}
                 addToRefMap={addToRefMap}
               />
