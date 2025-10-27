@@ -1,9 +1,13 @@
 .artistSection {
-  padding: 0 toRem(8) toRem(4);
+  padding: 0 toRem(8);
   list-style: none;
 
   &:last-child {
     padding-bottom: toRem(24);
+  }
+
+  &:first-child .artistName {
+    top: toRem(212);
   }
 }
 
@@ -11,11 +15,9 @@
   font-size: toRem(18);
   font-weight: bold;
   position: sticky;
-  top: toRem(206);
+  top: toRem(208);
   background-color: $background-color;
-  padding: toRem(8) 0 toRem(4);
-  padding: 0 toRem(24);
-  box-shadow: 0 toRem(8) toRem(2) toRem(-5) #ffffff88;
+  padding: toRem(6) toRem(24) 0;
 }
 
 .count {

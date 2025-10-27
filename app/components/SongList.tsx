@@ -87,8 +87,9 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     (letter: string) => {
       const rect = lettersRefMap[letter][0].getBoundingClientRect();
       const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop);
+      const topOffset = letter === '#' ? 212 : 208;
       window.scrollTo({
-        top: top - 206,
+        top: top - topOffset,
         behavior: 'smooth',
       });
     },

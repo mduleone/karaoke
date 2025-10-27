@@ -26,6 +26,13 @@
 
 .displayCount {
   flex: 1;
+  position: sticky;
+  top: toRem(186);
+  background-color: $background-color;
+  padding: 0 toRem(8);
+  z-index: 1;
+  // box-shadow: 0 toRem(8) toRem(2) toRem(-5) #ffffff88;
+  border-bottom: toRem(1) solid $text-color;
 }
 
 .artistList {
@@ -53,7 +60,9 @@
   cursor: pointer;
   font-size: toRem(16);
   gap: toRem(2);
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
   color: $text-color;
 }
 
