@@ -23,6 +23,7 @@ const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist:
 };
 
 const artistSorter = ({ artist: artistA }, { artist: artistB }) => artistA.localeCompare(artistB);
+const TOP_OFFSET = 208;
 
 const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
   'use client';
@@ -86,12 +87,9 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
   const handleLetterClick = useCallback(
     (letter: string) => {
       const rect = lettersRefMap[letter][0].getBoundingClientRect();
-      const top = rect.top + (window.pageYOffset || document.documentElement.scrollTop);
-      const topOffset = letter === '#' ? 212 : 208;
-      window.scrollTo({
-        top: top - topOffset,
-        behavior: 'smooth',
-      });
+      const scrollOffset = window.pageYOffset || document.documentElement.scrollTop;
+      const top = rect.top + scrollOffset - TOP_OFFSET;
+      window.scrollTo({ top, behavior: 'smooth' });
     },
     [lettersRefMap],
   );

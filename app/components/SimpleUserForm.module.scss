@@ -1,10 +1,10 @@
 .modal {
   display: flex;
-  position: absolute;
+  position: fixed;
   flex-direction: column;
   padding: 0;
-  top: 100%;
-  right: 0;
+  top: toRem(52);
+  right: toRem(24);
   min-width: toRem(248);
   z-index: 1000;
 }

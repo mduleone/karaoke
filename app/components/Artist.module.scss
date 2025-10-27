@@ -5,10 +5,6 @@
   &:last-child {
     padding-bottom: toRem(24);
   }
-
-  &:first-child .artistName {
-    top: toRem(212);
-  }
 }
 
 .artistName {

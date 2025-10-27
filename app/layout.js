@@ -7,10 +7,16 @@ import Header from './components/Header';
 import SimpleUserProvider from './context/simple-user';
 import Footer from './components/Footer';
 import ToastProvider from './components/ToastProvider';
+import { Nunito, M_PLUS_Rounded_1c, Fira_Sans } from 'next/font/google';
+import cx from './utils/classnames';
 
 export const metadata = {
-  title: "My Karaoke List",
+  title: "MyKaraoke",
 };
+
+const nunito = Nunito({
+  subsets: ['latin']
+})
 
 export default function RootLayout({ children }) {
   return (
@@ -21,8 +27,9 @@ export default function RootLayout({ children }) {
         <link rel="shortcut icon" href="/images/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="myKaraoke" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
       </head>
-      <body className={styles.body}>
+      <body className={cx(styles.body, nunito.className)}>
         <SimpleUserProvider>
           <KaraokeSearchProvider>
             <Header />

@@ -31,7 +31,6 @@
   background-color: $background-color;
   padding: 0 toRem(8);
   z-index: 1;
-  // box-shadow: 0 toRem(8) toRem(2) toRem(-5) #ffffff88;
   border-bottom: toRem(1) solid $text-color;
 }
 
@@ -75,7 +74,7 @@
   transform: translateY(-50%);
   border-radius: toRem(100);
   background-color: $letter-scroller-background-color;
-  z-index: 1;
+  z-index: 1000;
 }
 
 .scrollLetter {

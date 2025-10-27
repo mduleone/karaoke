@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import { useSimpleUserContext } from '../context/simple-user';
 import styles from './SimpleUserForm.module.scss';
@@ -18,6 +19,22 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const [localError, setLocalError] = useState(null);
   const { push } = useRouter();
   const formRef = useRef<HTMLDivElement>(null);
+  const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+    setPortalElement(element);
+    setShow(true);
+
+    return () => {
+      if (element.parentNode) {
+        element.parentNode.removeChild(element);
+      }
+      setPortalElement(null);
+    };
+  }, []);
 
   const onLogout = useCallback(() => {
     setUsername('');
@@ -103,46 +120,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
   }, [copyViaClipboardApi, copyViaFallback]);
 
-  if (username && pin) {
-    return (
-      <div ref={formRef} className={styles.modal}>
-        <div className={styles.formSection}>
-          <div>
-            <label className={styles.formLabel} htmlFor="username">
-              Share your list!
-            </label>
-            <input
-              type="text"
-              id="username"
-              className={styles.textInput}
-              ref={fallbackRef}
-              disabled
-              value={`${window.location.host}/${slugToString(username)}`}
-            />
-          </div>
-          <button className={styles.share} type="button" onClick={handleCopy}>
-            <div className={styles.copyButtonText}>
-              Copy to Clipboard
-              <FontAwesomeIcon
-                aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
-                icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
-              />
-            </div>
-          </button>
-          <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
-            Go to your list
-          </Link>
-          <div className={styles.buttonRow}>
-            <button type="button" className={styles.secondaryButton} onClick={onLogout}>
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
+  let userForm = (
     <div ref={formRef} className={styles.modal}>
       <div className={styles.formSection}>
         <div>
@@ -202,6 +180,47 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
       </div>
     </div>
   );
+
+  if (username && pin) {
+    userForm = (
+      <div ref={formRef} className={styles.modal}>
+        <div className={styles.formSection}>
+          <div>
+            <label className={styles.formLabel} htmlFor="username">
+              Share your list!
+            </label>
+            <input
+              type="text"
+              id="username"
+              className={styles.textInput}
+              ref={fallbackRef}
+              disabled
+              value={`${window.location.host}/${slugToString(username)}`}
+            />
+          </div>
+          <button className={styles.share} type="button" onClick={handleCopy}>
+            <div className={styles.copyButtonText}>
+              Copy to Clipboard
+              <FontAwesomeIcon
+                aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
+                icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
+              />
+            </div>
+          </button>
+          <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
+            Go to your list
+          </Link>
+          <div className={styles.buttonRow}>
+            <button type="button" className={styles.secondaryButton} onClick={onLogout}>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return show && createPortal(userForm, portalElement);
 };
 
 export default SimpleUserForm;
