@@ -11,7 +11,7 @@
 
 .formSection {
   padding: toRem(16);
-  background-color: #fff;
+  background-color: $song-background-color;
   border-radius: toRem(8);
   box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.1);
   border: toRem(1) solid #e5e7eb;
@@ -25,30 +25,43 @@
   margin-bottom: toRem(4);
   font-size: toRem(14);
   font-weight: 500;
-  color: #374151;
+  color: $sub-text-color;
 }
 
 .textInput {
   width: 100%;
-  padding: toRem(4) toRem(8);
-  border: toRem(1) solid #d1d5db;
-  border-radius: toRem(4);
+  padding: toRem(4);
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
   font-size: toRem(18);
   box-sizing: border-box;
+  background-color: $song-background-color;
+  color: $text-color;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
 }
 
 .button {
+  background-color: $button-color;
+  color: $text-color;
+  border: toRem(1) solid $text-color;
   padding: toRem(4) toRem(8);
-  border: none;
   border-radius: toRem(4);
-  font-size: toRem(16);
+  font-size: toRem(14);
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
   flex: 1;
-  
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+
   &:disabled {
-    opacity: .8;
+    opacity: 0.8;
     cursor: inherit;
 
     &:hover {
@@ -57,30 +70,37 @@
   }
 }
 
-.submitButton {
+.primaryButton {
   @extend .button;
-  background-color: #0D2A36;
-  color: #fff;
+  background-color: $button-color;
+
+  &:disabled {
+    background-color: $button-disabled-color;
+  }
 
   &:hover {
-    background-color: #1a526a;
+    background-color: $button-hover-color;
 
     &:disabled {
-      background-color: #0D2A36;
+      background-color: $button-disabled-color;
     }
   }
 }
 
-.clearButton {
+.secondaryButton {
   @extend .button;
-  background-color: #a9bec7;
-  color: #14123c;
-  
+  background-color: $secondary-button-color;
+  color: $text-color;
+
+  &:disabled {
+    background-color: $secondary-button-disabled-color;
+  }
+
   &:hover {
-    background-color: #8ea5af;
-    
+    background-color: $secondary-button-hover-color;
+
     &:disabled {
-      background-color: #a9bec7;
+      background-color: $secondary-button-disabled-color;
     }
   }
 }
@@ -95,7 +115,7 @@
 }
 
 .share {
-  @extend .clearButton;
+  @extend .primaryButton;
   padding: toRem(8);
 }
 
@@ -114,8 +134,9 @@
 }
 
 .pinWarning {
-  color: #000;
+  color: $text-color;
   text-align: center;
+  padding: 0;
 }
 
 .goToList {

@@ -133,7 +133,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             Go to your list
           </Link>
           <div className={styles.buttonRow}>
-            <button type="button" className={styles.submitButton} onClick={onLogout}>
+            <button type="button" className={styles.secondaryButton} onClick={onLogout}>
               Logout
             </button>
           </div>
@@ -152,6 +152,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <input
             type="text"
             id="username"
+            autoComplete="username"
             className={styles.textInput}
             placeholder="Username"
             onChange={(e) => {
@@ -182,7 +183,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <button
             type="button"
             disabled={!(localUsername && localPin)}
-            className={styles.submitButton}
+            className={styles.primaryButton}
             onClick={onLogin}
           >
             Login
@@ -190,13 +191,14 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <button
             type="button"
             disabled={!(localUsername && localPin)}
-            className={styles.clearButton}
+            className={styles.secondaryButton}
             onClick={onCreateAccount}
           >
             Create Account
           </button>
         </div>
-        <p className={styles.pinWarning}>Don&rsquo;t forget your pin! There is no way to reset it.</p>
+        <p className={styles.pinWarning}>Don&rsquo;t forget your pin!</p>
+        <p className={styles.pinWarning}>There is no way to reset it.</p>
       </div>
     </div>
   );
