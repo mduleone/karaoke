@@ -44,14 +44,16 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
 
   const onLogin = useCallback(() => {
     const login = async () => {
-      const success = await loginAction(localUsername, localPin);
+      const localUsernameSlug = stringToSlug(localUsername);
+      const success = await loginAction(localUsernameSlug, localPin);
       if (success.statusCode !== 200) {
         setLocalError(success.message);
         return;
       }
-      setUsername(localUsername);
+      setUsername(localUsernameSlug);
       setPin(localPin);
-      push(`/${stringToSlug(localUsername)}`);
+      push(`/${localUsernameSlug}`);
+      window.location.reload();
       onClose();
     };
 
@@ -60,15 +62,17 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
 
   const onCreateAccount = useCallback(() => {
     const createAccount = async () => {
-      const success = await createAccountAction(localUsername, localPin);
+      const localUsernameSlug = stringToSlug(localUsername);
+      const success = await createAccountAction(localUsernameSlug, localPin);
       if (success.statusCode !== 200) {
         setLocalError(success.message);
         return;
       }
-      setUsername(localUsername);
+      setUsername(localUsernameSlug);
       setPin(localPin);
       onClose();
-      push(`/${stringToSlug(localUsername)}`);
+      push(`/${localUsernameSlug}`);
+      window.location.reload();
     };
 
     createAccount();

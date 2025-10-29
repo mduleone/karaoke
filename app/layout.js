@@ -7,8 +7,9 @@ import Header from './components/Header';
 import SimpleUserProvider from './context/simple-user';
 import Footer from './components/Footer';
 import ToastProvider from './components/ToastProvider';
-import { Nunito, M_PLUS_Rounded_1c, Fira_Sans } from 'next/font/google';
+import { Nunito } from 'next/font/google';
 import cx from './utils/classnames';
+import SetDynamicManifestUrl from './components/SetDynamicManifest';
 
 export const metadata = {
   title: "MyKaraoke",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"></meta>
       </head>
       <body className={cx(styles.body, nunito.className)}>
+        <SetDynamicManifestUrl />
         <SimpleUserProvider>
           <KaraokeSearchProvider>
             <Header />
