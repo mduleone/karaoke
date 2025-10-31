@@ -4,8 +4,8 @@ $dark-text-color: #333;
 
 $rich-black: #051923;
 $prussian-blue: #003554;
-$picton-blue: #00A6FB;
-$picton-blue-translucent: #00A6FBbb;
+$picton-blue: #00a6fb;
+$picton-blue-translucent: #00a6fbbb;
 $steel-blue: #0582ca;
 $steel-blue-translucent: #0582cabb;
 $lapis-lazuli: #006494;
@@ -16,7 +16,8 @@ $button-color: $picton-blue;
 $button-hover-color: $steel-blue;
 $button-disabled-color: $picton-blue-translucent;
 $secondary-button-color: #184457; // deep slate-teal
-$secondary-button-hover-color: #15506B; // a step darker for hover
-$secondary-button-disabled-color:  #184457bb;
+$secondary-button-hover-color: #15506b; // a step darker for hover
+$secondary-button-disabled-color: $steel-blue-translucent;
+$secondary-button-background-color-disabled: #184457bb;
 $toggle-enabled-color: $button-color;
 $letter-scroller-background-color: $prussian-blue;

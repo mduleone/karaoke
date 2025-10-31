@@ -90,7 +90,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
           {avoid && <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />}
         </p>
         {withArtist && <p className={styles.songMeta}>{artist}</p>}
-        {withAddedDate && <p className={styles.songMeta}>Added: {createdDate}</p>}
+        {withAddedDate && <p className={styles.songMeta}>Added {createdDate}</p>}
         <div className={tagsAndActionsStyles}>
           {tagsCount > 0 && (
             <ul className={styles.tags}>

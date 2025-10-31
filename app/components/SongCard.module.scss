@@ -1,6 +1,6 @@
 .songCard {
   border-radius: toRem(6);
-  padding: 0 toRem(4);
+  padding: toRem(2) toRem(4);
   margin: 0 auto;
   border: toRem(1) solid #888;
   display: flex;
@@ -10,6 +10,7 @@
   background-color: $song-background-color;
   color: inherit;
   text-align: left;
+  line-height: 1.2;
 }
 
 .withUserOrTags {
@@ -68,6 +69,7 @@ button.songCard {
   font-weight: bold;
   border-radius: toRem(6);
   padding: 0 toRem(6);
+  line-height: 1.6;
 }
 
 .duet {

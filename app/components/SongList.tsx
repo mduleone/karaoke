@@ -13,7 +13,16 @@ import useAlphabetScroller from '../hooks/useAlphabetScroller';
 import { slugToString } from '../utils/string';
 import cx from '../utils/classnames';
 
-const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
+const songSorterByTitle = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
+  const titleCompare = titleA.localeCompare(titleB);
+  if (titleCompare !== 0) {
+    return titleCompare;
+  }
+
+  return artistA.localeCompare(artistB);
+};
+
+const songSorterByArtist = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const artistCompare = artistA.localeCompare(artistB);
   if (artistCompare !== 0) {
     return artistCompare;
@@ -35,11 +44,13 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     favoritesOnly,
     duetsOnly,
     byRecentlyAdded,
+    byTitle,
     setSearchQuery,
     setShowAvoid,
     setFavoritesOnly,
     setDuetsOnly,
     setByRecentlyAdded,
+    setByTitle,
   } = useKaraokeSearchContext();
 
   const filteredSongs: SongType[] = useMemo(() => {
@@ -67,7 +78,28 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
           };
           next = [...next, artist];
         }
-        artist.songs = [...artist.songs, curr].toSorted(songSorter);
+        artist.songs = [...artist.songs, curr].toSorted(songSorterByArtist);
+
+        return next;
+      }, [])
+      .toSorted(artistSorter);
+  }, [filteredSongs]);
+
+  const filteredSongsByTitle: ArtistType[] = useMemo(() => {
+    return filteredSongs
+      .reduce((agg, curr) => {
+        let next = [...agg];
+        const titleGroupIdCandidate = curr.title.charAt(0).toUpperCase();
+        const titleGroupId = /[0-9]/.test(titleGroupIdCandidate) ? '#' : titleGroupIdCandidate;
+        let titleGroup = next.find((el) => el.artist === titleGroupId);
+        if (!titleGroup) {
+          titleGroup = {
+            artist: titleGroupId,
+            songs: [],
+          };
+          next = [...next, titleGroup];
+        }
+        titleGroup.songs = [...titleGroup.songs, curr].toSorted(songSorterByTitle);
 
         return next;
       }, [])
@@ -77,11 +109,19 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
   const sortedSongsByAddedDate = useMemo(() => {
     return filteredSongs.toSorted((a, b) => {
       const diff = new Date(b.__createdtime__).getTime() - new Date(a.__createdtime__).getTime();
-      return diff !== 0 ? diff : songSorter(a, b);
+      return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
   }, [filteredSongs]);
 
-  const { lettersRefMap, addToRefMap, lettersMapState } = useAlphabetScroller(filteredSongsByArtist);
+  const listClasses = cx(styles.artistList, { [styles.standAloneSongCards]: byRecentlyAdded });
+  const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
+  const stringName = slugToString(paramsUsername);
+  const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
+
+  const { lettersRefMap, addToRefMap, lettersMapState } = useAlphabetScroller(
+    byTitle ? filteredSongsByTitle : filteredSongsByArtist,
+    byTitle,
+  );
 
   const handleLetterClick = useCallback(
     (letter: string) => {
@@ -92,11 +132,6 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     },
     [lettersRefMap],
   );
-
-  const listClasses = cx(styles.artistList, { [styles.recentlyAdded]: byRecentlyAdded });
-  const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
-  const stringName = slugToString(paramsUsername);
-  const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
 
   return (
     <>
@@ -118,33 +153,42 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             type="button"
             onClick={() => setFavoritesOnly((p) => !p)}
             aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
-            className={`${styles.settingsButton}${favoritesOnly ? ` ${styles.enabled}` : ''}`}
+            className={cx(styles.settingsButton, styles.standAlone, { [styles.enabled]: favoritesOnly })}
           >
-            Favorites <FontAwesomeIcon icon={['fas', 'heart']} />
+            <FontAwesomeIcon icon={['fas', 'heart']} />
           </button>
           <button
             type="button"
             onClick={() => setDuetsOnly((p) => !p)}
             aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
-            className={`${styles.settingsButton} ${styles.noGap}${duetsOnly ? ` ${styles.enabled}` : ''}`}
+            className={cx(styles.settingsButton, styles.noGap, { [styles.enabled]: duetsOnly })}
           >
-            <FontAwesomeIcon icon={['fas', 'user-plus']} /> <FontAwesomeIcon icon={['fas', 'user']} />
+            <FontAwesomeIcon icon={['fas', 'user-plus']} />
+            <FontAwesomeIcon icon={['fas', 'user']} />
           </button>
           <button
             type="button"
             onClick={() => setShowAvoid((p) => !p)}
             aria-label={`${showAvoid ? 'Hide' : 'Show'} avoided songs`}
-            className={`${styles.settingsButton}${showAvoid ? '' : ` ${styles.enabled}`}`}
+            className={cx(styles.settingsButton, { [styles.enabled]: !showAvoid })}
           >
             Hide <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
           </button>
           <button
             type="button"
-            onClick={() => setByRecentlyAdded((p) => !p)}
-            aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
-            className={`${styles.settingsButton}${byRecentlyAdded ? ` ${styles.enabled}` : ''}`}
+            onClick={() => setByTitle(!byTitle)}
+            aria-label={`Sort by ${byTitle ? 'Artist' : 'Title'}`}
+            className={cx(styles.settingsButton, { [styles.enabled]: byTitle })}
           >
-            <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} /> Added
+            By Title
+          </button>
+          <button
+            type="button"
+            onClick={() => setByRecentlyAdded(!byRecentlyAdded)}
+            aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
+            className={cx(styles.settingsButton, styles.standAlone, { [styles.enabled]: byRecentlyAdded })}
+          >
+            <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
           </button>
         </div>
         <div className={styles.displayCount}>
@@ -168,18 +212,20 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
         </div>
       )}
       <ul className={listClasses}>
-        {byRecentlyAdded
-          ? sortedSongsByAddedDate.map((song) => (
-              <SongCard addToRefMap={addToRefMap} key={song.id} song={song} withArtist withAddedDate />
-            ))
-          : filteredSongsByArtist.map((artistGroup) => (
-              <Artist
-                key={artistGroup.artist}
-                artist={artistGroup.artist}
-                songs={artistGroup.songs}
-                addToRefMap={addToRefMap}
-              />
-            ))}
+        {byRecentlyAdded &&
+          sortedSongsByAddedDate.map((song) => (
+            <SongCard addToRefMap={addToRefMap} key={song.id} song={song} withArtist withAddedDate />
+          ))}
+        {!byRecentlyAdded &&
+          (byTitle ? filteredSongsByTitle : filteredSongsByArtist).map((artistGroup) => (
+            <Artist
+              key={artistGroup.artist}
+              artist={artistGroup.artist}
+              songs={artistGroup.songs}
+              addToRefMap={addToRefMap}
+              byTitle={byTitle}
+            />
+          ))}
       </ul>
     </>
   );

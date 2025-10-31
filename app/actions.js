@@ -15,8 +15,8 @@ const listSongsLocalBuild = async (forUser) => {
 
     const songs = songsRaw.filter(({ username, artist, title }) => {
       const shouldRenderSongForUser = forUser
-        ? username === forUser || (forUser === 'matt' && !username)
-        : !username || username === 'matt';
+        ? username === forUser
+        : username === 'matt';
       return !!artist && !!title && shouldRenderSongForUser;
     });
 
@@ -29,30 +29,15 @@ const listSongsLocalBuild = async (forUser) => {
 
 const listSongsServer = async (forUser) => {
   try {
-    const songs = [];
+    let songs = [];
     if (tables?.Songs) {
-      for await (const song of tables.Songs.search()) {
-        const {
-          artist,
-          title,
-          favorite,
-          duet,
-          learn,
-          retry,
-          avoid,
-          notes,
-          id,
-          tags,
-          username,
-          __createdtime__,
-          __updatedtime__,
-        } = song;
-        const shouldRenderSongForUser = forUser
-          ? username === forUser || (forUser === 'matt' && !username)
-          : !username || username === 'matt';
+      const userToSearch = forUser ? forUser : 'matt';
 
-        if (artist && title && shouldRenderSongForUser) {
-          songs.push({
+      songs = await tables.Songs.search({
+        conditions: [{ attribute: 'username', value: userToSearch, operator: '=' }],
+      })
+        .map(
+          ({
             artist,
             title,
             favorite,
@@ -65,11 +50,24 @@ const listSongsServer = async (forUser) => {
             tags,
             __createdtime__,
             __updatedtime__,
-          });
-        }
-      }
+          }) => ({
+            artist,
+            title,
+            favorite,
+            duet,
+            learn,
+            retry,
+            avoid,
+            notes,
+            id,
+            tags,
+            __createdtime__,
+            __updatedtime__,
+          }),
+        )
+        .filter(({ artist, title }) => !!artist && !!title);
     }
-    return songs;
+    return Array.from(songs);
   } catch (error) {
     console.error('Error listing songs:', error);
     return [];
@@ -242,7 +240,11 @@ export const singSong = async (songID, songArtist, songName, username, pin) => {
   const hash = userRecord.pinHash;
   const pinMatches = await bcrypt.compare(pin, hash);
   if (!pinMatches) {
-    return { statusCode: 403, status: 'Access Denied', message: `Error recording singing ${songArtist} - ${songTitle}` };
+    return {
+      statusCode: 403,
+      status: 'Access Denied',
+      message: `Error recording singing ${songArtist} - ${songTitle}`,
+    };
   }
 
   const sungAt = Date.now();
