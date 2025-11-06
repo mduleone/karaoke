@@ -9,18 +9,55 @@
 }
 
 .searchBox {
-  width: 100%;
+  width: calc(100% - toRem(30));
   padding: toRem(4);
   border: none;
-  border-bottom: toRem(1) solid $sub-text-color;
   font-size: toRem(18);
   box-sizing: border-box;
   background-color: transparent;
   color: $text-color;
   border-radius: 0;
+  outline: none;
 
   &::placeholder {
     color: $sub-text-color;
+  }
+}
+
+.searchLabel {
+  border-bottom: toRem(1) solid $sub-text-color;
+  position: relative;
+  width: 100%;
+  display: block;
+  height: fit-content;
+  color: $picton-blue-translucent;
+
+  &:focus-within {
+    outline-style: solid;
+    outline-width: toRem(2);
+    outline-color: invert;
+  }
+}
+
+.clearSearchButton {
+  position: absolute;
+  right: toRem(4);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff33;
+  border: none;
+  border-radius: toRem(100);
+  padding: toRem(2) toRem(8);
+  color: $sub-text-color;
+  font-size: toRem(14);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
   }
 }
 

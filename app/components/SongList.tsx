@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import Artist from './Artist';
 import SongCard from './SongCard';
@@ -133,11 +133,13 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     [lettersRefMap],
   );
 
+  const searchRef = useRef<HTMLInputElement>(null);
+
   return (
     <>
       <div className={styles.filters}>
         <h2>{isMatt ? 'Matt' : displayUsername}&rsquo;s List</h2>
-        <label htmlFor="search">
+        <label htmlFor="search" className={styles.searchLabel}>
           <input
             id="search"
             type="text"
@@ -146,7 +148,22 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             name="search"
             placeholder="Song or Artist Search..."
             className={styles.searchBox}
+            ref={searchRef}
           />
+          <button
+            type="button"
+            onClick={() => {
+              setSearchQuery('');
+              if (searchRef.current) {
+                searchRef.current.focus();
+              }
+            }}
+            aria-label="Clear Search"
+            disabled={searchQuery.length === 0}
+            className={cx(styles.clearSearchButton, { [styles.show]: searchQuery.length > 0 })}
+          >
+            <FontAwesomeIcon icon={['fas', 'x']} widthAuto />
+          </button>
         </label>
         <div className={styles.settingsPanel}>
           <button
