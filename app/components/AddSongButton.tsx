@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from 'react';
 
-import { createSong } from '../actions';
+import { createSong } from '../actions/createSong';
 import Modal from './Modal';
 import SongForm from './SongForm';
 import styles from './AddSongButton.module.scss';

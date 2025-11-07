@@ -93,7 +93,7 @@
   justify-content: center;
   max-width: toRem(220);
   margin: 0 auto;
-};
+}
 
 .checkboxLabel {
   display: inline-flex;
@@ -108,7 +108,7 @@
   border-radius: toRem(100);
   transition: background-color 0.2s ease-in-out;
 
-  &:has(input[type="checkbox"]:checked) {
+  &:has(input[type='checkbox']:checked) {
     background-color: $toggle-enabled-color;
   }
 
@@ -120,10 +120,6 @@
 
   &.noGap {
     gap: 0;
-
-    * + * {
-      margin-left: toRem(-4);
-    }
   }
 }
 
@@ -149,7 +145,7 @@
   transition: background-color 0.2s ease-in-out;
 }
 .submitButton:hover {
-  background-color: $letter-scroller-background-color;
+  background-color: $button-hover-color;
 }
 
 .lyricsLinks {
