@@ -66,6 +66,7 @@ button.songCard {
 
 .tag {
   background-color: #eee;
+  color: $dark-text-color;
   font-weight: bold;
   border-radius: toRem(6);
   padding: 0 toRem(6);
@@ -116,4 +117,12 @@ button.songCard {
   &:hover {
     background-color: $button-hover-color;
   }
+}
+
+.noGap {
+  padding: toRem(4) toRem(6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
 }

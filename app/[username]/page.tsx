@@ -1,4 +1,4 @@
-import { listSongs } from '../actions';
+import { listSongs } from '../actions/listSongs';
 import SongList from '../components/SongList';
 import { slugToString } from '../utils/string';
 

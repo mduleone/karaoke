@@ -132,11 +132,7 @@
 
 .noGap {
   gap: 0;
-  padding: toRem(1) toRem(6) toRem(1) toRem(8);
-
-  * + * {
-    margin-left: toRem(-4);
-  }
+  padding: toRem(1) toRem(8);
 }
 
 .enabled {
@@ -152,5 +148,28 @@
 
   > :first-child {
     margin-top: toRem(8);
+  }
+}
+
+.fab {
+  position: fixed;
+  bottom: toRem(24);
+  right: toRem(28);
+  width: toRem(56);
+  height: toRem(56);
+  border-radius: 50%;
+  background-color: $button-color;
+  box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  appearance: none;
+  border: none;
+  color: $text-color;
+
+  &:hover {
+    background-color: $button-hover-color;
   }
 }

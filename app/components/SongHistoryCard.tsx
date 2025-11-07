@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteSingingRecord } from '../actions';
+import { deleteSingingRecord } from '../actions/deleteSingingRecord';
 import type { SongHistoryType } from '../types/song';
 import styles from './SongHistoryCard.module.scss';
 import { useSimpleUserContext } from '../context/simple-user';

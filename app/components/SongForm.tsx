@@ -123,8 +123,8 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
               />
             </label>
             <label className={`${styles.checkboxLabel} ${styles.noGap}`} htmlFor="duet" aria-label="Duet">
-              <FontAwesomeIcon icon={['fas', 'user-plus']} />
-              <FontAwesomeIcon icon={['fas', 'user']} />
+              <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
+              <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
               <input
                 type="checkbox"
                 id="duet"
