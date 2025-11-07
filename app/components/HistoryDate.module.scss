@@ -1,0 +1,27 @@
+.dateSection {
+  padding: 0;
+  list-style: none;
+  background-color: $background-color;
+
+  &:last-child {
+    padding-bottom: toRem(24);
+  }
+}
+
+.date {
+  font-size: toRem(18);
+  font-weight: bold;
+  position: sticky;
+  background-color: $background-color;
+  top: toRem(118);
+  padding: 0 toRem(24);
+  z-index: 1;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+  padding: toRem(6) 0 0;
+  list-style: none;
+}

@@ -1,11 +1,14 @@
 const nextConfig = {
-	webpack: (config) => {
-		config.externals.push({
-			harperdb: 'commonjs harperdb',
-		});
+  webpack: (config) => {
+    config.externals.push({
+      harperdb: 'commonjs harperdb',
+    });
 
-		return config;
-	},
+    return config;
+  },
+  sassOptions: {
+    additionalData: `@use "./app/styles/global-utilities.scss" as *;`,
+  },
 };
 
 module.exports = nextConfig;

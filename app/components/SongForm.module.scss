@@ -1,0 +1,165 @@
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(32);
+  padding: 0;
+}
+
+.formSection {
+  padding: toRem(8);
+  background-color: $song-background-color;
+  border-radius: toRem(8);
+  box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.1);
+  border: toRem(1) solid #e5e7eb;
+
+  @media only screen and (min-width: toRem(282)) {
+    padding: toRem(9);
+  }
+  @media only screen and (min-width: toRem(284)) {
+    padding: toRem(10);
+  }
+  @media only screen and (min-width: toRem(286)) {
+    padding: toRem(11);
+  }
+  @media only screen and (min-width: toRem(288)) {
+    padding: toRem(12);
+  }
+  @media only screen and (min-width: toRem(290)) {
+    padding: toRem(13);
+  }
+  @media only screen and (min-width: toRem(292)) {
+    padding: toRem(14);
+  }
+  @media only screen and (min-width: toRem(294)) {
+    padding: toRem(15);
+  }
+  @media only screen and (min-width: toRem(296)) {
+    padding: toRem(16);
+  }
+}
+
+.formHeading {
+  margin: 0 0 toRem(24) 0;
+  font-size: toRem(24);
+  font-weight: 600;
+  color: $text-color;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: toRem(8);
+  font-size: toRem(14);
+  font-weight: 500;
+  color: $sub-text-color;
+}
+
+.textInput {
+  width: 100%;
+  padding: toRem(4);
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  font-size: toRem(18);
+  box-sizing: border-box;
+  background-color: $song-background-color;
+  color: $text-color;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+}
+
+.textArea {
+  width: 100%;
+  padding: toRem(4);
+  border: toRem(1) solid #d1d5db;
+  border-radius: toRem(4);
+  font-size: toRem(18);
+  box-sizing: border-box;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: toRem(16);
+  row-gap: toRem(8);
+  justify-content: center;
+  max-width: toRem(220);
+  margin: 0 auto;
+};
+
+.checkboxLabel {
+  display: inline-flex;
+  margin-bottom: toRem(8);
+  font-size: toRem(14);
+  font-weight: 500;
+  color: $text-color;
+  align-items: center;
+  padding: toRem(12) toRem(16);
+  gap: toRem(2);
+  border: toRem(1) solid #d1d5db;
+  border-radius: toRem(100);
+  transition: background-color 0.2s ease-in-out;
+
+  &:has(input[type="checkbox"]:checked) {
+    background-color: $toggle-enabled-color;
+  }
+
+  &:focus-within {
+    outline-offset: toRem(2);
+    outline-width: toRem(2);
+    outline-style: solid;
+  }
+
+  &.noGap {
+    gap: 0;
+
+    * + * {
+      margin-left: toRem(-4);
+    }
+  }
+}
+
+.checkboxInput {
+  position: absolute;
+  height: 0;
+  width: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.submitButton {
+  background-color: $button-color;
+  color: $text-color;
+  padding: toRem(12) toRem(24);
+  border: toRem(1) #000 solid;
+  border-radius: toRem(4);
+  font-size: toRem(16);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.submitButton:hover {
+  background-color: $letter-scroller-background-color;
+}
+
+.lyricsLinks {
+  display: flex;
+  gap: toRem(8);
+}
+
+.lyricsLink {
+  display: inline-block;
+  margin-top: toRem(8);
+  font-size: toRem(14);
+  color: $sub-text-color;
+}

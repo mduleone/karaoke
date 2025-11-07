@@ -1,0 +1,20 @@
+.heading {
+  width: 100%;
+  background-color: $background-color;
+  z-index: 100;
+  padding: toRem(16) toRem(24) 0;
+  position: sticky;
+  top: toRem(64);
+  max-lines: 1;
+  text-overflow: clip;
+  --webkit-line-clamp: 1;
+  border-bottom: toRem(1) solid $text-color;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: toRem(64) 0 0;
+  list-style: none;
+}

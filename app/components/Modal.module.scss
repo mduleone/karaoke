@@ -1,0 +1,57 @@
+.modalScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+  
+  @media (min-width: toRem(800)) {
+    padding: toRem(16);
+  }
+}
+
+.modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: $background-color;
+  box-shadow: 0 toRem(12) toRem(32) rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
+
+  @media (min-width: toRem(800)) {
+    width: min(100%, toRem(800));
+    height: auto;
+    max-height: 70vh;
+    min-height: toRem(500);
+    border-radius: toRem(12);
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: toRem(16);
+  right: toRem(16);
+  border: 0;
+  background: transparent;
+  font-size: toRem(22);
+  cursor: pointer;
+  color: $text-color;
+}
+
+.closeButton:focus-visible {
+  outline: toRem(2) solid #0D2A36;
+  outline-offset: toRem(2);
+}
+
+.content {
+  padding: toRem(16);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+}

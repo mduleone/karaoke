@@ -1,0 +1,15 @@
+.footer {
+  padding: toRem(16);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  background-color: $background-color;
+}
+
+
+.link,
+.link:visited,
+.link:active {
+  color: $text-color;
+}

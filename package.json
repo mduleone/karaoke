@@ -1,27 +1,35 @@
 {
-	"name": "harper-nextjs-example",
-	"version": "0.1.0",
-	"private": true,
-	"license": "Apache-2.0",
-	"scripts": {
-		"dev": "harperdb-nextjs dev",
-		"build": "harperdb-nextjs build",
-		"start": "harperdb-nextjs start",
-		"lint": "next lint",
-		"format": "prettier --write ."
-	},
-	"dependencies": {
-		"@harperdb/nextjs": "1.1.4",
-		"next": "15.3.3",
-		"react": "18",
-		"react-dom": "18"
-	},
-	"devDependencies": {
-		"@harperdb/code-guidelines": "0.0.2",
-		"eslint": "9.27.0",
-		"eslint-config-next": "15.3.3",
-		"eslint-config-prettier": "10.1.5",
-		"prettier": "3.5.3"
-	},
-	"prettier": "@harperdb/code-guidelines/prettier"
+  "name": "harper-nextjs-example",
+  "version": "0.1.0",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "harperdb-nextjs dev",
+    "build": "harperdb-nextjs build",
+    "local-build": "rm -rf .next && LOCAL_BUILD_FOR_DEPLOY=true harperdb-nextjs build",
+    "start": "harperdb-nextjs start",
+    "lint": "next lint",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "7.1.0",
+    "@fortawesome/free-solid-svg-icons": "7.1.0",
+    "@fortawesome/react-fontawesome": "3.1.0",
+    "@harperdb/nextjs": "1.1.4",
+    "bcrypt": "6.0.0",
+    "next": "15.3.3",
+    "react": "18",
+    "react-dom": "18",
+    "react-toastify": "11.0.5"
+  },
+  "devDependencies": {
+    "@harperdb/code-guidelines": "0.0.2",
+    "@types/node": "24.8.1",
+    "@types/react": "19.2.2",
+    "eslint": "9.27.0",
+    "eslint-config-next": "15.3.3",
+    "eslint-config-prettier": "10.1.5",
+    "prettier": "3.5.3",
+    "sass": "1.93.2"
+  }
 }

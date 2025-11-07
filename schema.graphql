@@ -1,7 +1,33 @@
-type Dog @table @export {
+## Here we can define any tables in our database. This example shows how we define a type as a table using
+## the type name as the table name and specifying it is an "export" available in the REST and other external protocols.
+type Songs @table @export {
+	id: ID @primaryKey # Here we define primary key (must be one)
+	artist: String @indexed
+	title: String @indexed
+	favorite: Boolean @indexed
+	duet: Boolean
+	learn: Boolean
+	retry: Boolean
+	avoid: Boolean
+	notes: String
+	tags: [String] @indexed
+	__updatedtime__: Float @updatedTime @indexed
+	__createdtime__: Float @createdTime @indexed
+	username: String @indexed
+}
+
+type SimpleUser @table @export {
+	username: String @primaryKey
+	pinHash: String
+	createdAt: Float @createdTime @indexed
+}
+
+type SingingRecord @table @export {
 	id: ID @primaryKey
-	name: String
-	breed: String
-	age: Int
-	color: String
+	songID: ID! @indexed
+	username: String! @indexed
+	songArtist: String @indexed
+	songName: String @indexed
+	sungAt: Float! @indexed
+	__createdtime__: Float @createdTime @indexed
 }

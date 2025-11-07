@@ -1,0 +1,30 @@
+.artistSection {
+  padding: 0 toRem(8);
+  list-style: none;
+
+  &:last-child {
+    padding-bottom: toRem(24);
+  }
+}
+
+.artistName {
+  font-size: toRem(18);
+  font-weight: bold;
+  position: sticky;
+  top: toRem(208);
+  background-color: $background-color;
+  padding: toRem(6) toRem(24) 0;
+}
+
+.count {
+  font-size: toRem(14);
+  color: #888;
+}
+
+.songList {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+  padding: toRem(6) 0 0;
+  list-style: none;
+}

@@ -1,0 +1,38 @@
+{
+  "name": "myKaraoke.info",
+  "short_name": "myKaraoke",
+  "theme_color": "#051923",
+  "background_color": "#051923",
+  "display": "standalone",
+  "orientation": "portrait",
+  "scope": "/",
+  "id": "/",
+  "start_url": "/",
+  "splash_pages": null,
+  "related_applications": [
+    {
+      "platform": "webapp",
+      "url": "https://mykaraoke.info",
+      "id": "/"
+    },
+    {
+      "platform": "webapp",
+      "url": "https://karaoke-cluster.karaoke.harperfabric.com:9926",
+      "id": "/"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

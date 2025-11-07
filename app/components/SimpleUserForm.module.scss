@@ -1,0 +1,146 @@
+.modal {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  padding: 0;
+  top: toRem(52);
+  right: toRem(24);
+  min-width: toRem(248);
+  z-index: 1000;
+}
+
+.formSection {
+  padding: toRem(16);
+  background-color: $song-background-color;
+  border-radius: toRem(8);
+  box-shadow: 0 toRem(2) toRem(4) rgba(0, 0, 0, 0.1);
+  border: toRem(1) solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(4);
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: toRem(4);
+  font-size: toRem(14);
+  font-weight: 500;
+  color: $sub-text-color;
+}
+
+.textInput {
+  width: 100%;
+  padding: toRem(4);
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  font-size: toRem(18);
+  box-sizing: border-box;
+  background-color: $song-background-color;
+  color: $text-color;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+}
+
+.button {
+  background-color: $button-color;
+  color: $text-color;
+  border: toRem(1) solid $text-color;
+  padding: toRem(4) toRem(8);
+  border-radius: toRem(4);
+  font-size: toRem(14);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  flex: 1;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+
+  &:disabled {
+    opacity: 0.8;
+    cursor: inherit;
+
+    &:hover {
+      background-color: inherit;
+    }
+  }
+}
+
+.primaryButton {
+  @extend .button;
+  background-color: $button-color;
+
+  &:disabled {
+    background-color: $button-disabled-color;
+  }
+
+  &:hover {
+    background-color: $button-hover-color;
+
+    &:disabled {
+      background-color: $button-disabled-color;
+    }
+  }
+}
+
+.secondaryButton {
+  @extend .button;
+  background-color: $secondary-button-color;
+  color: $text-color;
+
+  &:disabled {
+    background-color: $secondary-button-disabled-color;
+  }
+
+  &:hover {
+    background-color: $secondary-button-hover-color;
+
+    &:disabled {
+      background-color: $secondary-button-disabled-color;
+    }
+  }
+}
+
+.buttonRow {
+  display: flex;
+  gap: toRem(4);
+}
+
+.error {
+  color: #cc0001;
+}
+
+.share {
+  @extend .primaryButton;
+  padding: toRem(8);
+}
+
+.copyButtonText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareUrl {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: toRem(195);
+  text-align: left;
+}
+
+.pinWarning {
+  color: $text-color;
+  text-align: center;
+  padding: 0;
+}
+
+.goToList {
+  @extend .share;
+  @extend .copyButtonText;
+  text-decoration: none;
+}

@@ -1,0 +1,119 @@
+.songCard {
+  border-radius: toRem(6);
+  padding: toRem(2) toRem(4);
+  margin: 0 auto;
+  border: toRem(1) solid #888;
+  display: flex;
+  flex-direction: column;
+  gap: toRem(2);
+  width: calc(100% - toRem(50));
+  background-color: $song-background-color;
+  color: inherit;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.withUserOrTags {
+  padding-bottom: toRem(4);
+}
+
+.songCard:focus-visible {
+  outline: toRem(2) solid #0d2a36;
+  outline-offset: toRem(2);
+}
+
+button.songCard {
+  cursor: pointer;
+}
+
+.favorite {
+  background-color: #60ed8411;
+  border-color: #60ed84aa;
+}
+
+.avoid {
+  background-color: #ec909811;
+  border-color: #ec9098aa;
+}
+
+.songTitle {
+  font-size: toRem(16);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.songArtist {
+  font-size: toRem(14);
+}
+
+.songMeta {
+  font-size: toRem(14);
+  display: flex;
+  align-items: center;
+  color: #ccc;
+}
+
+.tags {
+  font-size: toRem(14);
+  display: flex;
+  gap: toRem(8);
+  list-style: none;
+  padding: 0;
+}
+
+.tag {
+  background-color: #eee;
+  font-weight: bold;
+  border-radius: toRem(6);
+  padding: 0 toRem(6);
+  line-height: 1.6;
+}
+
+.duet {
+  background-color: #3aa4cd;
+  color: #fff;
+}
+
+.learn {
+  background-color: #eef52c;
+  color: $dark-text-color;
+}
+
+.retry {
+  background-color: #ff9800;
+  color: $dark-text-color;
+}
+
+.tagsAndActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+.rowReverse {
+  flex-direction: row-reverse;
+}
+
+.songButtons {
+  display: flex;
+  gap: toRem(4);
+}
+
+.songButton {
+  background-color: $button-color;
+  color: $text-color;
+  border: toRem(1) solid $text-color;
+  padding: toRem(2) toRem(12);
+  border-radius: toRem(4);
+  font-size: toRem(14);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+}

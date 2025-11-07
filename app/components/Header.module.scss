@@ -1,0 +1,50 @@
+.header {
+  background-color: $background-color;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav {
+  max-width: toRem(1200);
+  margin: 0 auto;
+  padding: 0 toRem(24);
+}
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: toRem(4);
+  padding: toRem(16) 0;
+  margin: 0;
+  align-items: center;
+}
+
+.leftNavItem {
+  margin-right: auto;
+}
+
+.navLink {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: toRem(20);
+  appearance: none;
+  background-color: transparent;
+  border: none;
+}
+
+.userIcon {
+  position: relative;
+  overflow: visible;
+}
+
+.userIconButton {
+  font-size: toRem(20);
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #fff;
+}

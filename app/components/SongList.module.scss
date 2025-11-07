@@ -1,0 +1,156 @@
+.filters {
+  background-color: $background-color;
+  color: $text-color;
+  flex: 1;
+  position: sticky;
+  top: toRem(64);
+  z-index: 1;
+  padding: 0 toRem(24);
+}
+
+.searchBox {
+  width: calc(100% - toRem(30));
+  padding: toRem(4);
+  border: none;
+  font-size: toRem(18);
+  box-sizing: border-box;
+  background-color: transparent;
+  color: $text-color;
+  border-radius: 0;
+  outline: none;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+}
+
+.searchLabel {
+  border-bottom: toRem(1) solid $sub-text-color;
+  position: relative;
+  width: 100%;
+  display: block;
+  height: fit-content;
+  color: $picton-blue-translucent;
+
+  &:focus-within {
+    outline-style: solid;
+    outline-width: toRem(2);
+    outline-color: invert;
+  }
+}
+
+.clearSearchButton {
+  position: absolute;
+  right: toRem(4);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff33;
+  border: none;
+  border-radius: toRem(100);
+  padding: toRem(2) toRem(8);
+  color: $sub-text-color;
+  font-size: toRem(14);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.displayCount {
+  flex: 1;
+  position: sticky;
+  top: toRem(186);
+  background-color: $background-color;
+  padding: 0 toRem(8);
+  z-index: 1;
+  border-bottom: toRem(1) solid $text-color;
+}
+
+.artistList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: toRem(64) 0 0;
+  width: 100%;
+  list-style: none;
+  background-color: $background-color;
+}
+
+.settingsPanel {
+  display: flex;
+  justify-content: space-around;
+  margin: toRem(8) 0;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: toRem(1) solid $text-color;
+  border-radius: toRem(100);
+  cursor: pointer;
+  font-size: toRem(16);
+  gap: toRem(2);
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  color: $text-color;
+}
+
+.scrollLetters {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: toRem(100);
+  background-color: $letter-scroller-background-color;
+  z-index: 1000;
+}
+
+.scrollLetter {
+  appearance: none;
+  border: none;
+  background: none;
+  color: $text-color;
+  font-size: toRem(12);
+
+  &:first-child {
+    padding-top: toRem(4);
+  }
+
+  &:last-child {
+    padding-bottom: toRem(4);
+  }
+}
+
+.noGap {
+  gap: 0;
+  padding: toRem(1) toRem(6) toRem(1) toRem(8);
+
+  * + * {
+    margin-left: toRem(-4);
+  }
+}
+
+.enabled {
+  background-color: $toggle-enabled-color;
+}
+
+.standAlone {
+  padding: toRem(1) toRem(8);
+}
+
+.standAloneSongCards {
+  gap: toRem(8);
+
+  > :first-child {
+    margin-top: toRem(8);
+  }
+}
