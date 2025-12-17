@@ -4,11 +4,11 @@
   "private": true,
   "license": "Apache-2.0",
   "scripts": {
-    "dev": "harperdb-nextjs dev",
+    "dev": "rm -f .next/dev/lock && NODE_OPTIONS=\"--inspect=0 --require ./ws-silencer.js\" harperdb-nextjs dev",
     "build": "harperdb-nextjs build",
     "local-build": "rm -rf .next && LOCAL_BUILD_FOR_DEPLOY=true harperdb-nextjs build",
     "start": "harperdb-nextjs start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -16,10 +16,11 @@
     "@fortawesome/free-solid-svg-icons": "7.1.0",
     "@fortawesome/react-fontawesome": "3.1.0",
     "@harperdb/nextjs": "1.1.4",
+    "harperdb": "^4.7.12",
     "bcrypt": "6.0.0",
-    "next": "15.3.3",
-    "react": "18",
-    "react-dom": "18",
+    "next": "16.0.10",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-toastify": "11.0.5"
   },
   "devDependencies": {
@@ -27,7 +28,7 @@
     "@types/node": "24.8.1",
     "@types/react": "19.2.2",
     "eslint": "9.27.0",
-    "eslint-config-next": "15.3.3",
+    "eslint-config-next": "16.0.10",
     "eslint-config-prettier": "10.1.5",
     "prettier": "3.5.3",
     "sass": "1.93.2"

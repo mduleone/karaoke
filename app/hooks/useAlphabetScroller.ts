@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect, type RefObject } from 'react';
 import { ArtistType, SongType } from '../types/song';
+import { has } from '../utils/object';
 
 const isArtists = (candidate): candidate is ArtistType[] =>
-  candidate.every((cand) => ['artist', 'songs'].every((key) => key in cand));
+  candidate.every((cand) => ['artist', 'songs'].every((key) => has(cand, key)));
 
 const useAlphabetScroller = (sortedList: SongType[] | ArtistType[], byTitle: boolean = false) => {
   const letterRefMap = useRef<Record<string, HTMLElement[]>>({});

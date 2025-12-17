@@ -158,7 +158,7 @@ export async function createSong(formData) {
 
   // Revalidate the page to show updated data
   revalidatePath('/');
-  revalidatePath('/[username]');
+  revalidatePath('/[username]', 'page');
 
   return { statusCode: 200, status: 'OK' };
 }
@@ -220,7 +220,7 @@ export async function updateSong(formData) {
 
   // Revalidate the page to show updated data
   revalidatePath('/');
-  revalidatePath('/[username]');
+  revalidatePath('/[username]', 'page');
 
   return { statusCode: 200, status: 'OK' };
 }
@@ -312,7 +312,7 @@ export async function deleteSingingRecord(singingRecordId, username, pin) {
 
   await tables.SingingRecord.delete(singingRecordId);
 
-  revalidatePath('/[username]/history');
+  revalidatePath('/[username]/history', 'page');
 }
 
 export async function login(username, pin) {
