@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-const hasOwn = {}.hasOwnProperty;
+import { has } from './object';
 
 const cx = (...args: any[]) => {
   let classes = '';
@@ -60,11 +60,11 @@ const parseValue = (arg: any) => {
 
   let classes = '';
 
-  for (const key in arg) {
-    if (hasOwn.call(arg, key) && arg[key]) {
+  Object.keys(arg).forEach((key) => {
+    if (has(arg, key) && arg[key]) {
       classes = appendClass(classes, key);
     }
-  }
+  });
 
   return classes;
 }

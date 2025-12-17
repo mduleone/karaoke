@@ -1,13 +1,13 @@
-const nextConfig = {
-  webpack: (config) => {
-    config.externals.push({
-      harperdb: 'commonjs harperdb',
-    });
+const path = require('path');
 
-    return config;
-  },
+const globalUtilitiesPath = path.join(__dirname, 'app/styles/global-utilities.scss').replace(/\\/g, '/');
+
+const nextConfig = {
+  serverExternalPackages: ['harperdb'],
+  turbopack: {},
   sassOptions: {
-    additionalData: `@use "./app/styles/global-utilities.scss" as *;`,
+    includePaths: [__dirname],
+    additionalData: `@use "${globalUtilitiesPath}" as *;`,
   },
 };
 
