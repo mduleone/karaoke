@@ -83,6 +83,12 @@
   border-radius: toRem(4);
   font-size: toRem(18);
   box-sizing: border-box;
+
+  &:disabled {
+    color: $text-color;
+    background-color: rgba(239, 239, 239, 0.3);
+    cursor: not-allowed;
+  }
 }
 
 .tags {

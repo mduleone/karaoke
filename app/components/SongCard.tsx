@@ -22,7 +22,8 @@ type SongProps = {
 };
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
-  const { artist, title, favorite, duet, learn, retry, avoid, tags, createdAt } = song;
+  const { artist, title, favorite, duet, learn, retry, avoid, notes, createdAt } = song;
+  console.log(!!notes);
 
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +52,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
     [closeModal],
   );
 
-  const tagsCount = [duet, learn, retry].reduce((agg, curr) => agg + Number(curr), 0);
+  const tagsCount = [duet, learn, retry, !!notes].reduce((agg, curr) => agg + Number(curr), 0);
   const extraTagsCount = [learn, retry].reduce((agg, curr) => agg + Number(curr), 0);
 
   const cardStyles = cx(styles.songCard, {
@@ -102,7 +103,12 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
               )}
               {extraTagsCount > 0 && (
                 <li className={cx(styles.tag)}>
-                  +{extraTagsCount} Tag{extraTagsCount === 1 ? '' : 's'}
+                  {extraTagsCount} Tag{extraTagsCount === 1 ? '' : 's'}
+                </li>
+              )}
+              {notes && (
+                <li key="notes" className={cx(styles.tag)}>
+                  Notes
                 </li>
               )}
               {/* {learn && <li className={cx(styles.tag, styles.learn)}>Learn</li>}
