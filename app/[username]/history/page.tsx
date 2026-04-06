@@ -1,4 +1,6 @@
-import { listSingingRecordsForUser } from '../../actions';
+export const dynamic = 'force-dynamic';
+
+import { listSingingRecordsForUser } from '../../actions/listSingingRecordsForUser';
 import SongHistoryList from '../../components/SongHistoryList';
 import { slugToString } from '../../utils/string';
 

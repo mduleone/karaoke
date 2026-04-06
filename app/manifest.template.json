@@ -17,7 +17,7 @@
     },
     {
       "platform": "webapp",
-      "url": "https://karaoke-cluster.karaoke.harperfabric.com:9926",
+      "url": "https://app.karaoke.harperfabric.com:9926",
       "id": "/"
     }
   ],

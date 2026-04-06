@@ -9,15 +9,15 @@ export type SongType = {
   notes: string;
   id: string;
   tags: string[];
-  __createdtime__: number;
-  __updatedtime__: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type SongHistoryType = {
   artist: string;
   title: string;
   id: string;
-  sungAt: number;
+  sungAt: Date;
 };
 
 export type ArtistType = {

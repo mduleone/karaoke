@@ -1,4 +1,6 @@
-import { listSongs } from './actions';
+export const dynamic = 'force-dynamic';
+
+import { listSongs } from './actions/listSongs';
 import SongList from './components/SongList';
 
 export default async function Page() {

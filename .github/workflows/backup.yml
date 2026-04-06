@@ -1,0 +1,42 @@
+name: Nightly Backup
+
+on:
+  # schedule:
+  #   - cron: '0 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout backups branch
+        uses: actions/checkout@v4
+        with:
+          ref: backups
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout backup script from tags-and-extras
+        run: |
+          git fetch origin tags-and-extras
+          git checkout origin/tags-and-extras -- scripts/backup.ts db/ drizzle.config.ts package.json package-lock.json tsconfig.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run backup
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npx tsx scripts/backup.ts
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add scripts/songs_backup.json scripts/singing_records_backup.json
+          if ! git diff --staged --quiet; then
+            git commit -m "Backup $(date -u '+%Y-%m-%d')"
+            git push origin backups
+          fi

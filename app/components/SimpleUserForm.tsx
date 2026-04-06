@@ -7,10 +7,9 @@ import { createPortal } from 'react-dom';
 import { useSimpleUserContext } from '../context/simple-user';
 import styles from './SimpleUserForm.module.scss';
 import { slugToString, stringToSlug } from '../utils/string';
-import { login as loginAction, createAccount as createAccountAction } from '../actions';
+import { login as loginAction, createAccount as createAccountAction } from '../actions/users';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
 import Link from 'next/link';
-import cx from '../utils/classnames';
 
 const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const { username, pin, setUsername, setPin } = useSimpleUserContext();

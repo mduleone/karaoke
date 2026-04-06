@@ -18,6 +18,7 @@ coverage
 
 # env/config
 .env
+scripts/.env
 .env.local
 .env.*.local
 .env.test

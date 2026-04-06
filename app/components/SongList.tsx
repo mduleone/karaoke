@@ -108,7 +108,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 
   const sortedSongsByAddedDate = useMemo(() => {
     return filteredSongs.toSorted((a, b) => {
-      const diff = new Date(b.__createdtime__).getTime() - new Date(a.__createdtime__).getTime();
+      const diff = b.createdAt.getTime() - a.createdAt.getTime();
       return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
   }, [filteredSongs]);
@@ -180,8 +180,8 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
             className={cx(styles.settingsButton, styles.noGap, { [styles.enabled]: duetsOnly })}
           >
-            <FontAwesomeIcon icon={['fas', 'user-plus']} />
-            <FontAwesomeIcon icon={['fas', 'user']} />
+            <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
+            <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
           </button>
           <button
             type="button"
@@ -244,6 +244,9 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             />
           ))}
       </ul>
+      {/* <button className={styles.fab}>
+        <FontAwesomeIcon size="xl" icon={['fas', 'music']} />
+      </button> */}
     </>
   );
 };

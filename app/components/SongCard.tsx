@@ -3,7 +3,8 @@
 import { MouseEventHandler, useCallback, useState } from 'react';
 import { useParams } from 'next/navigation';
 
-import { updateSong, singSong } from '../actions';
+import { updateSong } from '../actions/updateSong';
+import { singSong } from '../actions/singSong';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
@@ -21,9 +22,10 @@ type SongProps = {
 };
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
-  const { artist, title, favorite, duet, learn, retry, avoid, tags, __createdtime__ } = song;
+  const { artist, title, favorite, duet, learn, retry, avoid, notes, createdAt } = song;
+  console.log(!!notes);
 
-  const createdDate = new Date(__createdtime__).toLocaleDateString();
+  const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { username, pin } = useSimpleUserContext();
   const params = useParams();
@@ -50,9 +52,8 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
     [closeModal],
   );
 
-  const tagsCount = [duet ? 'Duet' : null, learn ? 'Learn' : null, retry ? 'Retry' : null, ...(tags ?? [])].filter(
-    Boolean,
-  ).length;
+  const tagsCount = [duet, learn, retry, !!notes].reduce((agg, curr) => agg + Number(curr), 0);
+  const extraTagsCount = [learn, retry].reduce((agg, curr) => agg + Number(curr), 0);
 
   const cardStyles = cx(styles.songCard, {
     [styles.avoid]: avoid,
@@ -94,9 +95,24 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
         <div className={tagsAndActionsStyles}>
           {tagsCount > 0 && (
             <ul className={styles.tags}>
-              {duet && <li className={`${styles.tag} ${styles.duet}`}>Duet</li>}
-              {learn && <li className={`${styles.tag} ${styles.learn}`}>Learn</li>}
-              {retry && <li className={`${styles.tag} ${styles.retry}`}>Retry</li>}
+              {duet && (
+                <li className={cx(styles.tag, styles.duet, styles.noGap)}>
+                  <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
+                  <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
+                </li>
+              )}
+              {extraTagsCount > 0 && (
+                <li className={cx(styles.tag)}>
+                  {extraTagsCount} Tag{extraTagsCount === 1 ? '' : 's'}
+                </li>
+              )}
+              {notes && (
+                <li key="notes" className={cx(styles.tag)}>
+                  Notes
+                </li>
+              )}
+              {/* {learn && <li className={cx(styles.tag, styles.learn)}>Learn</li>}
+              {retry && <li className={cx(styles.tag, styles.retry)}>Retry</li>} */}
             </ul>
           )}
           {canEditSong && (
