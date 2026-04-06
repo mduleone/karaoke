@@ -1,28 +1,23 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcrypt';
-import { SimpleUserType } from '../types/SimpleUser';
+import { db } from '../../db';
+import { singingRecords, simpleUsers } from '../../db/schema';
 
-const saltRounds = 10;
-
-export const deleteSingingRecord = async (singingRecordId: string, username: string, pin: string) =>{
-  if (typeof tables === 'undefined' || !tables.SingingRecord || !tables.SimpleUser) {
-    throw new Error('Database not available');
-  }
-
-  const userRecord = await tables.SimpleUser.get(username) as unknown as SimpleUserType;
+export const deleteSingingRecord = async (singingRecordId: string, username: string, pin: string) => {
+  const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, username)).limit(1);
   if (!userRecord) {
     return { statusCode: 401, error: new Error(`User does not exist!`) };
   }
 
-  const hash = userRecord.pinHash;
-  const pinMatches = await bcrypt.compare(pin, hash);
+  const pinMatches = await bcrypt.compare(pin, userRecord.passwordHash);
   if (!pinMatches) {
     return { statusCode: 403, error: new Error(`You're not ${username}!`) };
   }
 
-  await tables.SingingRecord.delete(singingRecordId);
+  await db.delete(singingRecords).where(eq(singingRecords.id, singingRecordId));
 
   revalidatePath('/[username]/history');
 };

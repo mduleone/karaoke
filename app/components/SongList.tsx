@@ -108,7 +108,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
 
   const sortedSongsByAddedDate = useMemo(() => {
     return filteredSongs.toSorted((a, b) => {
-      const diff = new Date(b.__createdtime__).getTime() - new Date(a.__createdtime__).getTime();
+      const diff = b.createdAt.getTime() - a.createdAt.getTime();
       return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
   }, [filteredSongs]);

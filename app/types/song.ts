@@ -9,8 +9,8 @@ export type SongType = {
   notes: string;
   id: string;
   tags: string[];
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 export type SongHistoryType = {

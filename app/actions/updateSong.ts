@@ -1,8 +1,10 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcrypt';
-import { SimpleUserType } from '../types/SimpleUser';
+import { db } from '../../db';
+import { songs, simpleUsers } from '../../db/schema';
 import { createFormDataReader } from './formReader';
 
 export const updateSong = async (formData: FormData) => {
@@ -17,28 +19,26 @@ export const updateSong = async (formData: FormData) => {
   const username = usernameValue.toLocaleLowerCase().trim();
   const pin = pinValue.trim();
 
-  const userRecord = (await tables.SimpleUser.get(username)) as unknown as SimpleUserType;
+  const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, username)).limit(1);
   if (!userRecord) {
     return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist!' };
   }
 
-  const hash = userRecord.pinHash;
-  const pinMatches = await bcrypt.compare(pin, hash);
+  const pinMatches = await bcrypt.compare(pin, userRecord.passwordHash);
   if (!pinMatches) {
     return { statusCode: 403, status: 'Access denied', message: `You're not ${username}!` };
   }
-  // Extract form values
+
   const id = formDataReader('id');
   const artistValue = formDataReader('artist');
   const titleValue = formDataReader('title');
   const notesValue = formDataReader('notes');
-  const favorite = formDataReader('favorite', true);
-  const duet = formDataReader('duet', true);
-  const learn = formDataReader('learn', true);
-  const retry = formDataReader('retry', true);
-  const avoid = formDataReader('avoid', true);
+  const favorite = formDataReader('favorite', true) as boolean;
+  const duet = formDataReader('duet', true) as boolean;
+  const learn = formDataReader('learn', true) as boolean;
+  const retry = formDataReader('retry', true) as boolean;
+  const avoid = formDataReader('avoid', true) as boolean;
 
-  // Validate required fields
   if (typeof id !== 'string' || id.length === 0) {
     throw new Error('Song ID is required for updates');
   }
@@ -55,15 +55,10 @@ export const updateSong = async (formData: FormData) => {
     throw new Error('Artist and Title are required');
   }
 
-  if (typeof tables === 'undefined' || !tables.Songs) {
-    throw new Error('Database not available');
-  }
+  await db.update(songs).set({ artist, title, notes, favorite, duet, learn, retry, avoid, username }).where(eq(songs.id, id));
 
-  await tables.Songs.put(id, { artist, title, notes, favorite, duet, learn, retry, avoid, username });
-
-  // Revalidate the page to show updated data
   revalidatePath('/');
   revalidatePath('/[username]');
 
   return { statusCode: 200, status: 'OK' };
-}
+};

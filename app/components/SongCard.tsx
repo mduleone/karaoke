@@ -22,9 +22,9 @@ type SongProps = {
 };
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
-  const { artist, title, favorite, duet, learn, retry, avoid, tags, __createdtime__ } = song;
+  const { artist, title, favorite, duet, learn, retry, avoid, tags, createdAt } = song;
 
-  const createdDate = new Date(__createdtime__).toLocaleDateString();
+  const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { username, pin } = useSimpleUserContext();
   const params = useParams();

@@ -1,41 +1,25 @@
 'use server';
 
-import { SongType } from '../types/song';
+import { eq } from 'drizzle-orm';
+import { db } from '../../db';
+import { singingRecords, songs } from '../../db/schema';
 
 export const listSingingRecordsForUser = async (forUser: string) => {
-  const lowerCaseUsername = forUser?.toLocaleLowerCase();
   try {
-    let songs = [];
-    if (tables?.SingingRecord) {
-      songs = await Promise.all(
-        tables.SingingRecord.search({
-          conditions: [{ attribute: 'username', value: lowerCaseUsername, comparator: 'equals' }],
-        })
-          .map(async ({ id, songID, sungAt }) => {
-            let artist, title;
-            try {
-              ({ artist, title } = await tables.Songs.get(songID) as unknown as SongType);
-            } catch (e) {
-              console.error(`Couldn't find song ${songID}`);
-              console.error(e);
-            }
-
-            if (artist && title) {
-              return {
-                id,
-                artist,
-                title,
-                songID,
-                sungAt,
-              };
-            }
-          })
-          .filter((record) => !!record),
-      );
-    }
-    return Array.from(songs);
+    const lowerCaseUsername = forUser?.toLocaleLowerCase();
+    return await db
+      .select({
+        id: singingRecords.id,
+        artist: songs.artist,
+        title: songs.title,
+        songId: singingRecords.songId,
+        sungAt: singingRecords.sungAt,
+      })
+      .from(singingRecords)
+      .innerJoin(songs, eq(singingRecords.songId, songs.id))
+      .where(eq(singingRecords.username, lowerCaseUsername));
   } catch (error) {
-    console.error('Error listing songs:', error);
+    console.error('Error listing singing records:', error);
     return [];
   }
 };

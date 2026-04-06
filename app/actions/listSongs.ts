@@ -1,53 +1,15 @@
 'use server';
 
-const listSongsServer = async (forUser) => {
-  try {
-    let songs = [];
-    if (tables?.Songs) {
-      const userToSearch = forUser ? forUser : 'matt';
+import { eq } from 'drizzle-orm';
+import { db } from '../../db';
+import { songs } from '../../db/schema';
 
-      songs = await tables.Songs.search({
-        conditions: [{ attribute: 'username', value: userToSearch, comparator: 'equals' }],
-      })
-        .map(
-          ({
-            artist,
-            title,
-            favorite,
-            duet,
-            learn,
-            retry,
-            avoid,
-            notes,
-            id,
-            tags,
-            __createdtime__,
-            __updatedtime__,
-          }) => ({
-            artist,
-            title,
-            favorite,
-            duet,
-            learn,
-            retry,
-            avoid,
-            notes,
-            id,
-            tags,
-            __createdtime__,
-            __updatedtime__,
-          }),
-        )
-        .filter(({ artist, title }) => !!artist && !!title);
-    }
-    return Array.from(songs);
+export const listSongs = async (forUser?: string) => {
+  try {
+    const userToSearch = forUser?.toLocaleLowerCase() ?? 'matt';
+    return await db.select().from(songs).where(eq(songs.username, userToSearch));
   } catch (error) {
     console.error('Error listing songs:', error);
     return [];
   }
-};
-
-export const listSongs = async (forUser) => {
-  const lowerCaseUsername = forUser?.toLocaleLowerCase();
-  return await listSongsServer(lowerCaseUsername);
 };

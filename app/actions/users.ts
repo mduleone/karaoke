@@ -1,23 +1,21 @@
 'use server';
 
+import { eq } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
-import { SimpleUserType } from '../types/SimpleUser';
+import { db } from '../../db';
+import { simpleUsers } from '../../db/schema';
 
 const saltRounds = 10;
 
 export const login = async (username: string, pin: string) => {
-  if (typeof tables === 'undefined' || !tables.SimpleUser) {
-    throw new Error('Database not available');
-  }
   const lowerCaseUsername = username.toLocaleLowerCase();
 
-  const userRecord = await tables.SimpleUser.get(lowerCaseUsername) as unknown as SimpleUserType;
+  const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, lowerCaseUsername)).limit(1);
   if (!userRecord) {
     return { statusCode: 401, status: 'Unauthorized', message: 'User does not exist' };
   }
 
-  const hash = userRecord.pinHash;
-  const pinMatches = await bcrypt.compare(pin, hash);
+  const pinMatches = await bcrypt.compare(pin, userRecord.passwordHash);
   if (!pinMatches) {
     return { statusCode: 401, status: 'Unauthorized', message: 'Invalid username/pin combination' };
   }
@@ -26,18 +24,15 @@ export const login = async (username: string, pin: string) => {
 };
 
 export const createAccount = async (username: string, pin: string) => {
-  if (typeof tables === 'undefined' || !tables.SimpleUser) {
-    throw new Error('Database not available');
-  }
   const lowerCaseUsername = username.toLocaleLowerCase();
 
-  const userRecord = await tables.SimpleUser.get(lowerCaseUsername) as unknown as SimpleUserType;
+  const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, lowerCaseUsername)).limit(1);
   if (userRecord) {
     return { statusCode: 401, status: 'Unauthorized', message: 'User already exists' };
   }
 
-  const pinHash = await bcrypt.hash(pin, saltRounds);
-  await tables.SimpleUser.create({ username: lowerCaseUsername, pinHash }, {});
+  const passwordHash = await bcrypt.hash(pin, saltRounds);
+  await db.insert(simpleUsers).values({ username: lowerCaseUsername, passwordHash });
 
   return { statusCode: 200, status: 'OK' };
 };
