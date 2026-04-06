@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: backups
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Checkout backup script from tags-and-extras
         run: |
