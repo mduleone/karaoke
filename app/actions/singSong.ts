@@ -2,7 +2,6 @@
 
 import bcrypt from 'bcrypt';
 import { SimpleUserType } from '../types/SimpleUser';
-import('harperdb');
 
 export const singSong = async (songID: string, songArtist: string, songName: string, username: string, pin: string) => {
   const lowerCaseUsername = username?.toLocaleLowerCase();

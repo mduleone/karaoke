@@ -1,7 +1,6 @@
 'use server';
 
 import { SongType } from '../types/song';
-import('harperdb');
 
 export const getSong = async (songId: string): Promise<SongType | null> => {
   try {

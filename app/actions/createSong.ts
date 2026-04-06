@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcrypt';
 import { SimpleUserType } from '../types/SimpleUser';
 import { createFormDataReader } from './formReader';
-import('harperdb');
 
 export const createSong = async (formData: FormData) => {
   if (typeof tables === 'undefined' || !tables.Songs || !tables.SimpleUser) {

@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache';
 import bcrypt from 'bcrypt';
 import { SimpleUserType } from '../types/SimpleUser';
 import { createFormDataReader } from './formReader';
-import('harperdb');
 
 export const updateSong = async (formData: FormData) => {
   const formDataReader = createFormDataReader(formData);

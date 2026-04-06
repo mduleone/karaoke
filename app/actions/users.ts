@@ -2,7 +2,6 @@
 
 import bcrypt from 'bcrypt';
 import { SimpleUserType } from '../types/SimpleUser';
-import('harperdb');
 
 const saltRounds = 10;
 
