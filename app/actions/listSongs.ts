@@ -4,7 +4,7 @@ import { Condition } from 'harperdb/resources/ResourceInterface';
 import { RequestTarget } from 'harperdb/resources/RequestTarget';
 import('harperdb');
 
-const CLUSTER_URL_FOR_SONGS = 'https://karaoke-cluster.karaoke.harperfabric.com:9926/Songs/';
+const CLUSTER_URL_FOR_SONGS = 'https://app.karaoke.harperfabric.com:9926/Songs/';
 
 const listSongsLocalBuild = async (forUser) => {
   try {

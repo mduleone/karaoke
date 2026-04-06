@@ -5,3 +5,4 @@ jsResource:
 '@harperdb/nextjs':
   package: '@harperdb/nextjs'
   files: '*'
+  prebuilt: true
