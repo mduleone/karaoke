@@ -17,7 +17,7 @@ export type SongHistoryType = {
   artist: string;
   title: string;
   id: string;
-  sungAt: number;
+  sungAt: Date;
 };
 
 export type ArtistType = {
