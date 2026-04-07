@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
 
 import Artist from './Artist';
-import SongCard from './SongCard';
+import AddedDate from './AddedDate';
 import type { ArtistType, SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
@@ -240,14 +240,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       <ul className={styles.artistList}>
         {byRecentlyAdded &&
           songsByAddedDate.map((group) => (
-            <li key={group.date} className={styles.dateSection}>
-              <p className={styles.dateSectionHeading}>{group.date}</p>
-              <ul className={styles.dateSectionSongs}>
-                {group.songs.map((song) => (
-                  <SongCard key={song.id} song={song} withArtist />
-                ))}
-              </ul>
-            </li>
+            <AddedDate key={group.date} date={group.date} songs={group.songs} />
           ))}
         {!byRecentlyAdded &&
           (byTitle ? filteredSongsByTitle : filteredSongsByArtist).map((artistGroup) => (
