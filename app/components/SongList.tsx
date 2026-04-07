@@ -123,7 +123,6 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     }, [] as { date: string; songs: SongType[] }[]);
   }, [filteredSongs]);
 
-  const listClasses = cx(styles.artistList, { [styles.standAloneSongCards]: byRecentlyAdded });
   const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
   const stringName = slugToString(paramsUsername);
   const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
@@ -238,7 +237,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
           ))}
         </div>
       )}
-      <ul className={listClasses}>
+      <ul className={styles.artistList}>
         {byRecentlyAdded &&
           songsByAddedDate.map((group) => (
             <li key={group.date} className={styles.dateSection}>
