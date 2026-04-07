@@ -25,7 +25,7 @@ type SongProps = {
 };
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
-  const { artist, title, favorite, duet, learn, retry, avoid, notes, createdAt } = song;
+  const { artist, title, favorite, duet, learn, retry, avoid, notes, tags, createdAt } = song;
 
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -103,7 +103,19 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
 
   return (
     <li ref={addToRefMap?.(title)}>
-      <CardComponent {...cardComponentProps} className={cardStyles}>
+      <CardComponent
+        {...cardComponentProps}
+        className={cardStyles}
+        data-notes={notes || undefined}
+        data-tags={[
+          ...(favorite ? ['favorite'] : []),
+          ...(duet ? ['duet'] : []),
+          ...(learn ? ['learn'] : []),
+          ...(retry ? ['retry'] : []),
+          ...(avoid ? ['avoid'] : []),
+          ...tags,
+        ].join(', ') || undefined}
+      >
         <p className={styles.songTitle}>
           <span>{title}</span>
           {favorite && <FontAwesomeIcon icon={['fas', 'heart']} />}
