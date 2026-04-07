@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import type { SongType } from '../types/song';
 import styles from './SongForm.module.scss';
@@ -15,12 +15,22 @@ type SongFormProps = {
   song?: SongType;
   onClose?: () => void;
   disabled?: boolean;
+  artists?: string[];
+  existingSongs?: { artist: string; title: string }[];
 };
 
-const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose }: SongFormProps) => {
+const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose, artists = [], existingSongs = [] }: SongFormProps) => {
   const favoriteRef = useRef<HTMLInputElement>(null);
   const avoidRef = useRef<HTMLInputElement>(null);
   const { username, pin } = useSimpleUserContext();
+  const [localArtist, setLocalArtist] = useState('');
+  const [localTitle, setLocalTitle] = useState('');
+
+  const isDuplicate = !song && localArtist && localTitle &&
+    existingSongs.some(
+      (s) => s.artist.toLowerCase() === localArtist.toLowerCase() &&
+             s.title.toLowerCase() === localTitle.toLowerCase()
+    );
 
   const onChangeToggleOppositeExtremity: (
     oppositeRef: ReturnType<typeof useRef<HTMLInputElement>>,
@@ -48,12 +58,20 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               type="text"
               id="artist"
               name="artist"
+              list="artist-suggestions"
               className={styles.textInput}
               placeholder="Sabrina Carpenter"
               defaultValue={song?.artist}
               required
               disabled={disabled}
+              autoComplete="off"
+              onChange={(e) => setLocalArtist(e.target.value)}
             />
+            {artists.length > 0 && (
+              <datalist id="artist-suggestions">
+                {artists.map((a) => <option key={a} value={a} />)}
+              </datalist>
+            )}
           </div>
           <div>
             <label className={styles.formLabel} htmlFor="title">
@@ -68,8 +86,12 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               defaultValue={song?.title}
               required
               disabled={disabled}
+              onChange={(e) => setLocalTitle(e.target.value)}
             />
           </div>
+          {isDuplicate && (
+            <p className={styles.duplicateWarning}>You already have this song in your list.</p>
+          )}
           {song && (
             <div className={styles.lyricsLinks}>
               <Link

@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation';
 import { updateSong } from '../actions/updateSong';
 import { singSong } from '../actions/singSong';
 import { deleteSong } from '../actions/deleteSong';
+import { listAllArtists } from '../actions/listAllArtists';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
@@ -27,6 +28,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
 
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [artists, setArtists] = useState<string[]>([]);
   const { username, pin } = useSimpleUserContext();
   const params = useParams();
 
@@ -36,7 +38,11 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
   const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
   const canEditSong = signedIn && !isWrongUserToEdit;
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = useCallback(async () => {
+    setIsModalOpen(true);
+    const allArtists = await listAllArtists();
+    setArtists(allArtists);
+  }, []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const formAction = useCallback(
@@ -140,6 +146,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
           song={song}
           disabled={!canEditSong}
           onClose={closeModal}
+          artists={artists}
         />
       </Modal>
     </li>
