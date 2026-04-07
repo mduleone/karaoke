@@ -1,0 +1,5 @@
+# This branch only tracks backup JSON files
+*
+!.gitignore
+!songs_backup.json
+!singing_records_backup.json
