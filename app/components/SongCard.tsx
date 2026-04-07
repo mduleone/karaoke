@@ -23,7 +23,6 @@ type SongProps = {
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
   const { artist, title, favorite, duet, learn, retry, avoid, notes, createdAt } = song;
-  console.log(!!notes);
 
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);

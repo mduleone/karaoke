@@ -20,6 +20,8 @@ const Header = () => {
     setShowUserForm(false);
   }, []);
 
+  if (pathname === '/') return null;
+
   const isMatt = params.username === 'matt' || typeof params.username === 'undefined';
   const isHistory = pathname.endsWith('/history');
   const historyHref = `/${isMatt ? 'matt' : params.username}/history`;
