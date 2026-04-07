@@ -143,14 +143,6 @@
   padding: toRem(1) toRem(8);
 }
 
-.standAloneSongCards {
-  gap: toRem(8);
-
-  > :first-child {
-    margin-top: toRem(8);
-  }
-}
-
 .fab {
   position: fixed;
   bottom: toRem(24);

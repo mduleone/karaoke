@@ -4,7 +4,7 @@ import { useParams } from 'next/navigation';
 import { useCallback, useMemo, useRef } from 'react';
 
 import Artist from './Artist';
-import SongCard from './SongCard';
+import AddedDate from './AddedDate';
 import type { ArtistType, SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
@@ -106,14 +106,23 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       .toSorted(artistSorter);
   }, [filteredSongs]);
 
-  const sortedSongsByAddedDate = useMemo(() => {
-    return filteredSongs.toSorted((a, b) => {
+  const songsByAddedDate = useMemo(() => {
+    const sorted = filteredSongs.toSorted((a, b) => {
       const diff = b.createdAt.getTime() - a.createdAt.getTime();
       return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
+    return sorted.reduce((agg, song) => {
+      const dateKey = song.createdAt.toLocaleDateString();
+      let group = agg.find((g) => g.date === dateKey);
+      if (!group) {
+        group = { date: dateKey, songs: [] };
+        agg.push(group);
+      }
+      group.songs.push(song);
+      return agg;
+    }, [] as { date: string; songs: SongType[] }[]);
   }, [filteredSongs]);
 
-  const listClasses = cx(styles.artistList, { [styles.standAloneSongCards]: byRecentlyAdded });
   const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
   const stringName = slugToString(paramsUsername);
   const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
@@ -228,10 +237,10 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
           ))}
         </div>
       )}
-      <ul className={listClasses}>
+      <ul className={styles.artistList}>
         {byRecentlyAdded &&
-          sortedSongsByAddedDate.map((song) => (
-            <SongCard addToRefMap={addToRefMap} key={song.id} song={song} withArtist withAddedDate />
+          songsByAddedDate.map((group) => (
+            <AddedDate key={group.date} date={group.date} songs={group.songs} />
           ))}
         {!byRecentlyAdded &&
           (byTitle ? filteredSongsByTitle : filteredSongsByArtist).map((artistGroup) => (
