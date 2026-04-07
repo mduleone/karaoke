@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -9,7 +9,6 @@ import styles from './SimpleUserForm.module.scss';
 import { slugToString, stringToSlug } from '../utils/string';
 import { login as loginAction, createAccount as createAccountAction } from '../actions/users';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
-import Link from 'next/link';
 
 type Mode = null | 'login' | 'create';
 
@@ -85,30 +84,30 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     };
   }, [onClose]);
 
+  const params = useParams();
+  const paramsUsername = params?.username as string | undefined;
+
   const fallbackRef = useRef<HTMLInputElement | null>(null);
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [aiShareStatus, setAiShareStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const userListUrl = `${window.location.host}/${stringToSlug(username)}`;
 
-  const copyViaClipboardApi = useCallback(async () => {
-    await navigator.clipboard.writeText(userListUrl);
-  }, [userListUrl]);
-
-  const copyViaFallback = useCallback(() => {
-    const input = fallbackRef.current;
-    input.value = userListUrl;
-    input.select();
-    document.execCommand('copy');
-    input.value = '';
-  }, [userListUrl]);
+  const copyToClipboard = useCallback(async (text: string) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const input = fallbackRef.current;
+      input.value = text;
+      input.select();
+      document.execCommand('copy');
+      input.value = '';
+    }
+  }, []);
 
   const handleCopy = useCallback(async () => {
     try {
-      if (navigator.clipboard?.writeText) {
-        await copyViaClipboardApi();
-      } else {
-        copyViaFallback();
-      }
+      await copyToClipboard(userListUrl);
       setStatus('success');
       setTimeout(() => setStatus('idle'), 2000);
     } catch (error) {
@@ -116,7 +115,20 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
     }
-  }, [copyViaClipboardApi, copyViaFallback]);
+  }, [copyToClipboard, userListUrl]);
+
+  const handleShareWithAI = useCallback(async (targetUsername: string) => {
+    const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
+    try {
+      await copyToClipboard(prompt);
+      setAiShareStatus('success');
+      setTimeout(() => setAiShareStatus('idle'), 2000);
+    } catch (error) {
+      console.error('Failed to copy', error);
+      setAiShareStatus('error');
+      setTimeout(() => setAiShareStatus('idle'), 3000);
+    }
+  }, [copyToClipboard, username]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,14 +160,22 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <div className={styles.copyButtonText}>
             Copy to Clipboard
             <FontAwesomeIcon
+              fixedWidth
               aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
               icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
             />
           </div>
         </button>
-        <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
-          Go to your list
-        </Link>
+        <button className={styles.share} type="button" onClick={() => handleShareWithAI(stringToSlug(username))}>
+          <div className={styles.copyButtonText}>
+            {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
+            <FontAwesomeIcon
+              aria-label={aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'}
+              fixedWidth
+              icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
+            />
+          </div>
+        </button>
         <div className={styles.buttonRow}>
           <button type="button" className={styles.secondaryButton} onClick={onLogout}>
             Logout
@@ -174,6 +194,17 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             Create account
           </button>
         </div>
+        {paramsUsername && (
+          <button className={styles.share} type="button" onClick={() => handleShareWithAI(paramsUsername)}>
+            <div className={styles.copyButtonText}>
+              {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
+              <FontAwesomeIcon
+                aria-label={aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'}
+                icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
+              />
+            </div>
+          </button>
+        )}
       </div>
     );
   } else {
