@@ -1,0 +1,29 @@
+# myKaraoke
+
+A personal karaoke song list tracker at mykaraoke.info.
+
+## Song Lists
+
+Each user's song list is at `/{username}`. The page includes a `<link rel="alternate" type="application/json">` header pointing to a machine-readable JSON endpoint.
+
+### Song list JSON
+
+`GET /{username}/songs.json`
+
+Returns the user's full song list with metadata:
+
+- `artist` — artist name
+- `title` — song title
+- `notes` — freeform notes (key, difficulty, etc.), null if empty
+- `tags` — array of labels: `favorite`, `duet`, `learn`, `retry`, `avoid`, plus any custom tags
+- `addedAt` — ISO 8601 timestamp
+
+### Singing history JSON
+
+`GET /{username}/history.json`
+
+Returns a chronological log of every time the user has recorded singing a song:
+
+- `artist` — artist name
+- `title` — song title
+- `sungAt` — ISO 8601 timestamp
