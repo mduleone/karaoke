@@ -17,9 +17,10 @@ type SongFormProps = {
   disabled?: boolean;
   artists?: string[];
   existingSongs?: { artist: string; title: string }[];
+  sungHistory?: { id: string; sungAt: Date }[];
 };
 
-const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose, artists = [], existingSongs = [] }: SongFormProps) => {
+const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose, artists = [], existingSongs = [], sungHistory = [] }: SongFormProps) => {
   const favoriteRef = useRef<HTMLInputElement>(null);
   const avoidRef = useRef<HTMLInputElement>(null);
   const { username, pin } = useSimpleUserContext();
@@ -118,6 +119,23 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               >
                 Spotify
               </Link>
+            </div>
+          )}
+          {sungHistory.length > 0 && (
+            <div>
+              <p className={styles.formLabel}>
+                Sung {sungHistory.length} time{sungHistory.length === 1 ? '' : 's'}
+              </p>
+              <ul className={styles.sungHistoryList}>
+                {sungHistory.slice(0, 5).map((record) => {
+                  const d = new Date(record.sungAt);
+                  return (
+                    <li key={record.id} className={styles.sungHistoryEntry}>
+                      {d.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit', year: 'numeric' })} {d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
           )}
           <div>

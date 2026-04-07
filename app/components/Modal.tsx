@@ -22,12 +22,14 @@ const Modal = ({ children, onClose, show }: ModalProps) => {
     const element = document.createElement('div');
     document.body.appendChild(element);
     setPortalElement(element);
+    document.body.style.overflow = 'hidden';
 
     return () => {
       if (element.parentNode) {
         element.parentNode.removeChild(element);
       }
       setPortalElement(null);
+      document.body.style.overflow = '';
     };
   }, [show]);
 

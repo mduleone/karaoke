@@ -1,6 +1,6 @@
 .songCard {
   border-radius: toRem(6);
-  padding: 0 toRem(4);
+  padding: toRem(2) toRem(4);
   border: toRem(1) solid #888;
   display: flex;
   flex-direction: column;
@@ -10,11 +10,34 @@
   color: inherit;
   text-align: left;
   margin: 0 auto;
+  line-height: 1.2;
 }
 
 .songCard:focus-visible {
   outline: toRem(2) solid #0d2a36;
   outline-offset: toRem(2);
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: toRem(4);
+  flex-shrink: 0;
+}
+
+.editButton {
+  background-color: $button-color;
+  color: $text-color;
+  border: toRem(1) solid $text-color;
+  padding: toRem(2) toRem(12);
+  border-radius: toRem(4);
+  font-size: toRem(14);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
 }
 
 .deleteButton {
@@ -24,6 +47,67 @@
   appearance: none;
   cursor: pointer;
   padding: toRem(4);
+}
+
+.editForm {
+  background-color: $song-background-color;
+  border-radius: toRem(8);
+  padding: toRem(24);
+  display: flex;
+  flex-direction: column;
+  gap: toRem(16);
+}
+
+.editHeading {
+  margin: 0;
+  font-size: toRem(20);
+  font-weight: 600;
+}
+
+.editSongName {
+  margin: 0;
+  color: $sub-text-color;
+  font-size: toRem(14);
+}
+
+.editLabel {
+  font-size: toRem(13);
+  font-weight: 600;
+  color: $sub-text-color;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.editInput {
+  background: transparent;
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  color: $text-color;
+  font-size: toRem(18);
+  padding: toRem(4) 0;
+  width: 100%;
+  border-radius: 0;
+  color-scheme: dark;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $picton-blue;
+  }
+}
+
+.saveButton {
+  background-color: $button-color;
+  color: $text-color;
+  padding: toRem(12) toRem(24);
+  border: toRem(1) #000 solid;
+  border-radius: toRem(4);
+  font-size: toRem(16);
+  font-weight: 500;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
 }
 
 .songTitle {
@@ -39,5 +123,7 @@
   font-size: toRem(14);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: #ccc;
+  padding-bottom: toRem(4);
 }

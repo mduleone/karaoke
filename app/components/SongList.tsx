@@ -106,11 +106,21 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       .toSorted(artistSorter);
   }, [filteredSongs]);
 
-  const sortedSongsByAddedDate = useMemo(() => {
-    return filteredSongs.toSorted((a, b) => {
+  const songsByAddedDate = useMemo(() => {
+    const sorted = filteredSongs.toSorted((a, b) => {
       const diff = b.createdAt.getTime() - a.createdAt.getTime();
       return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
+    return sorted.reduce((agg, song) => {
+      const dateKey = song.createdAt.toLocaleDateString();
+      let group = agg.find((g) => g.date === dateKey);
+      if (!group) {
+        group = { date: dateKey, songs: [] };
+        agg.push(group);
+      }
+      group.songs.push(song);
+      return agg;
+    }, [] as { date: string; songs: SongType[] }[]);
   }, [filteredSongs]);
 
   const listClasses = cx(styles.artistList, { [styles.standAloneSongCards]: byRecentlyAdded });
@@ -230,8 +240,15 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       )}
       <ul className={listClasses}>
         {byRecentlyAdded &&
-          sortedSongsByAddedDate.map((song) => (
-            <SongCard addToRefMap={addToRefMap} key={song.id} song={song} withArtist withAddedDate />
+          songsByAddedDate.map((group) => (
+            <li key={group.date} className={styles.dateSection}>
+              <p className={styles.dateSectionHeading}>{group.date}</p>
+              <ul className={styles.dateSectionSongs}>
+                {group.songs.map((song) => (
+                  <SongCard key={song.id} song={song} withArtist />
+                ))}
+              </ul>
+            </li>
           ))}
         {!byRecentlyAdded &&
           (byTitle ? filteredSongsByTitle : filteredSongsByArtist).map((artistGroup) => (

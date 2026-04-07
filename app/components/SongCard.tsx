@@ -7,6 +7,7 @@ import { updateSong } from '../actions/updateSong';
 import { singSong } from '../actions/singSong';
 import { deleteSong } from '../actions/deleteSong';
 import { listAllArtists } from '../actions/listAllArtists';
+import { listSingingRecordsForSong } from '../actions/listSingingRecordsForSong';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
@@ -29,6 +30,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [artists, setArtists] = useState<string[]>([]);
+  const [sungHistory, setSungHistory] = useState<{ id: string; sungAt: Date }[]>([]);
   const { username, pin } = useSimpleUserContext();
   const params = useParams();
 
@@ -38,11 +40,17 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
   const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
   const canEditSong = signedIn && !isWrongUserToEdit;
 
+  const listOwner = (params.username as string) || 'matt';
+
   const openModal = useCallback(async () => {
     setIsModalOpen(true);
-    const allArtists = await listAllArtists();
+    const [allArtists, history] = await Promise.all([
+      listAllArtists(),
+      listSingingRecordsForSong(song.id, listOwner),
+    ]);
     setArtists(allArtists);
-  }, []);
+    setSungHistory(history);
+  }, [song.id, listOwner]);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const formAction = useCallback(
@@ -147,6 +155,7 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
           disabled={!canEditSong}
           onClose={closeModal}
           artists={artists}
+          sungHistory={sungHistory}
         />
       </Modal>
     </li>
