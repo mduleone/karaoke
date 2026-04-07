@@ -93,25 +93,21 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
 
   const userListUrl = `${window.location.host}/${stringToSlug(username)}`;
 
-  const copyViaClipboardApi = useCallback(async () => {
-    await navigator.clipboard.writeText(userListUrl);
-  }, [userListUrl]);
-
-  const copyViaFallback = useCallback(() => {
-    const input = fallbackRef.current;
-    input.value = userListUrl;
-    input.select();
-    document.execCommand('copy');
-    input.value = '';
-  }, [userListUrl]);
+  const copyToClipboard = useCallback(async (text: string) => {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const input = fallbackRef.current;
+      input.value = text;
+      input.select();
+      document.execCommand('copy');
+      input.value = '';
+    }
+  }, []);
 
   const handleCopy = useCallback(async () => {
     try {
-      if (navigator.clipboard?.writeText) {
-        await copyViaClipboardApi();
-      } else {
-        copyViaFallback();
-      }
+      await copyToClipboard(userListUrl);
       setStatus('success');
       setTimeout(() => setStatus('idle'), 2000);
     } catch (error) {
@@ -119,20 +115,12 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
       setStatus('error');
       setTimeout(() => setStatus('idle'), 3000);
     }
-  }, [copyViaClipboardApi, copyViaFallback]);
+  }, [copyToClipboard, userListUrl]);
 
   const handleShareWithAI = useCallback(async (targetUsername: string) => {
     const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(prompt);
-      } else {
-        const input = fallbackRef.current;
-        input.value = prompt;
-        input.select();
-        document.execCommand('copy');
-        input.value = '';
-      }
+      await copyToClipboard(prompt);
       setAiShareStatus('success');
       setTimeout(() => setAiShareStatus('idle'), 2000);
     } catch (error) {
@@ -140,7 +128,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
       setAiShareStatus('error');
       setTimeout(() => setAiShareStatus('idle'), 3000);
     }
-  }, [username]);
+  }, [copyToClipboard, username]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
