@@ -14,6 +14,7 @@ export const songs = pgTable('songs', {
   tags: text('tags').array().default([]),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 });
 
 export const simpleUsers = pgTable('simple_users', {
@@ -29,4 +30,5 @@ export const singingRecords = pgTable('singing_records', {
   songArtist: text('song_artist').notNull(),
   username: text('username').notNull(),
   sungAt: timestamp('sung_at', { withTimezone: true }).notNull(),
+  deletedAt: timestamp('deleted_at', { withTimezone: true }),
 });

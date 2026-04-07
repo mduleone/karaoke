@@ -3,19 +3,21 @@
 import Link from 'next/link';
 import { useRef } from 'react';
 
-import { FontAwesomeIcon } from './FontAwesomeProvider';
 import type { SongType } from '../types/song';
 import styles from './SongForm.module.scss';
 import { useSimpleUserContext } from '../context/simple-user';
+import { FontAwesomeIcon } from './FontAwesomeProvider';
 
 type SongFormProps = {
   formAction?: (formData: FormData) => Promise<void>;
+  onDelete?: () => Promise<void>;
+  onSing?: () => Promise<void>;
   song?: SongType;
   onClose?: () => void;
   disabled?: boolean;
 };
 
-const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps) => {
+const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose }: SongFormProps) => {
   const favoriteRef = useRef<HTMLInputElement>(null);
   const avoidRef = useRef<HTMLInputElement>(null);
   const { username, pin } = useSimpleUserContext();
@@ -170,6 +172,23 @@ const SongForm = ({ formAction, song, disabled = false, onClose }: SongFormProps
               />
             </label>
           </div>
+          {(onSing || onDelete) && (
+            <>
+              <hr className={styles.divider} />
+              <div className={styles.quickActions}>
+                {onDelete && (
+                  <button type="button" className={`${styles.quickActionButton} ${styles.deleteAction}`} onClick={onDelete} aria-label="Delete song">
+                    <FontAwesomeIcon icon={['fas', 'xmark']} />
+                  </button>
+                )}
+                {onSing && (
+                  <button type="button" className={styles.quickActionButton} onClick={onSing} aria-label="Record singing">
+                    <FontAwesomeIcon icon={['fas', 'microphone-lines']} />
+                  </button>
+                )}
+              </div>
+            </>
+          )}
           <button
             type={disabled ? 'button' : 'submit'}
             onClick={disabled ? onClose : undefined}
