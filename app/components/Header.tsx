@@ -22,10 +22,9 @@ const Header = () => {
 
   if (pathname === '/') return null;
 
-  const isMatt = params.username === 'matt' || typeof params.username === 'undefined';
   const isHistory = pathname.endsWith('/history');
-  const historyHref = `/${isMatt ? 'matt' : params.username}/history`;
-  const songListHref = `/${isMatt ? '' : params.username}`;
+  const historyHref = `/${params.username}/history`;
+  const songListHref = `/${params.username}`;
 
   return (
     <header className={styles.header}>
