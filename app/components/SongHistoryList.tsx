@@ -1,12 +1,15 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import HistoryDate from './HistoryDate';
 import type { SongHistoryType } from '../types/song';
 import styles from './SongHistoryList.module.scss';
+import listStyles from './SongList.module.scss';
 import { useSimpleUserContext } from '../context/simple-user';
+import { FontAwesomeIcon } from './FontAwesomeProvider';
+import cx from '../utils/classnames';
 
 const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const artistCompare = artistA.localeCompare(artistB);
@@ -32,6 +35,8 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
   'use client';
   const { username, pin } = useSimpleUserContext();
   const { username: paramsUsername } = useParams() as { username?: string };
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchRef = useRef<HTMLInputElement>(null);
 
   const signedIn = Boolean(username && pin);
   const isGenericListAndUserIsMatt = username === 'matt' && paramsUsername === undefined;
@@ -39,8 +44,16 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
   const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
   const canDeleteSongs = signedIn && !isWrongUserToEdit;
 
+  const filteredSongs = useMemo(() => {
+    const q = searchQuery.toLowerCase();
+    if (!q) return songs;
+    return songs.filter(
+      (song) => song.title.toLowerCase().includes(q) || song.artist.toLowerCase().includes(q),
+    );
+  }, [songs, searchQuery]);
+
   const sortedSongsByAddedDate = useMemo(() => {
-    return songs
+    return filteredSongs
       .reduce((agg, curr) => {
         let next = [...agg];
         const { sungAt } = curr;
@@ -63,12 +76,33 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
         return next;
       }, [])
       .toSorted((dateA, dateB) => dateB.dateSorter.localeCompare(dateA.dateSorter));
-  }, [songs]);
+  }, [filteredSongs]);
   const displayUsername = paramsUsername && paramsUsername.charAt(0).toLocaleUpperCase() + paramsUsername.slice(1);
 
   return (
     <>
-      <h2 className={styles.heading}>{displayUsername}&rsquo;s History</h2>
+      <div className={styles.heading}>
+        <h2>{displayUsername}&rsquo;s History</h2>
+        <label htmlFor="history-search" className={listStyles.searchLabel}>
+          <input
+            id="history-search"
+            type="text"
+            onChange={(e) => setSearchQuery(e.target.value)}
+            value={searchQuery}
+            name="search"
+            placeholder="Song or Artist Search..."
+            className={listStyles.searchBox}
+            ref={searchRef}
+          />
+          <button
+            type="button"
+            onClick={() => { setSearchQuery(''); searchRef.current?.focus(); }}
+            className={cx(listStyles.clearSearchButton, { [listStyles.show]: searchQuery.length > 0 })}
+          >
+            <FontAwesomeIcon icon={['fas', 'xmark']} />
+          </button>
+        </label>
+      </div>
       <ul className={styles.historyList}>
         {sortedSongsByAddedDate.map((dateGroup) => (
           <HistoryDate

@@ -20,10 +20,11 @@ const Header = () => {
     setShowUserForm(false);
   }, []);
 
-  const isMatt = params.username === 'matt' || typeof params.username === 'undefined';
+  if (pathname === '/') return null;
+
   const isHistory = pathname.endsWith('/history');
-  const historyHref = `/${isMatt ? 'matt' : params.username}/history`;
-  const songListHref = `/${isMatt ? '' : params.username}`;
+  const historyHref = `/${params.username}/history`;
+  const songListHref = `/${params.username}`;
 
   return (
     <header className={styles.header}>

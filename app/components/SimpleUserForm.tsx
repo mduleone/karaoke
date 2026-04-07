@@ -11,8 +11,11 @@ import { login as loginAction, createAccount as createAccountAction } from '../a
 import { FontAwesomeIcon } from './FontAwesomeProvider';
 import Link from 'next/link';
 
+type Mode = null | 'login' | 'create';
+
 const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const { username, pin, setUsername, setPin } = useSimpleUserContext();
+  const [mode, setMode] = useState<Mode>(null);
   const [localUsername, setLocalUsername] = useState('');
   const [localPin, setLocalPin] = useState('');
   const [localError, setLocalError] = useState(null);
@@ -41,40 +44,32 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     onClose();
   }, [setUsername, setPin, onClose]);
 
-  const onLogin = useCallback(() => {
-    const login = async () => {
-      const localUsernameSlug = stringToSlug(localUsername);
-      const success = await loginAction(localUsernameSlug, localPin);
-      if (success.statusCode !== 200) {
-        setLocalError(success.message);
-        return;
-      }
-      setUsername(localUsernameSlug);
-      setPin(localPin);
-      push(`/${localUsernameSlug}`);
-      window.location.reload();
-      onClose();
-    };
-
-    login();
+  const onLogin = useCallback(async () => {
+    const localUsernameSlug = stringToSlug(localUsername);
+    const success = await loginAction(localUsernameSlug, localPin);
+    if (success.statusCode !== 200) {
+      setLocalError(success.message);
+      return;
+    }
+    setUsername(localUsernameSlug);
+    setPin(localPin);
+    push(`/${localUsernameSlug}`);
+    window.location.reload();
+    onClose();
   }, [localUsername, localPin, setUsername, setPin, push, onClose]);
 
-  const onCreateAccount = useCallback(() => {
-    const createAccount = async () => {
-      const localUsernameSlug = stringToSlug(localUsername);
-      const success = await createAccountAction(localUsernameSlug, localPin);
-      if (success.statusCode !== 200) {
-        setLocalError(success.message);
-        return;
-      }
-      setUsername(localUsernameSlug);
-      setPin(localPin);
-      onClose();
-      push(`/${localUsernameSlug}`);
-      window.location.reload();
-    };
-
-    createAccount();
+  const onCreateAccount = useCallback(async () => {
+    const localUsernameSlug = stringToSlug(localUsername);
+    const success = await createAccountAction(localUsernameSlug, localPin);
+    if (success.statusCode !== 200) {
+      setLocalError(success.message);
+      return;
+    }
+    setUsername(localUsernameSlug);
+    setPin(localPin);
+    onClose();
+    push(`/${localUsernameSlug}`);
+    window.location.reload();
   }, [localUsername, localPin, setUsername, setPin, onClose, push]);
 
   useEffect(() => {
@@ -84,9 +79,9 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
       }
     };
 
-    document.addEventListener('click', clickListener);
+    document.addEventListener('mousedown', clickListener);
     return () => {
-      document.removeEventListener('click', clickListener);
+      document.removeEventListener('mousedown', clickListener);
     };
   }, [onClose]);
 
@@ -123,9 +118,67 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
   }, [copyViaClipboardApi, copyViaFallback]);
 
-  let userForm = (
-    <div ref={formRef} className={styles.modal}>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!(localUsername && localPin)) return;
+    mode === 'login' ? onLogin() : onCreateAccount();
+  };
+
+  let userForm: React.ReactNode;
+
+  let inner: React.ReactNode;
+
+  if (username && pin) {
+    inner = (
       <div className={styles.formSection}>
+        <div>
+          <label className={styles.formLabel} htmlFor="username">
+            Share your list!
+          </label>
+          <input
+            type="text"
+            id="username"
+            className={styles.textInput}
+            ref={fallbackRef}
+            disabled
+            value={`${window.location.host}/${slugToString(username)}`}
+          />
+        </div>
+        <button className={styles.share} type="button" onClick={handleCopy}>
+          <div className={styles.copyButtonText}>
+            Copy to Clipboard
+            <FontAwesomeIcon
+              aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
+              icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
+            />
+          </div>
+        </button>
+        <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
+          Go to your list
+        </Link>
+        <div className={styles.buttonRow}>
+          <button type="button" className={styles.secondaryButton} onClick={onLogout}>
+            Logout
+          </button>
+        </div>
+      </div>
+    );
+  } else if (mode === null) {
+    inner = (
+      <div className={styles.formSection}>
+        <div className={styles.buttonRow}>
+          <button type="button" className={styles.primaryButton} onClick={() => setMode('login')}>
+            Log in
+          </button>
+          <button type="button" className={styles.secondaryButton} onClick={() => setMode('create')}>
+            Create account
+          </button>
+        </div>
+      </div>
+    );
+  } else {
+    inner = (
+      <form className={styles.formSection} onSubmit={handleSubmit}>
         <div>
           <label className={styles.formLabel} htmlFor="username">
             Username
@@ -133,14 +186,13 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <input
             type="text"
             id="username"
+            name="username"
             autoComplete="username"
             className={styles.textInput}
             placeholder="Username"
-            onChange={(e) => {
-              setLocalUsername(e.target.value);
-              setLocalError(null);
-            }}
+            onChange={(e) => { setLocalUsername(e.target.value); setLocalError(null); }}
             value={localUsername}
+            autoFocus
           />
         </div>
         {localError && <div className={styles.error}>{localError}</div>}
@@ -151,77 +203,37 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           <input
             type="password"
             id="pin"
+            name="password"
+            autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             className={styles.textInput}
             placeholder="Pin"
-            onChange={(e) => {
-              setLocalPin(e.target.value);
-              setLocalError(null);
-            }}
+            onChange={(e) => { setLocalPin(e.target.value); setLocalError(null); }}
             value={localPin}
           />
         </div>
         <div className={styles.buttonRow}>
           <button
-            type="button"
+            type="submit"
             disabled={!(localUsername && localPin)}
             className={styles.primaryButton}
-            onClick={onLogin}
           >
-            Login
+            {mode === 'login' ? 'Log in' : 'Create account'}
           </button>
-          <button
-            type="button"
-            disabled={!(localUsername && localPin)}
-            className={styles.secondaryButton}
-            onClick={onCreateAccount}
-          >
-            Create Account
+          <button type="button" className={styles.secondaryButton} onClick={() => { setMode(null); setLocalError(null); }}>
+            Cancel
           </button>
         </div>
-        <p className={styles.pinWarning}>Don&rsquo;t forget your pin!</p>
-        <p className={styles.pinWarning}>There is no way to reset it.</p>
-      </div>
-    </div>
-  );
-
-  if (username && pin) {
-    userForm = (
-      <div ref={formRef} className={styles.modal}>
-        <div className={styles.formSection}>
-          <div>
-            <label className={styles.formLabel} htmlFor="username">
-              Share your list!
-            </label>
-            <input
-              type="text"
-              id="username"
-              className={styles.textInput}
-              ref={fallbackRef}
-              disabled
-              value={`${window.location.host}/${slugToString(username)}`}
-            />
-          </div>
-          <button className={styles.share} type="button" onClick={handleCopy}>
-            <div className={styles.copyButtonText}>
-              Copy to Clipboard
-              <FontAwesomeIcon
-                aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
-                icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
-              />
-            </div>
-          </button>
-          <Link className={styles.goToList} href={`/${stringToSlug(username)}`}>
-            Go to your list
-          </Link>
-          <div className={styles.buttonRow}>
-            <button type="button" className={styles.secondaryButton} onClick={onLogout}>
-              Logout
-            </button>
-          </div>
-        </div>
-      </div>
+        {mode === 'create' && (
+          <>
+            <p className={styles.pinWarning}>Don&rsquo;t forget your pin!</p>
+            <p className={styles.pinWarning}>There is no way to reset it.</p>
+          </>
+        )}
+      </form>
     );
   }
+
+  userForm = <div ref={formRef} className={styles.modal}>{inner}</div>;
 
   return show && createPortal(userForm, portalElement);
 };

@@ -17,7 +17,7 @@ export const deleteSingingRecord = async (singingRecordId: string, username: str
     return { statusCode: 403, error: new Error(`You're not ${username}!`) };
   }
 
-  await db.delete(singingRecords).where(eq(singingRecords.id, singingRecordId));
+  await db.update(singingRecords).set({ deletedAt: new Date() }).where(eq(singingRecords.id, singingRecordId));
 
   revalidatePath('/[username]/history');
 };

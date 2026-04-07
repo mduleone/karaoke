@@ -1,0 +1,112 @@
+.card {
+  background-color: $song-background-color;
+  border-radius: toRem(12);
+  padding: toRem(24);
+  display: flex;
+  flex-direction: column;
+  gap: toRem(12);
+  width: 100%;
+  max-width: toRem(360);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(4);
+}
+
+.label {
+  font-size: toRem(13);
+  font-weight: 600;
+  color: $sub-text-color;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  border-bottom: toRem(1) solid $sub-text-color;
+  color: $text-color;
+  font-size: toRem(18);
+  padding: toRem(4) 0;
+  width: 100%;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $sub-text-color;
+  }
+
+  &:focus {
+    outline: none;
+    border-bottom-color: $picton-blue;
+  }
+}
+
+.buttonRow {
+  display: flex;
+  gap: toRem(8);
+  margin-top: toRem(4);
+}
+
+.primaryButton {
+  flex: 1;
+  background-color: $button-color;
+  color: $text-color;
+  border: none;
+  border-radius: toRem(6);
+  padding: toRem(10) toRem(16);
+  font-size: toRem(15);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.secondaryButton {
+  flex: 1;
+  background-color: $secondary-button-color;
+  color: $text-color;
+  border: none;
+  border-radius: toRem(6);
+  padding: toRem(10) toRem(16);
+  font-size: toRem(15);
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-button-hover-color;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: toRem(14);
+}
+
+.warning {
+  font-size: toRem(12);
+  color: $sub-text-color;
+  text-align: center;
+}
+
+.welcomeBack {
+  color: $sub-text-color;
+  font-size: toRem(15);
+  text-align: center;
+}

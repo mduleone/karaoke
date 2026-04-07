@@ -1,10 +1,12 @@
 'use client';
 
-import { MouseEventHandler, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import { updateSong } from '../actions/updateSong';
 import { singSong } from '../actions/singSong';
+import { deleteSong } from '../actions/deleteSong';
+import { listAllArtists } from '../actions/listAllArtists';
 import type { SongType } from '../types/song';
 import Modal from './Modal';
 import SongForm from './SongForm';
@@ -23,10 +25,10 @@ type SongProps = {
 
 const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap }: SongProps) => {
   const { artist, title, favorite, duet, learn, retry, avoid, notes, createdAt } = song;
-  console.log(!!notes);
 
   const createdDate = createdAt.toLocaleDateString();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [artists, setArtists] = useState<string[]>([]);
   const { username, pin } = useSimpleUserContext();
   const params = useParams();
 
@@ -36,7 +38,11 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
   const isWrongUserToEdit = signedIn && notMyUser && !isGenericListAndUserIsMatt;
   const canEditSong = signedIn && !isWrongUserToEdit;
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = useCallback(async () => {
+    setIsModalOpen(true);
+    const allArtists = await listAllArtists();
+    setArtists(allArtists);
+  }, []);
   const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   const formAction = useCallback(
@@ -63,21 +69,26 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
 
   const tagsAndActionsStyles = cx(styles.tagsAndActions, { [styles.rowReverse]: canEditSong && tagsCount === 0 });
 
-  const confirmationMessage = `You're about to sing:\n` + `${song.artist} - ${song.title}`;
-  const singSongAction: MouseEventHandler<HTMLButtonElement> = useCallback(
-    async (event) => {
-      event.preventDefault();
-      if (canEditSong && window.confirm(confirmationMessage)) {
-        const success = await singSong(song.id, song.artist, song.title, username, pin);
-        if (success.statusCode !== 200) {
-          toast.error(success.message);
-        } else {
-          toast.success(`You sang ${song.artist} - ${song.title}`);
-        }
-      }
-    },
-    [song.id, song.artist, song.title, username, pin, canEditSong, confirmationMessage],
-  );
+  const singSongAction = useCallback(async () => {
+    if (!window.confirm(`You're about to sing:\n${song.artist} - ${song.title}`)) return;
+    const success = await singSong(song.id, song.artist, song.title, username, pin);
+    if (success.statusCode !== 200) {
+      toast.error(success.message);
+    } else {
+      toast.success(`You sang ${song.artist} - ${song.title}`);
+    }
+  }, [song.id, song.artist, song.title, username, pin]);
+
+  const deleteSongAction = useCallback(async () => {
+    if (!window.confirm(`Delete "${song.title}" by ${song.artist}? This can't be undone.`)) return;
+    const result = await deleteSong(song.id, username, pin);
+    if (result?.statusCode !== undefined) {
+      toast.error(result.message);
+    } else {
+      closeModal();
+      toast.success(`Deleted ${song.artist} - ${song.title}`);
+    }
+  }, [song.id, song.artist, song.title, username, pin, closeModal]);
 
   const CardComponent = canEditSong ? 'div' : 'button';
   const cardComponentProps = canEditSong ? {} : { onClick: openModal };
@@ -128,7 +139,15 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
         </div>
       </CardComponent>
       <Modal show={isModalOpen} onClose={closeModal}>
-        <SongForm formAction={formAction} song={song} disabled={!canEditSong} onClose={closeModal} />
+        <SongForm
+          formAction={formAction}
+          onDelete={canEditSong ? deleteSongAction : undefined}
+          onSing={canEditSong ? singSongAction : undefined}
+          song={song}
+          disabled={!canEditSong}
+          onClose={closeModal}
+          artists={artists}
+        />
       </Modal>
     </li>
   );

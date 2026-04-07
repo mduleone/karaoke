@@ -25,7 +25,8 @@ const setDynamicManifest = (manifestUrl: string) => {
 const SetDynamicManifestUrl = () => {
   const pathname = usePathname();
   useEffect(() => {
-    const path = pathname.split('/')[1];
+    const pathSegment = pathname.split('/')[1];
+    const path = pathSegment || localStorage.getItem('simpleUserUsername') || '';
     const stringManifest = JSON.stringify(generateDynamicManifestUrl(path));
     const manifestURL = 'data:application/json;charset=utf-8,' + encodeURIComponent(stringManifest);
     setDynamicManifest(manifestURL);

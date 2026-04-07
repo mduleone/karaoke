@@ -1,8 +1,8 @@
 name: Nightly Backup
 
 on:
-  # schedule:
-  #   - cron: '0 4 * * *'
+  schedule:
+    - cron: '0 4 * * *'
   workflow_dispatch:
 
 jobs:
@@ -18,10 +18,10 @@ jobs:
           ref: backups
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Checkout backup script from tags-and-extras
+      - name: Checkout backup script from main
         run: |
-          git fetch origin tags-and-extras
-          git checkout origin/tags-and-extras -- scripts/backup.ts db/ drizzle.config.ts package.json package-lock.json tsconfig.json
+          git fetch origin main
+          git checkout origin/main -- scripts/backup.ts db/ drizzle.config.ts package.json package-lock.json tsconfig.json
 
       - name: Install dependencies
         run: npm ci
