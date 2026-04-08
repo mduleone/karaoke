@@ -16,7 +16,7 @@ import {
   faCircleCheck,
   faMusic,
   faRobot,
-  faMobileScreen,
+  faUserGroup,
 } from '@fortawesome/free-solid-svg-icons';
 
 const fontAwesomeLibrary = [
@@ -36,7 +36,7 @@ const fontAwesomeLibrary = [
   faCircleCheck,
   faMusic,
   faRobot,
-  faMobileScreen,
+  faUserGroup,
 ];
 
 library.add(...fontAwesomeLibrary);

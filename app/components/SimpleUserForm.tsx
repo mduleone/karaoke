@@ -152,24 +152,12 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             value={`${window.location.host}/${slugToString(username)}`}
           />
         </div>
-        <button className={styles.share} type="button" onClick={handleCopy}>
+        <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
           <div className={styles.copyButtonText}>
-            {status === 'idle' ? 'Copy to clipboard' : status === 'success' ? 'Copied!' : 'Failed to copy'}
-            <FontAwesomeIcon
-              fixedWidth
-              aria-label={status === 'idle' ? 'Copy to clipboard' : `${status} copying`}
-              icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
-            />
+            Share with humans
+            <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
           </div>
         </button>
-        {typeof navigator !== 'undefined' && navigator.share && (
-          <button className={styles.share} type="button" onClick={() => navigator.share({ url: userListUrl })}>
-            <div className={styles.copyButtonText}>
-              Add to home screen
-              <FontAwesomeIcon fixedWidth aria-label="Add to home screen" icon={['fas', 'mobile-screen']} />
-            </div>
-          </button>
-        )}
         <button className={styles.share} type="button" onClick={handleShareWithAI}>
           <div className={styles.copyButtonText}>
             {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
@@ -199,14 +187,10 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
           </button>
         </div>
         {paramsUsername && (
-          <button className={styles.share} type="button" onClick={handleCopy}>
+          <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
             <div className={styles.copyButtonText}>
-              {status === 'idle' ? 'Share list' : status === 'success' ? 'Copied!' : 'Failed to copy'}
-              <FontAwesomeIcon
-                aria-label={status === 'idle' ? 'Share list' : status === 'success' ? 'Copied' : 'Error'}
-                fixedWidth
-                icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
-              />
+              Share with humans
+              <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
             </div>
           </button>
         )}
