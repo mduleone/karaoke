@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -18,7 +18,6 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const [localUsername, setLocalUsername] = useState('');
   const [localPin, setLocalPin] = useState('');
   const [localError, setLocalError] = useState(null);
-  const { push } = useRouter();
   const formRef = useRef<HTMLDivElement>(null);
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
   const [show, setShow] = useState(false);
@@ -52,10 +51,8 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
     setUsername(localUsernameSlug);
     setPin(localPin);
-    push(`/${localUsernameSlug}`);
-    window.location.reload();
-    onClose();
-  }, [localUsername, localPin, setUsername, setPin, push, onClose]);
+    window.location.assign(`/${localUsernameSlug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   const onCreateAccount = useCallback(async () => {
     const localUsernameSlug = stringToSlug(localUsername);
@@ -66,10 +63,8 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
     setUsername(localUsernameSlug);
     setPin(localPin);
-    onClose();
-    push(`/${localUsernameSlug}`);
-    window.location.reload();
-  }, [localUsername, localPin, setUsername, setPin, onClose, push]);
+    window.location.assign(`/${localUsernameSlug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   useEffect(() => {
     const clickListener = (event) => {
@@ -117,18 +112,21 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
   }, [copyToClipboard, userListUrl]);
 
-  const handleShareWithAI = useCallback(async (targetUsername: string) => {
-    const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
-    try {
-      await copyToClipboard(prompt);
-      setAiShareStatus('success');
-      setTimeout(() => setAiShareStatus('idle'), 2000);
-    } catch (error) {
-      console.error('Failed to copy', error);
-      setAiShareStatus('error');
-      setTimeout(() => setAiShareStatus('idle'), 3000);
-    }
-  }, [copyToClipboard, username]);
+  const handleShareWithAI = useCallback(
+    async (targetUsername: string) => {
+      const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
+      try {
+        await copyToClipboard(prompt);
+        setAiShareStatus('success');
+        setTimeout(() => setAiShareStatus('idle'), 2000);
+      } catch (error) {
+        console.error('Failed to copy', error);
+        setAiShareStatus('error');
+        setTimeout(() => setAiShareStatus('idle'), 3000);
+      }
+    },
+    [copyToClipboard, username],
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -199,7 +197,9 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             <div className={styles.copyButtonText}>
               {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
               <FontAwesomeIcon
-                aria-label={aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'}
+                aria-label={
+                  aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'
+                }
                 icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
               />
             </div>
@@ -221,7 +221,10 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             autoComplete="username"
             className={styles.textInput}
             placeholder="Username"
-            onChange={(e) => { setLocalUsername(e.target.value); setLocalError(null); }}
+            onChange={(e) => {
+              setLocalUsername(e.target.value);
+              setLocalError(null);
+            }}
             value={localUsername}
             autoFocus
           />
@@ -238,19 +241,25 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             className={styles.textInput}
             placeholder="Pin"
-            onChange={(e) => { setLocalPin(e.target.value); setLocalError(null); }}
+            onChange={(e) => {
+              setLocalPin(e.target.value);
+              setLocalError(null);
+            }}
             value={localPin}
           />
         </div>
         <div className={styles.buttonRow}>
-          <button
-            type="submit"
-            disabled={!(localUsername && localPin)}
-            className={styles.primaryButton}
-          >
+          <button type="submit" disabled={!(localUsername && localPin)} className={styles.primaryButton}>
             {mode === 'login' ? 'Log in' : 'Create account'}
           </button>
-          <button type="button" className={styles.secondaryButton} onClick={() => { setMode(null); setLocalError(null); }}>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => {
+              setMode(null);
+              setLocalError(null);
+            }}
+          >
             Cancel
           </button>
         </div>
@@ -264,7 +273,11 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     );
   }
 
-  userForm = <div ref={formRef} className={styles.modal}>{inner}</div>;
+  userForm = (
+    <div ref={formRef} className={styles.modal}>
+      {inner}
+    </div>
+  );
 
   return show && createPortal(userForm, portalElement);
 };
