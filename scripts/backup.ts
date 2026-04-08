@@ -10,16 +10,18 @@ async function backup() {
 
   console.log('Backing up songs...');
   const songsData = await db.select().from(songs);
+  songsData.sort((a, b) => a.artist.localeCompare(b.artist) || a.title.localeCompare(b.title));
   fs.writeFileSync(
-    path.join(__dirname, 'songs_backup.json'),
+    path.join(process.cwd(), 'songs_backup.json'),
     JSON.stringify(songsData, null, 2),
   );
   console.log(`  wrote ${songsData.length} songs`);
 
   console.log('Backing up singing records...');
   const recordsData = await db.select().from(singingRecords);
+  recordsData.sort((a, b) => new Date(a.sungAt).getTime() - new Date(b.sungAt).getTime());
   fs.writeFileSync(
-    path.join(__dirname, 'singing_records_backup.json'),
+    path.join(process.cwd(), 'singing_records_backup.json'),
     JSON.stringify(recordsData, null, 2),
   );
   console.log(`  wrote ${recordsData.length} singing records`);
