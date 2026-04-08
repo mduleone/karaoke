@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 import AddSongButton from './AddSongButton';
 import SimpleUserForm from './SimpleUserForm';
@@ -15,6 +15,8 @@ const Header = () => {
   const [showUserForm, setShowUserForm] = useState(false);
   const params = useParams();
   const pathname = usePathname();
+
+  const userButtonRef = useRef<HTMLButtonElement>(null);
 
   const onCloseUserForm = useCallback(() => {
     setShowUserForm(false);
@@ -47,6 +49,7 @@ const Header = () => {
           </li>
           <li className={styles.userIcon}>
             <button
+              ref={userButtonRef}
               type="button"
               className={styles.userIconButton}
               title="Set Username/Pin"
@@ -54,7 +57,7 @@ const Header = () => {
             >
               <FontAwesomeIcon icon={['fas', 'user']} />
             </button>
-            {showUserForm && <SimpleUserForm onClose={onCloseUserForm} />}
+            {showUserForm && <SimpleUserForm onClose={onCloseUserForm} triggerRef={userButtonRef} />}
           </li>
         </ul>
       </nav>

@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from './FontAwesomeProvider';
 
 type Mode = null | 'login' | 'create';
 
-const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
+const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerRef?: React.RefObject<HTMLButtonElement> }) => {
   const { username, pin, setUsername, setPin } = useSimpleUserContext();
   const [mode, setMode] = useState<Mode>(null);
   const [localUsername, setLocalUsername] = useState('');
@@ -69,6 +69,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   useEffect(() => {
     const clickListener = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
+        if (triggerRef?.current?.contains(event.target)) return;
         onClose();
       }
     };
