@@ -139,19 +139,14 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
   if (username && pin) {
     inner = (
       <div className={styles.formSection}>
-        <div>
-          <label className={styles.formLabel} htmlFor="username">
-            Share your list!
-          </label>
-          <input
-            type="text"
-            id="username"
-            className={styles.textInput}
-            ref={fallbackRef}
-            disabled
-            value={`${window.location.host}/${slugToString(username)}`}
-          />
-        </div>
+        <input
+          type="text"
+          id="username"
+          className={styles.textInput}
+          ref={fallbackRef}
+          disabled
+          value={`${window.location.host}/${paramsUsername}`}
+        />
         <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
           <div className={styles.copyButtonText}>
             Share with humans
@@ -168,6 +163,14 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             />
           </div>
         </button>
+        {username !== paramsUsername && (
+          <button type="button" className={styles.share} onClick={() => window.location.assign(`/${username}`)}>
+            <div className={styles.copyButtonText}>
+              Go to your list
+              <FontAwesomeIcon fixedWidth aria-label="Go to your list" icon={['fas', 'right-from-bracket']} />
+            </div>
+          </button>
+        )}
         <div className={styles.buttonRow}>
           <button type="button" className={styles.secondaryButton} onClick={onLogout}>
             Logout
