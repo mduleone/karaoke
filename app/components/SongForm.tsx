@@ -222,7 +222,7 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
                   </button>
                 )}
                 {onSing && (
-                  <button type="button" className={styles.quickActionButton} onClick={onSing} aria-label="Record singing">
+                  <button type="button" className={`${styles.quickActionButton} ${styles.singAction}`} onClick={onSing} aria-label="Record singing">
                     <FontAwesomeIcon icon={['fas', 'microphone-lines']} />
                   </button>
                 )}
