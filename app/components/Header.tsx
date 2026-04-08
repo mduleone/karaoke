@@ -37,7 +37,7 @@ const Header = () => {
               myKaraoke
             </Link>
           </li>
-          {username && pin && (
+          {username && pin && username === params.username && (
             <li>
               <AddSongButton className={styles.navLink} />
             </li>
