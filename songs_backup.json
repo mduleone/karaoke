@@ -912,22 +912,6 @@
     "deletedAt": null
   },
   {
-    "id": "95263b3c-b9fc-4637-bc85-9773ecbffd3c",
-    "artist": "Black Sabbath",
-    "title": "Mr. Crowley",
-    "notes": "",
-    "username": "matt",
-    "favorite": false,
-    "duet": false,
-    "learn": false,
-    "retry": false,
-    "avoid": false,
-    "tags": [],
-    "createdAt": "2026-04-05T03:21:21.183Z",
-    "updatedAt": "2026-04-05T03:21:21.183Z",
-    "deletedAt": null
-  },
-  {
     "id": "900826d6-6b41-4230-b332-e507fff7331c",
     "artist": "Black Sabbath",
     "title": "War Pigs",
@@ -3885,6 +3869,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "95263b3c-b9fc-4637-bc85-9773ecbffd3c",
+    "artist": "Ozzy Osbourne",
+    "title": "Mr. Crowley",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-05T03:21:21.183Z",
+    "updatedAt": "2026-04-05T03:21:21.183Z",
     "deletedAt": null
   },
   {
