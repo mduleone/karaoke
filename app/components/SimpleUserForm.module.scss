@@ -7,6 +7,10 @@
   right: toRem(24);
   min-width: toRem(248);
   z-index: 1000;
+
+  @media (min-width: toRem(1200)) {
+    right: calc((100vw - toRem(1200)) / 2 + toRem(24));
+  }
 }
 
 .formSection {
