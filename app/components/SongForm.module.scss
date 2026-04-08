@@ -177,20 +177,20 @@
   }
 
   &.deleteAction {
-    border-color: #cc0001;
-    color: #cc0001;
+    border-color: #ec9098aa;
+    color: #ec9098;
 
     &:hover {
-      background-color: #cc000122;
+      background-color: #ec909811;
     }
   }
 
   &.singAction {
-    border-color: $picton-blue;
-    color: $picton-blue;
+    border-color: #60ed84aa;
+    color: #60ed84;
 
     &:hover {
-      background-color: #000cc122;
+      background-color: #60ed8411;
     }
   }
 }
