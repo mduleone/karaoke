@@ -30,6 +30,7 @@ jobs:
         run: |
           cp songs_backup.json /tmp/songs_backup.json
           cp singing_records_backup.json /tmp/singing_records_backup.json
+          rm songs_backup.json singing_records_backup.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout backups
