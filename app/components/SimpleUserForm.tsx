@@ -86,7 +86,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [aiShareStatus, setAiShareStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const userListUrl = `${window.location.host}/${stringToSlug(username)}`;
+  const userListUrl = `${window.location.origin}/${paramsUsername}`;
 
   const copyToClipboard = useCallback(async (text: string) => {
     if (navigator.clipboard?.writeText) {
@@ -112,21 +112,18 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
   }, [copyToClipboard, userListUrl]);
 
-  const handleShareWithAI = useCallback(
-    async (targetUsername: string) => {
-      const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
-      try {
-        await copyToClipboard(prompt);
-        setAiShareStatus('success');
-        setTimeout(() => setAiShareStatus('idle'), 2000);
-      } catch (error) {
-        console.error('Failed to copy', error);
-        setAiShareStatus('error');
-        setTimeout(() => setAiShareStatus('idle'), 3000);
-      }
-    },
-    [copyToClipboard, username],
-  );
+  const handleShareWithAI = useCallback(async () => {
+    const prompt = `Here is my karaoke song list: ${window.location.origin}/${paramsUsername}/songs.json`;
+    try {
+      await copyToClipboard(prompt);
+      setAiShareStatus('success');
+      setTimeout(() => setAiShareStatus('idle'), 2000);
+    } catch (error) {
+      console.error('Failed to copy', error);
+      setAiShareStatus('error');
+      setTimeout(() => setAiShareStatus('idle'), 3000);
+    }
+  }, [copyToClipboard, username]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,15 +153,23 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
         </div>
         <button className={styles.share} type="button" onClick={handleCopy}>
           <div className={styles.copyButtonText}>
-            Copy to Clipboard
+            {status === 'idle' ? 'Copy to clipboard' : status === 'success' ? 'Copied!' : 'Failed to copy'}
             <FontAwesomeIcon
               fixedWidth
-              aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
+              aria-label={status === 'idle' ? 'Copy to clipboard' : `${status} copying`}
               icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
             />
           </div>
         </button>
-        <button className={styles.share} type="button" onClick={() => handleShareWithAI(stringToSlug(username))}>
+        {typeof navigator !== 'undefined' && navigator.share && (
+          <button className={styles.share} type="button" onClick={() => navigator.share({ url: userListUrl })}>
+            <div className={styles.copyButtonText}>
+              Add to home screen
+              <FontAwesomeIcon fixedWidth aria-label="Add to home screen" icon={['fas', 'mobile-screen']} />
+            </div>
+          </button>
+        )}
+        <button className={styles.share} type="button" onClick={handleShareWithAI}>
           <div className={styles.copyButtonText}>
             {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
             <FontAwesomeIcon
@@ -193,14 +198,13 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           </button>
         </div>
         {paramsUsername && (
-          <button className={styles.share} type="button" onClick={() => handleShareWithAI(paramsUsername)}>
+          <button className={styles.share} type="button" onClick={handleCopy}>
             <div className={styles.copyButtonText}>
-              {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
+              {status === 'idle' ? 'Share list' : status === 'success' ? 'Copied!' : 'Failed to copy'}
               <FontAwesomeIcon
-                aria-label={
-                  aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'
-                }
-                icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
+                aria-label={status === 'idle' ? 'Share list' : status === 'success' ? 'Copied' : 'Error'}
+                fixedWidth
+                icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
               />
             </div>
           </button>
