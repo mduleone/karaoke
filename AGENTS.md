@@ -1,20 +1,29 @@
 # Repository Guidelines
 
-## Project Structure & Module Organization
-The Next.js app lives under `app/`, following the App Router layout. Shared server actions are centralized in `app/actions.js`, while route-specific UI and data fetching live in `app/dogs/` and other route directories. Reusable components reside in `app/ui/` with matching `.module.scss` styles, and global tokens load from `app/reset.scss` and `app/styles/`. Deployment configuration for `@harperdb/nextjs` is defined in `config.yaml`, and `resources.js` lists the HarperDB resources consumed by server actions.
+## Project Structure
+The Next.js app uses the App Router. Key directories:
+- `app/` — routes, layout, global styles
+- `app/actions/` — server actions, one file per action (verb-forward camelCase, e.g. `listSongs.ts`)
+- `app/components/` — reusable components
+- `app/styles/` — global tokens and SCSS helpers
+- `db/schema.ts` — Drizzle ORM schema (3 tables: `songs`, `simple_users`, `singing_records`)
+- `scripts/` — utility scripts (e.g. backup)
+- `.github/workflows/` — GitHub Actions (nightly backup cron)
 
-## Build, Test, and Development Commands
-- `npm run dev`: Starts the HarperDB-coupled Next.js dev server on port 9926, bootstrapping the local Harper instance.
-- `npm run build`: Creates an optimized production bundle via `harperdb-nextjs build`.
-- `npm run start`: Serves the prebuilt bundle; use after running `npm run build`.
-- `npm run lint`: Runs `next lint` with the repo ESLint config; resolves TypeScript and JSX issues.
-- `npm run format`: Applies the shared Prettier profile to all project files.
+## Build & Dev Commands
+- `npm run dev` — local dev server
+- `npm run build` — production build
+- `npm run lint` — ESLint
+- `npm run format` — Prettier
 
-## Coding Style & Naming Conventions
-Prettier preferences are inherited from `@harperdb/code-guidelines/prettier`, enforcing 2-space indentation, single quotes where possible, and trailing commas. ESLint (configured in `eslint.config.mjs`) should report clean prior to submission. Prefer TypeScript for new components (`.tsx`) and colocate styles as `.module.scss` files mirroring component names. In SCSS, leverage the shared `toRem` helper from `app/styles/_functions.scss`—use rems for sizing by passing pixel values to `toRem` (for example, `toRem(4)` equals `4px`). Server actions should remain in `app/actions.js` and be exported with verb-forward camelCase names (e.g., `listDogs`).
+## Coding Style
+- 2-space indentation, single quotes, trailing commas (Prettier enforced via `prettier.config.js`)
+- ESLint config in `eslint.config.mjs` — should be clean before submitting
+- Prefer TypeScript for new files; colocate styles as `.module.scss`
+- In SCSS, use the `toRem` helper from `app/styles/_functions.scss` for sizing
+- Server actions live in `app/actions/`, one file per action, exported with verb-forward camelCase
 
-## Testing Guidelines
-No automated test suite ships today. New features should include component or integration tests using your team’s selected framework (Vitest, Jest, or Playwright) and expose a matching `npm test` script. Test files should sit alongside source files with `.test.ts(x)` suffixes, and cover primary states (loading, success, failure). Ensure HarperDB interactions are mocked to keep tests deterministic.
-
-## Commit & Pull Request Guidelines
-Follow the existing short imperative commit style (`Make updates to start karaoke`). Group logical changes together and keep commits scoped. Pull requests should detail the change, list test evidence (`npm run lint`, custom tests), and link any HarperDB deployment notes or issue trackers. Include screenshots or recordings when altering UI flows, especially within `app/dogs/`.
+## Commit Guidelines
+- Short one-line imperative messages (e.g. `Add retry flag to songs table`)
+- No `Co-Authored-By` trailers
+- Group logical changes; keep commits scoped
