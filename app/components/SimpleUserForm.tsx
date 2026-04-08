@@ -166,8 +166,8 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
         {username !== paramsUsername && (
           <button type="button" className={styles.share} onClick={() => window.location.assign(`/${username}`)}>
             <div className={styles.copyButtonText}>
-              Go to my list
-              <FontAwesomeIcon fixedWidth aria-label="Go to my list" icon={['fas', 'right-from-bracket']} />
+              Go to your list
+              <FontAwesomeIcon fixedWidth aria-label="Go to your list" icon={['fas', 'right-from-bracket']} />
             </div>
           </button>
         )}
