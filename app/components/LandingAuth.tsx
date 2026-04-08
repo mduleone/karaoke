@@ -1,7 +1,6 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { login as loginAction, createAccount as createAccountAction } from '../actions/users';
 import { useSimpleUserContext } from '../context/simple-user';
@@ -16,8 +15,6 @@ const LandingAuth = () => {
   const [localUsername, setLocalUsername] = useState('');
   const [localPin, setLocalPin] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const { push } = useRouter();
-
   const onLogin = useCallback(async () => {
     const slug = stringToSlug(localUsername);
     const result = await loginAction(slug, localPin);
@@ -27,8 +24,8 @@ const LandingAuth = () => {
     }
     setUsername(slug);
     setPin(localPin);
-    push(`/${slug}`);
-  }, [localUsername, localPin, setUsername, setPin, push]);
+    window.location.assign(`/${slug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   const onCreateAccount = useCallback(async () => {
     const slug = stringToSlug(localUsername);
@@ -39,8 +36,8 @@ const LandingAuth = () => {
     }
     setUsername(slug);
     setPin(localPin);
-    push(`/${slug}`);
-  }, [localUsername, localPin, setUsername, setPin, push]);
+    window.location.assign(`/${slug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   const canSubmit = localUsername.trim() && localPin.trim();
 

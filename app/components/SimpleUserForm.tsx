@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -12,13 +12,12 @@ import { FontAwesomeIcon } from './FontAwesomeProvider';
 
 type Mode = null | 'login' | 'create';
 
-const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
+const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerRef?: React.RefObject<HTMLButtonElement> }) => {
   const { username, pin, setUsername, setPin } = useSimpleUserContext();
   const [mode, setMode] = useState<Mode>(null);
   const [localUsername, setLocalUsername] = useState('');
   const [localPin, setLocalPin] = useState('');
   const [localError, setLocalError] = useState(null);
-  const { push } = useRouter();
   const formRef = useRef<HTMLDivElement>(null);
   const [portalElement, setPortalElement] = useState<HTMLElement | null>(null);
   const [show, setShow] = useState(false);
@@ -52,10 +51,8 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
     setUsername(localUsernameSlug);
     setPin(localPin);
-    push(`/${localUsernameSlug}`);
-    window.location.reload();
-    onClose();
-  }, [localUsername, localPin, setUsername, setPin, push, onClose]);
+    window.location.assign(`/${localUsernameSlug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   const onCreateAccount = useCallback(async () => {
     const localUsernameSlug = stringToSlug(localUsername);
@@ -66,14 +63,13 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
     setUsername(localUsernameSlug);
     setPin(localPin);
-    onClose();
-    push(`/${localUsernameSlug}`);
-    window.location.reload();
-  }, [localUsername, localPin, setUsername, setPin, onClose, push]);
+    window.location.assign(`/${localUsernameSlug}`);
+  }, [localUsername, localPin, setUsername, setPin]);
 
   useEffect(() => {
     const clickListener = (event) => {
       if (formRef.current && !formRef.current.contains(event.target)) {
+        if (triggerRef?.current?.contains(event.target)) return;
         onClose();
       }
     };
@@ -91,7 +87,7 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [aiShareStatus, setAiShareStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const userListUrl = `${window.location.host}/${stringToSlug(username)}`;
+  const userListUrl = `${window.location.origin}/${paramsUsername}`;
 
   const copyToClipboard = useCallback(async (text: string) => {
     if (navigator.clipboard?.writeText) {
@@ -117,8 +113,8 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     }
   }, [copyToClipboard, userListUrl]);
 
-  const handleShareWithAI = useCallback(async (targetUsername: string) => {
-    const prompt = `Here is ${targetUsername === stringToSlug(username) ? 'my' : `${targetUsername}'s`} karaoke song list: ${window.location.origin}/${targetUsername}/songs.json`;
+  const handleShareWithAI = useCallback(async () => {
+    const prompt = `Here is my karaoke song list: ${window.location.origin}/${paramsUsername}/songs.json`;
     try {
       await copyToClipboard(prompt);
       setAiShareStatus('success');
@@ -156,17 +152,13 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             value={`${window.location.host}/${slugToString(username)}`}
           />
         </div>
-        <button className={styles.share} type="button" onClick={handleCopy}>
+        <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
           <div className={styles.copyButtonText}>
-            Copy to Clipboard
-            <FontAwesomeIcon
-              fixedWidth
-              aria-label={status === 'idle' ? 'Click to copy' : `${status} copying`}
-              icon={['fas', status === 'idle' ? 'clipboard' : status === 'success' ? 'circle-check' : 'x']}
-            />
+            Share with humans
+            <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
           </div>
         </button>
-        <button className={styles.share} type="button" onClick={() => handleShareWithAI(stringToSlug(username))}>
+        <button className={styles.share} type="button" onClick={handleShareWithAI}>
           <div className={styles.copyButtonText}>
             {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
             <FontAwesomeIcon
@@ -195,13 +187,10 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
           </button>
         </div>
         {paramsUsername && (
-          <button className={styles.share} type="button" onClick={() => handleShareWithAI(paramsUsername)}>
+          <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
             <div className={styles.copyButtonText}>
-              {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
-              <FontAwesomeIcon
-                aria-label={aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'}
-                icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
-              />
+              Share with humans
+              <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
             </div>
           </button>
         )}
@@ -221,7 +210,10 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             autoComplete="username"
             className={styles.textInput}
             placeholder="Username"
-            onChange={(e) => { setLocalUsername(e.target.value); setLocalError(null); }}
+            onChange={(e) => {
+              setLocalUsername(e.target.value);
+              setLocalError(null);
+            }}
             value={localUsername}
             autoFocus
           />
@@ -238,19 +230,25 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             className={styles.textInput}
             placeholder="Pin"
-            onChange={(e) => { setLocalPin(e.target.value); setLocalError(null); }}
+            onChange={(e) => {
+              setLocalPin(e.target.value);
+              setLocalError(null);
+            }}
             value={localPin}
           />
         </div>
         <div className={styles.buttonRow}>
-          <button
-            type="submit"
-            disabled={!(localUsername && localPin)}
-            className={styles.primaryButton}
-          >
+          <button type="submit" disabled={!(localUsername && localPin)} className={styles.primaryButton}>
             {mode === 'login' ? 'Log in' : 'Create account'}
           </button>
-          <button type="button" className={styles.secondaryButton} onClick={() => { setMode(null); setLocalError(null); }}>
+          <button
+            type="button"
+            className={styles.secondaryButton}
+            onClick={() => {
+              setMode(null);
+              setLocalError(null);
+            }}
+          >
             Cancel
           </button>
         </div>
@@ -264,7 +262,11 @@ const SimpleUserForm = ({ onClose }: { onClose: () => void }) => {
     );
   }
 
-  userForm = <div ref={formRef} className={styles.modal}>{inner}</div>;
+  userForm = (
+    <div ref={formRef} className={styles.modal}>
+      {inner}
+    </div>
+  );
 
   return show && createPortal(userForm, portalElement);
 };
