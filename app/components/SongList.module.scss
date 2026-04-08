@@ -112,6 +112,10 @@
   border-radius: toRem(100);
   background-color: $letter-scroller-background-color;
   z-index: 1000;
+
+  @media (min-width: toRem(1232)) {
+    right: calc((100vw - toRem(1200)) / 2 - toRem(16));
+  }
 }
 
 .scrollLetter {
