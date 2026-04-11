@@ -177,20 +177,20 @@
   }
 
   &.deleteAction {
-    border-color: #ec9098aa;
-    color: #ec9098;
+    border-color: #{$avoid-color}aa;
+    color: $avoid-color;
 
     &:hover {
-      background-color: #ec909811;
+      background-color: #{$avoid-color}11;
     }
   }
 
   &.singAction {
-    border-color: #60ed84aa;
-    color: #60ed84;
+    border-color: #{$favorite-color}aa;
+    color: $favorite-color;
 
     &:hover {
-      background-color: #60ed8411;
+      background-color: #{$favorite-color}11;
     }
   }
 }

@@ -87,6 +87,14 @@ const LandingAuth = () => {
           autoFocus
         />
       </div>
+      {mode === 'create' && (
+        <p className={styles.urlPreview}>
+          Share your list:
+          <span className={styles.urlPreviewUrl}>
+            mykaraoke.info/{localUsername.trim() ? stringToSlug(localUsername) : 'yourname'}
+          </span>
+        </p>
+      )}
       <div className={styles.field}>
         <label className={styles.label} htmlFor="pin">PIN</label>
         <input
@@ -100,6 +108,7 @@ const LandingAuth = () => {
           onChange={(e) => { setLocalPin(e.target.value); setError(null); }}
         />
       </div>
+      {mode === 'create' && <p className={styles.warning}>Save your PIN—it can&rsquo;t be recovered.</p>}
       {error && <p className={styles.error}>{error}</p>}
       <div className={styles.buttonRow}>
         <button
@@ -113,7 +122,6 @@ const LandingAuth = () => {
           Cancel
         </button>
       </div>
-      {mode === 'create' && <p className={styles.warning}>Don&rsquo;t forget your PIN — there&rsquo;s no way to reset it yet.</p>}
     </form>
   );
 };

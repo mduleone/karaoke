@@ -7,6 +7,7 @@
   gap: toRem(12);
   width: 100%;
   max-width: toRem(360);
+  text-align: left;
 }
 
 .field {
@@ -97,6 +98,26 @@
 .error {
   color: #ff6b6b;
   font-size: toRem(14);
+}
+
+.urlPreview {
+  font-size: toRem(13);
+  color: $sub-text-color;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.urlPreviewUrl {
+  display: block;
+  background-color: $rich-black;
+  border: toRem(1) solid $lapis-lazuli;
+  border-radius: toRem(4);
+  padding: toRem(4) toRem(8);
+  margin-top: toRem(6);
+  color: $sub-text-color;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .warning {

@@ -43,7 +43,7 @@ const Header = () => {
             </li>
           )}
           <li className={styles.userIcon}>
-            <Link className={styles.userIconButton} href={isHistory ? songListHref : historyHref}>
+            <Link aria-label={isHistory ? 'Song list' : 'Singing history'} className={styles.userIconButton} href={isHistory ? songListHref : historyHref}>
               <FontAwesomeIcon icon={['fas', 'list-ol']} />
             </Link>
           </li>
@@ -51,8 +51,8 @@ const Header = () => {
             <button
               ref={userButtonRef}
               type="button"
+              aria-label="Account"
               className={styles.userIconButton}
-              title="Set Username/Pin"
               onClick={() => setShowUserForm(!showUserForm)}
             >
               <FontAwesomeIcon icon={['fas', 'user']} />
