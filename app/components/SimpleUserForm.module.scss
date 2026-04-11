@@ -138,8 +138,64 @@
   text-align: left;
 }
 
-.pinWarning {
-  color: $text-color;
+.urlBlock {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: $rich-black;
+  border: toRem(1) solid $lapis-lazuli;
+  border-radius: toRem(4);
+  padding: toRem(4) toRem(8);
+  color: $sub-text-color;
+  font-size: toRem(13);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    border-color: $steel-blue;
+    color: $text-color;
+  }
+
+  &.copied {
+    color: $favorite-color;
+    border-color: #{$favorite-color}aa;
+  }
+}
+
+.urlPreview {
+  font-size: toRem(12);
+  color: $sub-text-color;
+  line-height: 1.4;
   text-align: center;
-  padding: 0;
+}
+
+.urlPreviewUrl {
+  display: block;
+  background-color: $rich-black;
+  border: toRem(1) solid $lapis-lazuli;
+  border-radius: toRem(4);
+  padding: toRem(3) toRem(6);
+  margin-top: toRem(4);
+  color: $sub-text-color;
+  font-size: toRem(12);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pinWarning {
+  font-size: toRem(12);
+  color: $sub-text-color;
+  text-align: center;
+}
+
+.hiddenInput {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
 }

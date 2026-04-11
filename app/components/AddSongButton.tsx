@@ -53,7 +53,7 @@ const AddSongButton: React.FC<AddSongButtonProps> = ({ className }) => {
 
   return (
     <>
-      <button type="button" onClick={handleOpen} className={`${className} ${styles.addButton}`}>
+      <button type="button" aria-label="Add song" onClick={handleOpen} className={`${className} ${styles.addButton}`}>
         <FontAwesomeIcon icon={['fas', 'plus']} />
       </button>
       <Modal show={isOpen} onClose={handleClose}>

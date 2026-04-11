@@ -114,7 +114,8 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
   }, [copyToClipboard, userListUrl]);
 
   const handleShareWithAI = useCallback(async () => {
-    const prompt = `Here is my karaoke song list: ${window.location.origin}/${paramsUsername}/songs.json`;
+    const base = `${window.location.origin}/${paramsUsername}`;
+    const prompt = `Here is my karaoke song list: ${base}/songs.json\nHere is my karaoke song history: ${base}/history.json`;
     try {
       await copyToClipboard(prompt);
       setAiShareStatus('success');
@@ -124,7 +125,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
       setAiShareStatus('error');
       setTimeout(() => setAiShareStatus('idle'), 3000);
     }
-  }, [copyToClipboard, username]);
+  }, [copyToClipboard, paramsUsername]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -139,25 +140,22 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
   if (username && pin) {
     inner = (
       <div className={styles.formSection}>
-        <input
-          type="text"
-          id="username"
-          className={styles.textInput}
-          ref={fallbackRef}
-          disabled
-          value={`${window.location.host}/${paramsUsername}`}
-        />
+        <button type="button" aria-label="Copy link to clipboard" className={`${styles.urlBlock}${status === 'success' ? ` ${styles.copied}` : ''}`} onClick={handleCopy}>
+          {status === 'success'
+            ? <>Copied! <FontAwesomeIcon fixedWidth icon={['fas', 'circle-check']} /></>
+            : `${window.location.host}/${paramsUsername}`}
+        </button>
         <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
           <div className={styles.copyButtonText}>
             Share with humans
-            <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
+            <FontAwesomeIcon fixedWidth aria-hidden="true" icon={['fas', 'user-group']} />
           </div>
         </button>
-        <button className={styles.share} type="button" onClick={handleShareWithAI}>
+        <button className={styles.share} type="button" aria-label="Copy song list and history links for AI" onClick={handleShareWithAI}>
           <div className={styles.copyButtonText}>
             {aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied!' : 'Failed to copy'}
             <FontAwesomeIcon
-              aria-label={aiShareStatus === 'idle' ? 'Share with AI' : aiShareStatus === 'success' ? 'Copied' : 'Error'}
+              aria-hidden="true"
               fixedWidth
               icon={['fas', aiShareStatus === 'idle' ? 'robot' : aiShareStatus === 'success' ? 'circle-check' : 'x']}
             />
@@ -167,7 +165,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
           <button type="button" className={styles.share} onClick={() => window.location.assign(`/${username}`)}>
             <div className={styles.copyButtonText}>
               Go to your list
-              <FontAwesomeIcon fixedWidth aria-label="Go to your list" icon={['fas', 'right-from-bracket']} />
+              <FontAwesomeIcon fixedWidth aria-hidden="true" icon={['fas', 'right-from-bracket']} />
             </div>
           </button>
         )}
@@ -193,7 +191,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
           <button className={styles.share} type="button" onClick={() => navigator.share ? navigator.share({ url: userListUrl }) : handleCopy()}>
             <div className={styles.copyButtonText}>
               Share with humans
-              <FontAwesomeIcon fixedWidth aria-label="Share with humans" icon={['fas', 'user-group']} />
+              <FontAwesomeIcon fixedWidth aria-hidden="true" icon={['fas', 'user-group']} />
             </div>
           </button>
         )}
@@ -212,7 +210,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             name="username"
             autoComplete="username"
             className={styles.textInput}
-            placeholder="Username"
+            placeholder="yourname"
             onChange={(e) => {
               setLocalUsername(e.target.value);
               setLocalError(null);
@@ -221,10 +219,18 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             autoFocus
           />
         </div>
+        {mode === 'create' && (
+          <p className={styles.urlPreview}>
+            Share your list:
+            <span className={styles.urlPreviewUrl}>
+              mykaraoke.info/{localUsername.trim() ? stringToSlug(localUsername) : 'yourname'}
+            </span>
+          </p>
+        )}
         {localError && <div className={styles.error}>{localError}</div>}
         <div>
           <label className={styles.formLabel} htmlFor="pin">
-            Pin
+            PIN
           </label>
           <input
             type="password"
@@ -232,7 +238,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             name="password"
             autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
             className={styles.textInput}
-            placeholder="Pin"
+            placeholder="••••"
             onChange={(e) => {
               setLocalPin(e.target.value);
               setLocalError(null);
@@ -240,6 +246,9 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             value={localPin}
           />
         </div>
+        {mode === 'create' && (
+          <p className={styles.pinWarning}>Save your PIN—it can&rsquo;t be recovered.</p>
+        )}
         <div className={styles.buttonRow}>
           <button type="submit" disabled={!(localUsername && localPin)} className={styles.primaryButton}>
             {mode === 'login' ? 'Log in' : 'Create account'}
@@ -255,12 +264,6 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
             Cancel
           </button>
         </div>
-        {mode === 'create' && (
-          <>
-            <p className={styles.pinWarning}>Don&rsquo;t forget your pin!</p>
-            <p className={styles.pinWarning}>There is no way to reset it.</p>
-          </>
-        )}
       </form>
     );
   }
@@ -268,6 +271,7 @@ const SimpleUserForm = ({ onClose, triggerRef }: { onClose: () => void; triggerR
   userForm = (
     <div ref={formRef} className={styles.modal}>
       {inner}
+      <input ref={fallbackRef} type="text" aria-hidden="true" className={styles.hiddenInput} readOnly />
     </div>
   );
 

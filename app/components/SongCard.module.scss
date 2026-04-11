@@ -27,13 +27,13 @@ button.songCard {
 }
 
 .favorite {
-  background-color: #60ed8411;
-  border-color: #60ed84aa;
+  background-color: #{$favorite-color}11;
+  border-color: #{$favorite-color}aa;
 }
 
 .avoid {
-  background-color: #ec909811;
-  border-color: #ec9098aa;
+  background-color: #{$avoid-color}11;
+  border-color: #{$avoid-color}aa;
 }
 
 .songTitle {

@@ -148,10 +148,10 @@ const SongCard = ({ song, withArtist = false, withAddedDate = false, addToRefMap
           )}
           {canEditSong && (
             <div className={styles.songButtons}>
-              <button type="button" className={styles.songButton} onClick={openModal}>
+              <button type="button" aria-label="Edit song" className={styles.songButton} onClick={openModal}>
                 <FontAwesomeIcon icon={['fas', 'pencil']} />
               </button>
-              <button type="button" className={styles.songButton} onClick={singSongAction}>
+              <button type="button" aria-label="Sing song" className={styles.songButton} onClick={singSongAction}>
                 <FontAwesomeIcon icon={['fas', 'microphone-lines']} />
               </button>
             </div>
