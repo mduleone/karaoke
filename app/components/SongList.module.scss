@@ -69,6 +69,42 @@
   padding: 0 toRem(8);
   z-index: 1;
   border-bottom: toRem(1) solid $text-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.activeFilters {
+  display: flex;
+  gap: toRem(4);
+}
+
+.activeFilter {
+  display: flex;
+  align-items: center;
+  gap: toRem(2);
+  font-size: toRem(11);
+  padding: toRem(1) toRem(6);
+  border-radius: toRem(100);
+  border: toRem(1) solid;
+}
+
+.activeFilterFavorite {
+  color: $favorite-color;
+  border-color: #{$favorite-color}aa;
+  background-color: #{$favorite-color}11;
+}
+
+.activeFilterDuet {
+  color: $picton-blue;
+  border-color: #{$picton-blue}aa;
+  background-color: #{$picton-blue}11;
+}
+
+.activeFilterRecent {
+  color: $picton-blue;
+  border-color: #{$picton-blue}aa;
+  background-color: #{$picton-blue}11;
 }
 
 .artistList {
