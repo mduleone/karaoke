@@ -89,7 +89,7 @@ const LandingAuth = () => {
       </div>
       {mode === 'create' && (
         <p className={styles.urlPreview}>
-          Share your list at{' '}
+          Share your list:
           <span className={styles.urlPreviewUrl}>
             mykaraoke.info/{localUsername.trim() ? stringToSlug(localUsername) : 'yourname'}
           </span>

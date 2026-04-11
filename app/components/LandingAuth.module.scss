@@ -108,9 +108,16 @@
 }
 
 .urlPreviewUrl {
-  color: $picton-blue;
-  font-weight: 600;
+  display: block;
+  background-color: $rich-black;
+  border: toRem(1) solid $lapis-lazuli;
+  border-radius: toRem(4);
+  padding: toRem(4) toRem(8);
+  margin-top: toRem(6);
+  color: $sub-text-color;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .warning {
