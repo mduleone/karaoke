@@ -5,7 +5,7 @@
   padding: 0;
   top: toRem(52);
   right: toRem(24);
-  min-width: toRem(248);
+  width: toRem(248);
   z-index: 1000;
 
   @media (min-width: toRem(1200)) {
