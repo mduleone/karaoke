@@ -1040,6 +1040,22 @@
     "deletedAt": null
   },
   {
+    "id": "30907d9f-0588-4e19-a0c6-41dc5906d48b",
+    "artist": "Bryan Adams",
+    "title": "Summer of 69",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-11T05:00:10.617Z",
+    "updatedAt": "2026-04-11T05:00:10.617Z",
+    "deletedAt": null
+  },
+  {
     "id": "5280f3ba-d848-49b8-8db5-2e5e467b04eb",
     "artist": "Cage the Elephant",
     "title": "Ain’t No Rest for the Wicked",
@@ -1501,6 +1517,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "2d98cb68-8c82-4033-b29e-c1d7f6007f48",
+    "artist": "Duran Duran",
+    "title": "Hungry Like the Wolf",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-11T03:09:04.326Z",
+    "updatedAt": "2026-04-11T03:09:04.326Z",
     "deletedAt": null
   },
   {
