@@ -111,16 +111,19 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       const diff = b.createdAt.getTime() - a.createdAt.getTime();
       return diff !== 0 ? diff : songSorterByArtist(a, b);
     });
-    return sorted.reduce((agg, song) => {
-      const dateKey = song.createdAt.toLocaleDateString();
-      let group = agg.find((g) => g.date === dateKey);
-      if (!group) {
-        group = { date: dateKey, songs: [] };
-        agg.push(group);
-      }
-      group.songs.push(song);
-      return agg;
-    }, [] as { date: string; songs: SongType[] }[]);
+    return sorted.reduce(
+      (agg, song) => {
+        const dateKey = song.createdAt.toLocaleDateString();
+        let group = agg.find((g) => g.date === dateKey);
+        if (!group) {
+          group = { date: dateKey, songs: [] };
+          agg.push(group);
+        }
+        group.songs.push(song);
+        return agg;
+      },
+      [] as { date: string; songs: SongType[] }[],
+    );
   }, [filteredSongs]);
 
   const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
@@ -218,9 +221,31 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
           </button>
         </div>
         <div className={styles.displayCount}>
-          Showing{' '}
-          {filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `all ${songs.length}`}{' '}
-          Songs
+          <span>
+            {filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `All ${songs.length}`}{' '}
+            Songs
+          </span>
+          {(favoritesOnly || duetsOnly || byRecentlyAdded) && (
+            <span className={styles.activeFilters}>
+              {favoritesOnly && (
+                <span className={cx(styles.activeFilter, styles.activeFilterFavorite)}>
+                  <FontAwesomeIcon icon={['fas', 'heart']} />
+                </span>
+              )}
+              {duetsOnly && (
+                <span className={cx(styles.activeFilter, styles.activeFilterDuet)}>
+                  <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
+                  <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
+                </span>
+              )}
+              {byRecentlyAdded && (
+                <span className={cx(styles.activeFilter, styles.activeFilterRecent)}>
+                  <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
+                  Recent
+                </span>
+              )}
+            </span>
+          )}
         </div>
       </div>
       {!byRecentlyAdded && (
@@ -239,9 +264,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
       )}
       <ul className={styles.artistList}>
         {byRecentlyAdded &&
-          songsByAddedDate.map((group) => (
-            <AddedDate key={group.date} date={group.date} songs={group.songs} />
-          ))}
+          songsByAddedDate.map((group) => <AddedDate key={group.date} date={group.date} songs={group.songs} />)}
         {!byRecentlyAdded &&
           (byTitle ? filteredSongsByTitle : filteredSongsByArtist).map((artistGroup) => (
             <Artist
