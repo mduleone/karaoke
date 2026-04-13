@@ -3205,7 +3205,7 @@
     "title": "Sex on Fire",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -3549,6 +3549,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "053265fb-6227-4233-b765-f1d2cc7b1e59",
+    "artist": "Metallica",
+    "title": "Enter Sandman",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-13T05:23:35.925Z",
+    "updatedAt": "2026-04-13T05:23:35.925Z",
     "deletedAt": null
   },
   {
