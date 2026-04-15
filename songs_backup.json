@@ -64,6 +64,22 @@
     "deletedAt": null
   },
   {
+    "id": "4082e181-864d-4a3d-8d9d-0419ea8c4593",
+    "artist": "AFI",
+    "title": "Miss Murder",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-14T23:41:10.823Z",
+    "updatedAt": "2026-04-14T23:41:10.823Z",
+    "deletedAt": null
+  },
+  {
     "id": "145093f1-510a-4ddd-8581-91a272e155aa",
     "artist": "Alabama",
     "title": "I’m in a Hurry (And Don’t Know Why)",
@@ -2925,6 +2941,38 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "e4da8d9f-a22d-48bd-9aa9-6a1da2d9a891",
+    "artist": "Jimmy Eat World",
+    "title": "Sweetness",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-15T05:21:08.442Z",
+    "updatedAt": "2026-04-15T05:21:08.442Z",
+    "deletedAt": null
+  },
+  {
+    "id": "61ce047e-46a9-4c7c-b506-f98b16217a46",
+    "artist": "Jimmy Eat World",
+    "title": "The Middle",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-15T05:20:41.676Z",
+    "updatedAt": "2026-04-15T05:20:41.676Z",
     "deletedAt": null
   },
   {
