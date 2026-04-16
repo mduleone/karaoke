@@ -1922,7 +1922,7 @@
   {
     "id": "9d414298-7ad1-47fe-93e5-435d40344632",
     "artist": "Fall Out Boy",
-    "title": "Sugar, we’re going down",
+    "title": "Sugar, We’re Going Down",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -1934,6 +1934,38 @@
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
     "deletedAt": null
+  },
+  {
+    "id": "6794b6fe-9d2c-4ace-bae8-9f3eb72b6bb6",
+    "artist": "Fall Out Boy",
+    "title": "This Ain’t a Scene (It’s an Arms Race)",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-16T02:15:11.480Z",
+    "updatedAt": "2026-04-16T02:15:11.480Z",
+    "deletedAt": null
+  },
+  {
+    "id": "276d9526-c683-45cb-8446-025f1b372a4b",
+    "artist": "Fall Out Boy",
+    "title": "This Ain’t a Scene, it’s an Arms Race",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-16T02:15:10.209Z",
+    "updatedAt": "2026-04-16T02:15:10.209Z",
+    "deletedAt": "2026-04-16T02:17:04.960Z"
   },
   {
     "id": "822ecdf4-0ef8-4bc0-82f6-e61d81732cc1",
