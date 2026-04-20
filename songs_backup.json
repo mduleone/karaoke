@@ -1840,6 +1840,22 @@
     "deletedAt": null
   },
   {
+    "id": "8f30009c-1f9c-4b55-87dc-18b3d26d2f6a",
+    "artist": "Elton John",
+    "title": "Crocodile Rock",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-20T04:58:52.872Z",
+    "updatedAt": "2026-04-20T04:58:52.872Z",
+    "deletedAt": null
+  },
+  {
     "id": "631763c3-78c9-449a-98e2-d70285d72a8b",
     "artist": "Elton John",
     "title": "Rocket Man (I Think It's Going To Be A Long, Long Time)",
