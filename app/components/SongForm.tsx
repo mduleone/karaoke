@@ -20,17 +20,29 @@ type SongFormProps = {
   sungHistory?: { id: string; sungAt: Date }[];
 };
 
-const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClose, artists = [], existingSongs = [], sungHistory = [] }: SongFormProps) => {
+const SongForm = ({
+  formAction,
+  onDelete,
+  onSing,
+  song,
+  disabled = false,
+  onClose,
+  artists = [],
+  existingSongs = [],
+  sungHistory = [],
+}: SongFormProps) => {
   const favoriteRef = useRef<HTMLInputElement>(null);
   const avoidRef = useRef<HTMLInputElement>(null);
   const { username, pin } = useSimpleUserContext();
   const [localArtist, setLocalArtist] = useState('');
   const [localTitle, setLocalTitle] = useState('');
 
-  const isDuplicate = !song && localArtist && localTitle &&
+  const isDuplicate =
+    !song &&
+    localArtist &&
+    localTitle &&
     existingSongs.some(
-      (s) => s.artist.toLowerCase() === localArtist.toLowerCase() &&
-             s.title.toLowerCase() === localTitle.toLowerCase()
+      (s) => s.artist.toLowerCase() === localArtist.toLowerCase() && s.title.toLowerCase() === localTitle.toLowerCase(),
     );
 
   const onChangeToggleOppositeExtremity: (
@@ -67,10 +79,13 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               disabled={disabled}
               autoComplete="off"
               onChange={(e) => setLocalArtist(e.target.value)}
+              autoCapitalize="words"
             />
             {artists.length > 0 && (
               <datalist id="artist-suggestions">
-                {artists.map((a) => <option key={a} value={a} />)}
+                {artists.map((a) => (
+                  <option key={a} value={a} />
+                ))}
               </datalist>
             )}
           </div>
@@ -88,11 +103,10 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               required
               disabled={disabled}
               onChange={(e) => setLocalTitle(e.target.value)}
+              autoCapitalize="words"
             />
           </div>
-          {isDuplicate && (
-            <p className={styles.duplicateWarning}>You already have this song in your list.</p>
-          )}
+          {isDuplicate && <p className={styles.duplicateWarning}>You already have this song in your list.</p>}
           {song && (
             <div className={styles.lyricsLinks}>
               <Link
@@ -131,7 +145,8 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
                   const d = new Date(record.sungAt);
                   return (
                     <li key={record.id} className={styles.sungHistoryEntry}>
-                      {d.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit', year: 'numeric' })} {d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {d.toLocaleDateString(undefined, { month: '2-digit', day: '2-digit', year: 'numeric' })}{' '}
+                      {d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </li>
                   );
                 })}
@@ -217,12 +232,22 @@ const SongForm = ({ formAction, onDelete, onSing, song, disabled = false, onClos
               <hr className={styles.divider} />
               <div className={styles.quickActions}>
                 {onDelete && (
-                  <button type="button" className={`${styles.quickActionButton} ${styles.deleteAction}`} onClick={onDelete} aria-label="Delete song">
+                  <button
+                    type="button"
+                    className={`${styles.quickActionButton} ${styles.deleteAction}`}
+                    onClick={onDelete}
+                    aria-label="Delete song"
+                  >
                     <FontAwesomeIcon icon={['fas', 'xmark']} />
                   </button>
                 )}
                 {onSing && (
-                  <button type="button" className={`${styles.quickActionButton} ${styles.singAction}`} onClick={onSing} aria-label="Record singing">
+                  <button
+                    type="button"
+                    className={`${styles.quickActionButton} ${styles.singAction}`}
+                    onClick={onSing}
+                    aria-label="Record singing"
+                  >
                     <FontAwesomeIcon icon={['fas', 'microphone-lines']} />
                   </button>
                 )}

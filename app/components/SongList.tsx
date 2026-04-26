@@ -10,7 +10,7 @@ import { useKaraokeSearchContext } from '../context/karaoke';
 import { FontAwesomeIcon } from './FontAwesomeProvider';
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
-import { slugToString } from '../utils/string';
+import { slugToString, normalizeForSearch } from '../utils/string';
 import cx from '../utils/classnames';
 
 const songSorterByTitle = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
@@ -54,12 +54,12 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
   } = useKaraokeSearchContext();
 
   const filteredSongs: SongType[] = useMemo(() => {
-    const lowerCaseSearchQuery = searchQuery.toLowerCase();
+    const normalizedQuery = normalizeForSearch(searchQuery);
     return songs
       .filter(
         (song) =>
-          song.title.toLowerCase().includes(lowerCaseSearchQuery) ||
-          song.artist.toLowerCase().includes(lowerCaseSearchQuery),
+          normalizeForSearch(song.title).includes(normalizedQuery) ||
+          normalizeForSearch(song.artist).includes(normalizedQuery),
       )
       .filter((song) => (showAvoid ? true : !song.avoid))
       .filter((song) => (favoritesOnly ? song.favorite : true))
@@ -161,6 +161,7 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
             placeholder="Song or Artist Search..."
             className={styles.searchBox}
             ref={searchRef}
+            autoCapitalize="words"
           />
           <button
             type="button"
