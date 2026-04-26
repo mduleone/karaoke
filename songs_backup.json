@@ -1074,7 +1074,7 @@
   {
     "id": "3c327c52-c026-4a52-b063-6f5af09f73b3",
     "artist": "Bon Jovi",
-    "title": "Login’ on a Prayer",
+    "title": "Livin’ on a Prayer",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -1245,6 +1245,22 @@
     "tags": [],
     "createdAt": "2026-04-18T03:41:46.069Z",
     "updatedAt": "2026-04-18T03:41:46.069Z",
+    "deletedAt": null
+  },
+  {
+    "id": "60ab961e-d709-4a9a-8350-b3780b1051ee",
+    "artist": "Bruce Springsteen",
+    "title": "Born to Run",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-26T02:50:46.249Z",
+    "updatedAt": "2026-04-26T02:50:46.249Z",
     "deletedAt": null
   },
   {
@@ -3237,7 +3253,7 @@
     "title": "The Middle",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -4525,6 +4541,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2026-03-05T02:40:28.475Z",
+    "deletedAt": null
+  },
+  {
+    "id": "5e5ae16b-40f2-4ecd-88e4-fa6e6db4d2e6",
+    "artist": "Queen",
+    "title": "Don’t Stop Me Now",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-26T02:46:04.522Z",
+    "updatedAt": "2026-04-26T02:46:04.522Z",
     "deletedAt": null
   },
   {
@@ -5997,6 +6029,38 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "dffded45-0000-4502-bb13-03c794b0a52f",
+    "artist": "Violent Femmes",
+    "title": "Blister in the Sun",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-26T00:02:56.469Z",
+    "updatedAt": "2026-04-26T00:02:56.469Z",
+    "deletedAt": null
+  },
+  {
+    "id": "e5e86c90-1a19-4944-b03d-1551ca94ceab",
+    "artist": "Violent Femmes",
+    "title": "Kiss Off",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-04-26T00:02:44.237Z",
+    "updatedAt": "2026-04-26T00:02:44.237Z",
     "deletedAt": null
   },
   {
