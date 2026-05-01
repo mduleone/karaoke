@@ -4176,6 +4176,38 @@
     "deletedAt": null
   },
   {
+    "id": "4d91d373-10d9-4e70-81d8-0bf9753865cc",
+    "artist": "New Radicals",
+    "title": "Mother We Just Can’t Get Enough",
+    "notes": "High",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": true,
+    "tags": [],
+    "createdAt": "2026-05-01T05:59:26.661Z",
+    "updatedAt": "2026-05-01T05:59:26.661Z",
+    "deletedAt": null
+  },
+  {
+    "id": "9a4c5682-6c76-442e-b430-f0b4b72c2a3a",
+    "artist": "New Radicals",
+    "title": "You Get What You Give",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-01T06:04:26.421Z",
+    "updatedAt": "2026-05-01T06:04:26.421Z",
+    "deletedAt": null
+  },
+  {
     "id": "7c46808c-84a7-4fc6-9fa3-cdbfca156907",
     "artist": "Newsies",
     "title": "Seize the Day",
