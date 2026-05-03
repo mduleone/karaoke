@@ -5728,6 +5728,22 @@
     "deletedAt": null
   },
   {
+    "id": "acced396-95ba-44bf-9ada-c679903b6702",
+    "artist": "Third Eye Blind",
+    "title": "Semi-Charmed Life",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-03T03:41:21.671Z",
+    "updatedAt": "2026-05-03T03:41:21.671Z",
+    "deletedAt": null
+  },
+  {
     "id": "d26dd93a-7fce-4a27-9f33-34fda99cf4ec",
     "artist": "Three Dog Night",
     "title": "Joy to the World",
