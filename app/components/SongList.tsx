@@ -1,17 +1,15 @@
 'use client';
 
-import { useParams } from 'next/navigation';
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import Artist from './Artist';
 import AddedDate from './AddedDate';
+import SongListFilters from './SongListFilters';
 import type { ArtistType, SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
-import { FontAwesomeIcon } from './FontAwesomeProvider';
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
-import { slugToString, normalizeForSearch } from '../utils/string';
-import cx from '../utils/classnames';
+import { normalizeForSearch } from '../utils/string';
 
 const songSorterByTitle = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const titleCompare = titleA.localeCompare(titleB);
@@ -36,22 +34,7 @@ const TOP_OFFSET = 208;
 
 const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
   'use client';
-  const { username: paramsUsername } = useParams() as { username?: string };
-
-  const {
-    searchQuery,
-    showAvoid,
-    favoritesOnly,
-    duetsOnly,
-    byRecentlyAdded,
-    byTitle,
-    setSearchQuery,
-    setShowAvoid,
-    setFavoritesOnly,
-    setDuetsOnly,
-    setByRecentlyAdded,
-    setByTitle,
-  } = useKaraokeSearchContext();
+  const { searchQuery, showAvoid, favoritesOnly, duetsOnly, byRecentlyAdded, byTitle } = useKaraokeSearchContext();
 
   const filteredSongs: SongType[] = useMemo(() => {
     const normalizedQuery = normalizeForSearch(searchQuery);
@@ -126,10 +109,6 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     );
   }, [filteredSongs]);
 
-  const isMatt = paramsUsername === 'matt' || typeof paramsUsername === 'undefined';
-  const stringName = slugToString(paramsUsername);
-  const displayUsername = stringName && stringName.charAt(0).toLocaleUpperCase() + stringName.slice(1);
-
   const { lettersRefMap, addToRefMap, lettersMapState } = useAlphabetScroller(
     byTitle ? filteredSongsByTitle : filteredSongsByArtist,
     byTitle,
@@ -145,110 +124,9 @@ const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
     [lettersRefMap],
   );
 
-  const searchRef = useRef<HTMLInputElement>(null);
-
   return (
     <>
-      <div className={styles.filters}>
-        <h2>{isMatt ? 'Matt' : displayUsername}&rsquo;s List</h2>
-        <label htmlFor="search" className={styles.searchLabel}>
-          <input
-            id="search"
-            type="text"
-            onChange={(e) => setSearchQuery(e.target.value)}
-            value={searchQuery}
-            name="search"
-            placeholder="Song or Artist Search..."
-            className={styles.searchBox}
-            ref={searchRef}
-            autoCapitalize="words"
-          />
-          <button
-            type="button"
-            onClick={() => {
-              setSearchQuery('');
-              if (searchRef.current) {
-                searchRef.current.focus();
-              }
-            }}
-            aria-label="Clear Search"
-            disabled={searchQuery.length === 0}
-            className={cx(styles.clearSearchButton, { [styles.show]: searchQuery.length > 0 })}
-          >
-            <FontAwesomeIcon icon={['fas', 'x']} widthAuto />
-          </button>
-        </label>
-        <div className={styles.settingsPanel}>
-          <button
-            type="button"
-            onClick={() => setFavoritesOnly((p) => !p)}
-            aria-label={`Show ${favoritesOnly ? 'all songs' : 'favorites only'}`}
-            className={cx(styles.settingsButton, styles.standAlone, { [styles.enabled]: favoritesOnly })}
-          >
-            <FontAwesomeIcon icon={['fas', 'heart']} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setDuetsOnly((p) => !p)}
-            aria-label={`Show ${duetsOnly ? 'all songs' : 'duets only'}`}
-            className={cx(styles.settingsButton, styles.noGap, { [styles.enabled]: duetsOnly })}
-          >
-            <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
-            <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowAvoid((p) => !p)}
-            aria-label={`${showAvoid ? 'Hide' : 'Show'} avoided songs`}
-            className={cx(styles.settingsButton, { [styles.enabled]: !showAvoid })}
-          >
-            Hide <FontAwesomeIcon icon={['fas', 'microphone-lines-slash']} />
-          </button>
-          <button
-            type="button"
-            onClick={() => setByTitle(!byTitle)}
-            aria-label={`Sort by ${byTitle ? 'Artist' : 'Title'}`}
-            className={cx(styles.settingsButton, { [styles.enabled]: byTitle })}
-          >
-            By Title
-          </button>
-          <button
-            type="button"
-            onClick={() => setByRecentlyAdded(!byRecentlyAdded)}
-            aria-label={`Sort ${byRecentlyAdded ? 'by Recently Added' : 'Artist and Song'}`}
-            className={cx(styles.settingsButton, styles.standAlone, { [styles.enabled]: byRecentlyAdded })}
-          >
-            <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
-          </button>
-        </div>
-        <div className={styles.displayCount}>
-          <span>
-            {filteredSongs.length < songs.length ? `${filteredSongs.length} of ${songs.length}` : `All ${songs.length}`}{' '}
-            Songs
-          </span>
-          {(favoritesOnly || duetsOnly || byRecentlyAdded) && (
-            <span className={styles.activeFilters}>
-              {favoritesOnly && (
-                <span className={cx(styles.activeFilter, styles.activeFilterFavorite)}>
-                  <FontAwesomeIcon icon={['fas', 'heart']} />
-                </span>
-              )}
-              {duetsOnly && (
-                <span className={cx(styles.activeFilter, styles.activeFilterDuet)}>
-                  <FontAwesomeIcon widthAuto icon={['fas', 'user-plus']} />
-                  <FontAwesomeIcon widthAuto icon={['fas', 'user']} />
-                </span>
-              )}
-              {byRecentlyAdded && (
-                <span className={cx(styles.activeFilter, styles.activeFilterRecent)}>
-                  <FontAwesomeIcon icon={['fas', 'clock-rotate-left']} />
-                  Recent
-                </span>
-              )}
-            </span>
-          )}
-        </div>
-      </div>
+      <SongListFilters filteredCount={filteredSongs.length} totalCount={songs.length} />
       {!byRecentlyAdded && (
         <div className={styles.scrollLetters}>
           {lettersMapState.map((letter) => (

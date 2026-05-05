@@ -4,12 +4,14 @@ import { createContext, useCallback, useContext, useMemo, useState } from 'react
 
 type KaraokeSearchContextType = {
   searchQuery: string;
+  historySearchQuery: string;
   showAvoid: boolean;
   favoritesOnly: boolean;
   duetsOnly: boolean;
   byRecentlyAdded: boolean;
   byTitle: boolean;
   setSearchQuery: ReturnType<typeof useState<string>>[1];
+  setHistorySearchQuery: ReturnType<typeof useState<string>>[1];
   setShowAvoid: ReturnType<typeof useState<boolean>>[1];
   setFavoritesOnly: ReturnType<typeof useState<boolean>>[1];
   setDuetsOnly: ReturnType<typeof useState<boolean>>[1];
@@ -21,6 +23,7 @@ export const KaraokeSearchContext = createContext<KaraokeSearchContextType | nul
 
 const KaraokeSearchProvider = ({ children }: React.FC & { children: React.ReactElement }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [historySearchQuery, setHistorySearchQuery] = useState('');
   const [showAvoid, setShowAvoid] = useState(true);
   const [favoritesOnly, setFavoritesOnly] = useState(false);
   const [duetsOnly, setDuetsOnly] = useState(false);
@@ -44,19 +47,31 @@ const KaraokeSearchProvider = ({ children }: React.FC & { children: React.ReactE
   const value = useMemo(
     () => ({
       searchQuery,
+      historySearchQuery,
       showAvoid,
       favoritesOnly,
       duetsOnly,
       byRecentlyAdded,
       byTitle,
       setSearchQuery,
+      setHistorySearchQuery,
       setShowAvoid,
       setFavoritesOnly,
       setDuetsOnly,
       setByRecentlyAdded,
       setByTitle,
     }),
-    [searchQuery, showAvoid, favoritesOnly, duetsOnly, byRecentlyAdded, byTitle, setByRecentlyAdded, setByTitle],
+    [
+      searchQuery,
+      historySearchQuery,
+      showAvoid,
+      favoritesOnly,
+      duetsOnly,
+      byRecentlyAdded,
+      byTitle,
+      setByRecentlyAdded,
+      setByTitle,
+    ],
   );
 
   return <KaraokeSearchContext.Provider value={value}>{children}</KaraokeSearchContext.Provider>;

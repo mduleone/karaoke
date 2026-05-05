@@ -1,0 +1,54 @@
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+%skeletonBase {
+  background: linear-gradient(90deg, #ffffff0a 0%, #ffffff1f 50%, #ffffff0a 100%);
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.4s ease-in-out infinite;
+  border-radius: toRem(4);
+}
+
+.skeletonList {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: toRem(64) 0 0;
+  width: 100%;
+  list-style: none;
+  background-color: $background-color;
+}
+
+.skeletonArtistSection {
+  padding: 0 toRem(8);
+  list-style: none;
+}
+
+.skeletonArtistName {
+  @extend %skeletonBase;
+  height: toRem(18);
+  width: toRem(140);
+  margin: toRem(6) toRem(24) 0;
+}
+
+.skeletonSongList {
+  display: flex;
+  flex-direction: column;
+  gap: toRem(8);
+  padding: toRem(6) 0 0;
+  list-style: none;
+}
+
+.skeletonSongCard {
+  @extend %skeletonBase;
+  height: toRem(44);
+  width: calc(100% - toRem(50));
+  margin: 0 auto;
+  border: toRem(1) solid #88888833;
+  border-radius: toRem(6);
+}

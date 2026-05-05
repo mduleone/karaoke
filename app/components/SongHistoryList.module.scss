@@ -1,12 +1,3 @@
-.heading {
-  width: 100%;
-  background-color: $background-color;
-  z-index: 100;
-  padding: 0 toRem(24);
-  position: sticky;
-  top: toRem(64);
-}
-
 .historyList {
   display: flex;
   flex-direction: column;
