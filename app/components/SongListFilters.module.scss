@@ -152,7 +152,8 @@
 
 .skeletonCount {
   display: inline-block;
-  height: toRem(14);
+  height: toRem(22);
+  margin-bottom: toRem(4);
   width: toRem(96);
   background: linear-gradient(90deg, #ffffff0a 0%, #ffffff1f 50%, #ffffff0a 100%);
   background-size: 200% 100%;
