@@ -1,10 +1,11 @@
 'use server';
 
 import { eq } from 'drizzle-orm';
-import { revalidatePath } from 'next/cache';
+import { updateTag } from 'next/cache';
 import bcrypt from 'bcrypt';
 import { db } from '../../db';
 import { songs, simpleUsers } from '../../db/schema';
+import { normalizeUsername } from '../utils/string';
 import { createFormDataReader } from './formReader';
 
 export const createSong = async (formData: FormData) => {
@@ -16,7 +17,7 @@ export const createSong = async (formData: FormData) => {
     throw new Error('Username and PIN are required');
   }
 
-  const username = usernameValue.toLocaleLowerCase().trim();
+  const username = normalizeUsername(usernameValue);
   const pin = pinValue.trim();
 
   const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, username)).limit(1);
@@ -52,8 +53,7 @@ export const createSong = async (formData: FormData) => {
 
   await db.insert(songs).values({ artist, title, notes, favorite, duet, learn, retry, avoid, username });
 
-  revalidatePath('/');
-  revalidatePath('/[username]');
+  updateTag(`user-songs:${username}`);
 
   return { statusCode: 200, status: 'OK' };
 };

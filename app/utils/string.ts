@@ -16,3 +16,6 @@ export const stringToSlug = (value?: string): string =>{
     .replace(/\s/g, '-');
 }
 export const slugToString = (slug?: string): string => slug?.replace(/-+/g, ' ') ?? '';
+
+export const normalizeUsername = (value?: string): string =>
+  value?.normalize('NFC').trim().toLocaleLowerCase() ?? '';

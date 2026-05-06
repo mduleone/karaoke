@@ -4,11 +4,12 @@ import { eq } from 'drizzle-orm';
 import bcrypt from 'bcrypt';
 import { db } from '../../db';
 import { simpleUsers } from '../../db/schema';
+import { normalizeUsername } from '../utils/string';
 
 const saltRounds = 10;
 
 export const login = async (username: string, pin: string) => {
-  const lowerCaseUsername = username.toLocaleLowerCase();
+  const lowerCaseUsername = normalizeUsername(username);
 
   const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, lowerCaseUsername)).limit(1);
   if (!userRecord) {
@@ -24,7 +25,7 @@ export const login = async (username: string, pin: string) => {
 };
 
 export const createAccount = async (username: string, pin: string) => {
-  const lowerCaseUsername = username.toLocaleLowerCase();
+  const lowerCaseUsername = normalizeUsername(username);
 
   const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, lowerCaseUsername)).limit(1);
   if (userRecord) {
