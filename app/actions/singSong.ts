@@ -1,12 +1,14 @@
 'use server';
 
 import { eq } from 'drizzle-orm';
+import { updateTag } from 'next/cache';
 import bcrypt from 'bcrypt';
 import { db } from '../../db';
 import { singingRecords, simpleUsers } from '../../db/schema';
+import { normalizeUsername } from '../utils/string';
 
 export const singSong = async (songID: string, songArtist: string, songName: string, username: string, pin: string) => {
-  const lowerCaseUsername = username?.toLocaleLowerCase();
+  const lowerCaseUsername = normalizeUsername(username);
 
   const [userRecord] = await db.select().from(simpleUsers).where(eq(simpleUsers.username, lowerCaseUsername)).limit(1);
   if (!userRecord) {
@@ -29,6 +31,8 @@ export const singSong = async (songID: string, songArtist: string, songName: str
     username: lowerCaseUsername,
     sungAt: new Date(),
   });
+
+  updateTag(`user-history:${lowerCaseUsername}`);
 
   return { statusCode: 200, status: 'OK' };
 };

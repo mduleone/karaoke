@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 import type { Metadata } from 'next';
 import { listSongs } from '../actions/listSongs';
 import SongList from '../components/SongList';
