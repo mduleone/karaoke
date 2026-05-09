@@ -1552,6 +1552,22 @@
     "deletedAt": null
   },
   {
+    "id": "7912fa5f-aaba-4019-9895-47c2370f0638",
+    "artist": "Cranberries, The",
+    "title": "Dream",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T03:24:57.969Z",
+    "updatedAt": "2026-05-09T03:24:57.969Z",
+    "deletedAt": null
+  },
+  {
     "id": "5988e6b4-a734-41af-afac-27eeb08a9061",
     "artist": "Cranberries, The",
     "title": "Zombie",
@@ -4141,6 +4157,22 @@
     "tags": [],
     "createdAt": "2026-04-06T07:57:52.096Z",
     "updatedAt": "2026-04-06T07:57:52.096Z",
+    "deletedAt": null
+  },
+  {
+    "id": "37cb72d0-9e07-4027-8fd4-9ab3bdb23277",
+    "artist": "My Chemical Romance",
+    "title": "Welcome To The Black Parade",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T03:22:58.274Z",
+    "updatedAt": "2026-05-09T03:22:58.274Z",
     "deletedAt": null
   },
   {
