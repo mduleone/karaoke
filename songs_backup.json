@@ -1760,6 +1760,22 @@
     "deletedAt": null
   },
   {
+    "id": "4db6b897-ebaf-4fe3-be6e-b87e8c130c86",
+    "artist": "Del Amitri",
+    "title": "Roll To Me",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T08:19:07.660Z",
+    "updatedAt": "2026-05-09T08:19:07.660Z",
+    "deletedAt": null
+  },
+  {
     "id": "699b52ed-28b1-46ed-8967-ce2bc35112dc",
     "artist": "Disney",
     "title": "Gaston",
@@ -2685,6 +2701,38 @@
     "tags": [],
     "createdAt": "2026-01-22T06:26:45.648Z",
     "updatedAt": "2026-01-22T06:26:45.648Z",
+    "deletedAt": null
+  },
+  {
+    "id": "266f1fd1-64c2-4403-a16f-ec1311f5278a",
+    "artist": "Gin Blossoms",
+    "title": "Follow You Down",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T08:17:16.197Z",
+    "updatedAt": "2026-05-09T08:17:16.197Z",
+    "deletedAt": null
+  },
+  {
+    "id": "873d2aa6-8eb0-494c-b8e4-5156d0fef933",
+    "artist": "Gin Blossoms",
+    "title": "Hey Jealousy",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T08:16:48.361Z",
+    "updatedAt": "2026-05-09T08:16:48.361Z",
     "deletedAt": null
   },
   {
@@ -5216,6 +5264,38 @@
     "deletedAt": null
   },
   {
+    "id": "c746a154-cda2-4b20-9df2-031a6fa43fe6",
+    "artist": "Semisonic",
+    "title": "Closing Time",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T08:02:02.412Z",
+    "updatedAt": "2026-05-09T08:02:02.412Z",
+    "deletedAt": null
+  },
+  {
+    "id": "b4ecf0ab-7682-49e1-aba3-159a3d8bcb89",
+    "artist": "Semisonic",
+    "title": "F.N.T.",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T07:59:27.916Z",
+    "updatedAt": "2026-05-09T07:59:27.916Z",
+    "deletedAt": null
+  },
+  {
     "id": "be643155-8707-471c-bde3-08cd689f56c4",
     "artist": "Shaboozey",
     "title": "A Bar Song (Tipsy)",
@@ -5453,6 +5533,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "b3990708-8773-4835-ab31-b53d7925c929",
+    "artist": "Stroke 9",
+    "title": "Little Black Backpack",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-09T08:01:11.997Z",
+    "updatedAt": "2026-05-09T08:01:11.997Z",
     "deletedAt": null
   },
   {
