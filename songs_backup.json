@@ -1056,6 +1056,38 @@
     "deletedAt": null
   },
   {
+    "id": "22dae0d4-fe41-42d1-937f-1315bec605b6",
+    "artist": "Blues Traveller",
+    "title": "Hook",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-11T01:21:57.068Z",
+    "updatedAt": "2026-05-11T01:21:57.068Z",
+    "deletedAt": null
+  },
+  {
+    "id": "e505e2eb-ddaa-4f21-8019-a350e9240d0d",
+    "artist": "Blues Traveller",
+    "title": "Run Around",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-11T01:21:48.907Z",
+    "updatedAt": "2026-05-11T01:21:48.907Z",
+    "deletedAt": null
+  },
+  {
     "id": "9e112616-6bfe-416f-bdd8-029fc4bfe256",
     "artist": "Bob Dylan",
     "title": "Like a Rolling Stone",
@@ -2578,7 +2610,7 @@
   {
     "id": "e406728a-6ea5-4965-a366-78ecdcdf5db5",
     "artist": "Frankie Valli",
-    "title": "You’re Just Too Good To Be True",
+    "title": "Can’t Take My Eyes Off You",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -4368,6 +4400,22 @@
     "deletedAt": null
   },
   {
+    "id": "fd1cae96-a337-4bf3-a4c1-b0e5d5777d43",
+    "artist": "No Pity For A Coward",
+    "title": "Suicide Silence",
+    "notes": "",
+    "username": "linoperna",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-11T05:21:39.783Z",
+    "updatedAt": "2026-05-11T05:21:39.783Z",
+    "deletedAt": null
+  },
+  {
     "id": "ebb13706-bbf2-4319-b812-668c5d6d966f",
     "artist": "Noah Kahan",
     "title": "Dial Drunk",
@@ -5728,6 +5776,22 @@
     "deletedAt": null
   },
   {
+    "id": "c6a4f5ce-3cb8-4671-afdd-c3c4332fd463",
+    "artist": "The Final Episode",
+    "title": "Asking Alexandria",
+    "notes": "",
+    "username": "linoperna",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-11T05:22:05.718Z",
+    "updatedAt": "2026-05-11T05:22:05.718Z",
+    "deletedAt": null
+  },
+  {
     "id": "d475c1be-65c3-44ae-9d34-b713ddee906a",
     "artist": "The Fray",
     "title": "How to Save a Life",
@@ -6397,6 +6461,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "86197ed2-3982-4ee5-ad8f-1be6c10ea60a",
+    "artist": "Whitechapel",
+    "title": "Father Of Lies",
+    "notes": "",
+    "username": "linoperna",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-11T05:21:00.543Z",
+    "updatedAt": "2026-05-11T05:21:00.543Z",
     "deletedAt": null
   },
   {
