@@ -2647,7 +2647,7 @@
     "username": "matt",
     "favorite": false,
     "duet": false,
-    "learn": true,
+    "learn": false,
     "retry": false,
     "avoid": false,
     "tags": [],
