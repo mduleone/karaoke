@@ -320,6 +320,22 @@
     "deletedAt": null
   },
   {
+    "id": "35b7c8d0-e38d-4eae-b358-a34f876bcbdf",
+    "artist": "Audioslave",
+    "title": "Like A Stone",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": true,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-14T17:49:11.155Z",
+    "updatedAt": "2026-05-14T17:49:11.155Z",
+    "deletedAt": null
+  },
+  {
     "id": "bcd19dba-7585-4f01-aae4-c78ae303aee5",
     "artist": "Avcii",
     "title": "Wake me up",
