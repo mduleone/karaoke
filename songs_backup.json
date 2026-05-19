@@ -5392,6 +5392,38 @@
     "deletedAt": null
   },
   {
+    "id": "6d04b670-cddd-42ce-ae73-dca6957100df",
+    "artist": "Simon & Garfunkel",
+    "title": "Cecilia",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-18T22:02:41.004Z",
+    "updatedAt": "2026-05-18T22:02:41.004Z",
+    "deletedAt": null
+  },
+  {
+    "id": "3b8b533f-1830-47e1-8157-23ddc62a59a7",
+    "artist": "Simon & Garfunkel",
+    "title": "The Sound of Silence",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-18T22:11:20.088Z",
+    "updatedAt": "2026-05-18T22:11:20.088Z",
+    "deletedAt": null
+  },
+  {
     "id": "c0621f3d-9359-4db1-9ba3-5a363b52c34f",
     "artist": "Simple Minds",
     "title": "Don't You (Forget About Me)",
