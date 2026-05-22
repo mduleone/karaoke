@@ -3984,6 +3984,22 @@
     "deletedAt": null
   },
   {
+    "id": "ddd54e7d-4464-41dd-8280-d48da63163ee",
+    "artist": "Maroon 5",
+    "title": "She Will Be Loved",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-22T02:21:55.192Z",
+    "updatedAt": "2026-05-22T02:21:55.192Z",
+    "deletedAt": null
+  },
+  {
     "id": "b48db7da-7aa2-4d22-aaba-42dd7b7e2e4f",
     "artist": "Matchbox 20",
     "title": "3AM",
