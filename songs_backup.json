@@ -368,6 +368,22 @@
     "deletedAt": null
   },
   {
+    "id": "4f15ac7d-b5b1-4055-b9e3-fadd5256a634",
+    "artist": "B-52s",
+    "title": "Love Shack",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-24T01:23:32.129Z",
+    "updatedAt": "2026-05-24T01:23:32.129Z",
+    "deletedAt": null
+  },
+  {
     "id": "a6386908-562e-446d-b149-7ee00dc6a3ef",
     "artist": "Backstreet Boys",
     "title": "Backstreet’s Back",
@@ -1341,6 +1357,22 @@
     "tags": [],
     "createdAt": "2026-04-11T05:00:10.617Z",
     "updatedAt": "2026-04-11T05:00:10.617Z",
+    "deletedAt": null
+  },
+  {
+    "id": "0e8d6986-1b5c-49fb-b89e-8305721e79e5",
+    "artist": "Bush",
+    "title": "Machinehead",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-23T01:34:55.701Z",
+    "updatedAt": "2026-05-23T01:34:55.701Z",
     "deletedAt": null
   },
   {
@@ -2737,7 +2769,7 @@
   },
   {
     "id": "ddbaf50f-330b-4c05-90b2-b1c9ee37a867",
-    "artist": "George Michaels",
+    "artist": "George Michael",
     "title": "Faith",
     "notes": "",
     "username": "matt",
@@ -3997,6 +4029,22 @@
     "tags": [],
     "createdAt": "2026-05-22T02:21:55.192Z",
     "updatedAt": "2026-05-22T02:21:55.192Z",
+    "deletedAt": null
+  },
+  {
+    "id": "163e0918-1c46-46df-a657-2379dc6c0e1f",
+    "artist": "Maroon 5",
+    "title": "This Love",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-23T02:52:08.237Z",
+    "updatedAt": "2026-05-23T02:52:08.237Z",
     "deletedAt": null
   },
   {
@@ -5728,6 +5776,22 @@
     "deletedAt": null
   },
   {
+    "id": "52940fdf-4a29-4334-8ba0-61a729e5b75d",
+    "artist": "Sublime",
+    "title": "Smoke Two Joints",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-24T03:47:07.353Z",
+    "updatedAt": "2026-05-24T03:47:07.353Z",
+    "deletedAt": null
+  },
+  {
     "id": "99b21cef-075f-4f0a-b962-2e975c45fc80",
     "artist": "Sublime",
     "title": "What I Got",
@@ -5821,6 +5885,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "0ec5468d-7a5e-4495-a38a-517511ac68f0",
+    "artist": "Tears For Fears",
+    "title": "Everybody Wants to Rule the World",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-23T04:33:17.099Z",
+    "updatedAt": "2026-05-23T04:33:17.099Z",
     "deletedAt": null
   },
   {
@@ -6525,6 +6605,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "726d4a26-5b81-44f0-b7eb-892e58ba8498",
+    "artist": "Weezer",
+    "title": "Buddy Holly",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-23T04:03:33.784Z",
+    "updatedAt": "2026-05-23T04:03:33.784Z",
     "deletedAt": null
   },
   {
