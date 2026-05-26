@@ -768,6 +768,22 @@
     "deletedAt": null
   },
   {
+    "id": "d7c02b8d-4018-410e-bc74-931430399094",
+    "artist": "Billy Idol",
+    "title": "Rebel Yell",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-26T06:10:35.414Z",
+    "updatedAt": "2026-05-26T06:10:35.414Z",
+    "deletedAt": null
+  },
+  {
     "id": "276e218f-66b3-499a-a4f2-c4ea4ddc8746",
     "artist": "Billy Joel",
     "title": "Always a Woman",
@@ -1344,6 +1360,22 @@
     "deletedAt": null
   },
   {
+    "id": "d323ea65-f1cf-4734-8edd-bceda4cc0a20",
+    "artist": "Bruce Springsteen",
+    "title": "Dancing In The Dark",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-26T06:07:56.634Z",
+    "updatedAt": "2026-05-26T06:07:56.634Z",
+    "deletedAt": null
+  },
+  {
     "id": "30907d9f-0588-4e19-a0c6-41dc5906d48b",
     "artist": "Bryan Adams",
     "title": "Summer of 69",
@@ -1568,6 +1600,22 @@
     "deletedAt": null
   },
   {
+    "id": "de82f4d9-68b8-4ddb-a48a-0a30c3fc28bb",
+    "artist": "Coldplay",
+    "title": "Fix You",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-26T06:02:52.529Z",
+    "updatedAt": "2026-05-26T06:02:52.529Z",
+    "deletedAt": null
+  },
+  {
     "id": "37c211fe-ca43-4ee3-bee7-877a472db145",
     "artist": "Coldplay",
     "title": "The Scientist",
@@ -1597,6 +1645,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "37eaed4a-ba89-447c-bee7-6ab4bc7b8603",
+    "artist": "Coldplay",
+    "title": "Yellow",
+    "notes": "",
+    "username": "matt",
+    "favorite": true,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-26T05:56:41.429Z",
+    "updatedAt": "2026-05-26T05:56:41.429Z",
     "deletedAt": null
   },
   {
