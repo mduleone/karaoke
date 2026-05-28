@@ -626,7 +626,7 @@
   {
     "id": "54585e47-6f2f-4d43-838b-3c3a7cae5e65",
     "artist": "Beatles",
-    "title": "I Wanna Hold Your Hand",
+    "title": "I Want To Hold Your Hand",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -2144,6 +2144,22 @@
     "deletedAt": null
   },
   {
+    "id": "88053b7f-6d5a-4e09-b144-c5dd147a571a",
+    "artist": "Elton John",
+    "title": "I’m Still Standing",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-27T15:44:12.448Z",
+    "updatedAt": "2026-05-27T15:44:12.448Z",
+    "deletedAt": null
+  },
+  {
     "id": "631763c3-78c9-449a-98e2-d70285d72a8b",
     "artist": "Elton John",
     "title": "Rocket Man (I Think It's Going To Be A Long, Long Time)",
@@ -2741,7 +2757,7 @@
     "title": "Take Me Out",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -2813,6 +2829,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "cd948641-9794-4393-b0d6-677571788959",
+    "artist": "Gavin DeGraw",
+    "title": "Not Over You",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-27T14:24:53.726Z",
+    "updatedAt": "2026-05-27T14:24:53.726Z",
     "deletedAt": null
   },
   {
@@ -4973,6 +5005,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:53:29.737Z",
     "updatedAt": "2025-12-17T06:53:29.737Z",
+    "deletedAt": null
+  },
+  {
+    "id": "26482d27-aec4-4941-a65d-f43a8f807973",
+    "artist": "Queen",
+    "title": "We Are The Champions",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-28T01:25:28.292Z",
+    "updatedAt": "2026-05-28T01:25:28.292Z",
     "deletedAt": null
   },
   {
