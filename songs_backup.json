@@ -3888,6 +3888,22 @@
     "deletedAt": null
   },
   {
+    "id": "19f7193d-d2e7-4fd9-9fcb-b696d8289f61",
+    "artist": "Lifehouse",
+    "title": "Hanging By A Moment",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-29T02:33:35.039Z",
+    "updatedAt": "2026-05-29T02:33:35.039Z",
+    "deletedAt": null
+  },
+  {
     "id": "5ea12e60-2e04-490b-b146-da89bfb640e0",
     "artist": "Lifehouse",
     "title": "You and Me",
@@ -4957,6 +4973,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2026-03-05T02:40:28.475Z",
+    "deletedAt": null
+  },
+  {
+    "id": "92991456-119c-4848-96be-eb0372296162",
+    "artist": "Puddle Of Mudd",
+    "title": "She Fucking Hates Me",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-29T02:33:51.878Z",
+    "updatedAt": "2026-05-29T02:33:51.878Z",
     "deletedAt": null
   },
   {
