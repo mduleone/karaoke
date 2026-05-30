@@ -4608,6 +4608,22 @@
     "deletedAt": null
   },
   {
+    "id": "0c610a12-71bc-4dc8-8410-9e965bf710a5",
+    "artist": "Nirvana",
+    "title": "Smells Like Teen Spirit",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-30T04:17:22.730Z",
+    "updatedAt": "2026-05-30T04:17:22.730Z",
+    "deletedAt": null
+  },
+  {
     "id": "fd1cae96-a337-4bf3-a4c1-b0e5d5777d43",
     "artist": "No Pity For A Coward",
     "title": "Suicide Silence",
@@ -4978,7 +4994,7 @@
   {
     "id": "92991456-119c-4848-96be-eb0372296162",
     "artist": "Puddle Of Mudd",
-    "title": "She Fucking Hates Me",
+    "title": "She Hates Me",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -6096,6 +6112,22 @@
     "deletedAt": null
   },
   {
+    "id": "6f25e77d-4fca-43e3-ab3a-745a4f74972b",
+    "artist": "The Cars",
+    "title": "Just What I Needed",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-30T04:33:32.379Z",
+    "updatedAt": "2026-05-30T04:33:32.379Z",
+    "deletedAt": null
+  },
+  {
     "id": "c6a4f5ce-3cb8-4671-afdd-c3c4332fd463",
     "artist": "The Final Episode",
     "title": "Asking Alexandria",
@@ -6301,6 +6333,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "3201b40c-9a05-4bbd-9aa7-b0caa8bde5cc",
+    "artist": "Tiffany",
+    "title": "I Think We’re Alone Now",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-05-30T04:25:51.542Z",
+    "updatedAt": "2026-05-30T04:25:51.542Z",
     "deletedAt": null
   },
   {
