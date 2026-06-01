@@ -3200,6 +3200,22 @@
     "deletedAt": null
   },
   {
+    "id": "77beb357-e2fe-4699-aad9-9d0d034c9086",
+    "artist": "Guns N’ Roses",
+    "title": "Sweet Child O’ Mine",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-01T03:01:52.971Z",
+    "updatedAt": "2026-06-01T03:01:52.971Z",
+    "deletedAt": null
+  },
+  {
     "id": "51af435a-6043-47a1-a8bf-7281ab84406a",
     "artist": "Hamilton",
     "title": "Alexander Hamilton",
