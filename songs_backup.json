@@ -1392,6 +1392,22 @@
     "deletedAt": null
   },
   {
+    "id": "af778277-6101-44ff-8c7f-d1e0923b05f8",
+    "artist": "Buckcherry",
+    "title": "Crazy Bitch",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-04T06:02:05.353Z",
+    "updatedAt": "2026-06-04T06:02:05.353Z",
+    "deletedAt": null
+  },
+  {
     "id": "0e8d6986-1b5c-49fb-b89e-8305721e79e5",
     "artist": "Bush",
     "title": "Machinehead",
