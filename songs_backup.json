@@ -2432,6 +2432,22 @@
     "deletedAt": "2026-04-16T02:17:04.960Z"
   },
   {
+    "id": "e9ef0dfe-1c89-440b-af3e-177387e1792f",
+    "artist": "Finger Eleven",
+    "title": "Paralyzer",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-07T00:34:24.139Z",
+    "updatedAt": "2026-06-07T00:34:24.139Z",
+    "deletedAt": null
+  },
+  {
     "id": "822ecdf4-0ef8-4bc0-82f6-e61d81732cc1",
     "artist": "Flogging Molly",
     "title": "Drunken Lullabies",
