@@ -3856,6 +3856,22 @@
     "deletedAt": null
   },
   {
+    "id": "c6b9aef0-f9ec-4c77-b289-c63c0ac76feb",
+    "artist": "Killers, The",
+    "title": "Somebody Told Me",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-08T01:07:54.441Z",
+    "updatedAt": "2026-06-08T01:07:54.441Z",
+    "deletedAt": null
+  },
+  {
     "id": "6a6c0e0e-b228-411e-9a21-fbbacd1bd2ce",
     "artist": "Killers, The",
     "title": "When You Were Young",
@@ -4549,7 +4565,7 @@
     "title": "Everybody Talks",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -4973,6 +4989,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "f4aadef4-ca0d-4f35-a81d-b4f28f6e1ed5",
+    "artist": "Pearl Jam",
+    "title": "Even Flow",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-08T05:49:11.329Z",
+    "updatedAt": "2026-06-08T05:49:11.329Z",
     "deletedAt": null
   },
   {
@@ -6877,6 +6909,22 @@
     "tags": [],
     "createdAt": "2026-05-23T04:03:33.784Z",
     "updatedAt": "2026-05-23T04:03:33.784Z",
+    "deletedAt": null
+  },
+  {
+    "id": "14c4010b-1e62-4d04-8af9-7f38263e9835",
+    "artist": "Weezer",
+    "title": "Island In The Sun",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-08T01:44:19.033Z",
+    "updatedAt": "2026-06-08T01:44:19.033Z",
     "deletedAt": null
   },
   {
