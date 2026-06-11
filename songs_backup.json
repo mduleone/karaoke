@@ -176,6 +176,22 @@
     "deletedAt": null
   },
   {
+    "id": "af3a4765-50dd-4cb4-85cf-5ff81e8c0904",
+    "artist": "All Time Low",
+    "title": "Weightless",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-11T00:31:52.663Z",
+    "updatedAt": "2026-06-11T00:31:52.663Z",
+    "deletedAt": null
+  },
+  {
     "id": "73f73cc8-5c31-403c-82a0-9e71775bfaea",
     "artist": "All-American Rejects",
     "title": "Dirty Little Secret",
