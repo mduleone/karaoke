@@ -1152,6 +1152,22 @@
     "deletedAt": null
   },
   {
+    "id": "977196bb-981e-4a62-821e-5a8f68a4d90d",
+    "artist": "Blur",
+    "title": "Song 2",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-14T18:40:15.777Z",
+    "updatedAt": "2026-06-14T18:40:15.777Z",
+    "deletedAt": null
+  },
+  {
     "id": "9e112616-6bfe-416f-bdd8-029fc4bfe256",
     "artist": "Bob Dylan",
     "title": "Like a Rolling Stone",
@@ -2453,7 +2469,7 @@
     "title": "Paralyzer",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -3184,6 +3200,22 @@
     "deletedAt": null
   },
   {
+    "id": "c6c273db-5c8e-41aa-af4c-45401becba61",
+    "artist": "Green Day",
+    "title": "Brain Stew",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-14T16:40:00.330Z",
+    "updatedAt": "2026-06-14T16:40:00.330Z",
+    "deletedAt": null
+  },
+  {
     "id": "2032f824-3bf6-4a77-9da3-5ff81c3bfcbb",
     "artist": "Green Day",
     "title": "Good Riddance (Time of your Life)",
@@ -3746,7 +3778,7 @@
   {
     "id": "617764c1-e73f-4e9b-8eec-1c3e72990d26",
     "artist": "Kansas",
-    "title": "Carry on My Wayward Son",
+    "title": "Carry On Wayward Son",
     "notes": "",
     "username": "matt",
     "favorite": false,
