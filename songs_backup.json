@@ -1056,6 +1056,38 @@
     "deletedAt": null
   },
   {
+    "id": "ca75b4b0-8e15-439e-ba34-af6700cf6999",
+    "artist": "Blink 182",
+    "title": "Dammit",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-27T02:22:01.979Z",
+    "updatedAt": "2026-06-27T02:22:01.979Z",
+    "deletedAt": null
+  },
+  {
+    "id": "12d7339c-4d8b-4d0a-92aa-a9060fc77888",
+    "artist": "Blink 182",
+    "title": "First Date",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-06-27T02:09:46.270Z",
+    "updatedAt": "2026-06-27T02:09:46.270Z",
+    "deletedAt": null
+  },
+  {
     "id": "3ec7cf9d-6346-42bc-8e7a-35e88f0bd185",
     "artist": "Blink 182",
     "title": "I Miss You",
