@@ -5824,6 +5824,22 @@
     "deletedAt": null
   },
   {
+    "id": "2e3ec997-5a24-4c48-ae16-f5c11b979eaf",
+    "artist": "Say Anything",
+    "title": "Wow I Can Get Sexual Too",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-07-02T02:48:37.577Z",
+    "updatedAt": "2026-07-02T02:48:37.577Z",
+    "deletedAt": null
+  },
+  {
     "id": "0e04d65d-f03d-43f8-8688-f208f1e81edf",
     "artist": "Say Anything",
     "title": "Yellow Cat (slash) Red Cat",
