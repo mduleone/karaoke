@@ -1504,6 +1504,22 @@
     "deletedAt": null
   },
   {
+    "id": "72e06fd6-3666-499b-ba8d-d34fa9da5422",
+    "artist": "Cake",
+    "title": "I Will Survive",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-07-09T01:34:43.178Z",
+    "updatedAt": "2026-07-09T01:34:43.178Z",
+    "deletedAt": null
+  },
+  {
     "id": "53dd0ec2-6a7c-498c-a6c5-b9a9e2d0eb44",
     "artist": "Cake",
     "title": "Never There",
