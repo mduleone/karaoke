@@ -3744,6 +3744,22 @@
     "deletedAt": null
   },
   {
+    "id": "a96fcf42-3a9b-4c68-9ca4-13e0486d8f99",
+    "artist": "Jazzy Jeff",
+    "title": "The Fresh Prince Of Bel-Air",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-07-23T20:48:41.453Z",
+    "updatedAt": "2026-07-23T20:48:41.453Z",
+    "deletedAt": null
+  },
+  {
     "id": "63b65551-304e-4b59-9a06-13305fffb6a6",
     "artist": "Jet",
     "title": "Are You Gonna Be My Girl",
@@ -6605,6 +6621,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "8342245e-736f-4d31-8de5-0ff1e36e6c9c",
+    "artist": "The Wanted",
+    "title": "Glad You Came",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": true,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-07-23T20:24:40.458Z",
+    "updatedAt": "2026-07-23T20:24:40.458Z",
     "deletedAt": null
   },
   {
