@@ -3296,6 +3296,22 @@
     "deletedAt": null
   },
   {
+    "id": "e78aaa61-1b97-4348-a4ca-71427f6aadbb",
+    "artist": "Grease",
+    "title": "Greased Lightning",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-08-03T03:30:08.864Z",
+    "updatedAt": "2026-08-03T03:30:08.864Z",
+    "deletedAt": null
+  },
+  {
     "id": "7042c0ce-159f-493b-a63d-895ba04cb18f",
     "artist": "Grease",
     "title": "Summer Nights",
@@ -5410,7 +5426,7 @@
   {
     "id": "e7b588f3-3d4e-4a5a-8d47-652c5706d6eb",
     "artist": "R.E.M.",
-    "title": "It’s the End of the World as we Know It",
+    "title": "It’s The End Of The World As We Know It",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -5426,7 +5442,7 @@
   {
     "id": "7dfedaa8-8144-4d01-9c2a-830fd2c758f9",
     "artist": "R.E.M.",
-    "title": "Losing my Religion",
+    "title": "Losing My Religion",
     "notes": "",
     "username": "matt",
     "favorite": false,
@@ -5757,6 +5773,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "437ca561-7d45-4bc1-a8d8-3730befe403b",
+    "artist": "Ricky Martin",
+    "title": "Livin La Vida Loca",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-08-03T03:35:03.017Z",
+    "updatedAt": "2026-08-03T03:35:03.017Z",
     "deletedAt": null
   },
   {
