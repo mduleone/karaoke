@@ -3808,6 +3808,22 @@
     "deletedAt": null
   },
   {
+    "id": "8944bd1b-64d9-4c58-9f09-a556e99ab0c6",
+    "artist": "Jet",
+    "title": "Cold Hard Bitch",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-08-20T02:27:15.707Z",
+    "updatedAt": "2026-08-20T02:27:15.707Z",
+    "deletedAt": null
+  },
+  {
     "id": "968908e0-8bf6-45d5-8a5c-b14efbaf25c2",
     "artist": "Jimi Hendrix",
     "title": "All Along the Watchtower",
@@ -4917,7 +4933,7 @@
     "title": "You Get What You Give",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
