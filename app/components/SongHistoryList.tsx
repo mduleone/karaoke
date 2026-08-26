@@ -9,9 +9,10 @@ import type { SongHistoryType } from '../types/song';
 import styles from './SongHistoryList.module.scss';
 import { useKaraokeSearchContext } from '../context/karaoke';
 import { useSimpleUserContext } from '../context/simple-user';
+import { compareArtists } from '../utils/string';
 
 const songSorter = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
-  const artistCompare = artistA.localeCompare(artistB);
+  const artistCompare = compareArtists(artistA, artistB);
   if (artistCompare !== 0) {
     return artistCompare;
   }
@@ -45,9 +46,7 @@ const SongHistoryList: React.FC<{ songs: SongHistoryType[] }> = ({ songs }) => {
   const filteredSongs = useMemo(() => {
     const q = historySearchQuery.toLowerCase();
     if (!q) return songs;
-    return songs.filter(
-      (song) => song.title.toLowerCase().includes(q) || song.artist.toLowerCase().includes(q),
-    );
+    return songs.filter((song) => song.title.toLowerCase().includes(q) || song.artist.toLowerCase().includes(q));
   }, [songs, historySearchQuery]);
 
   const sortedSongsByAddedDate = useMemo(() => {
