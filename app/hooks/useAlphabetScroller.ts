@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, type RefObject } from 'react';
 import { ArtistType, SongType } from '../types/song';
 import { has } from '../utils/object';
+import { stripLeadingArticle } from '../utils/string';
 
 const isArtists = (candidate): candidate is ArtistType[] =>
   candidate.every((cand) => ['artist', 'songs'].every((key) => has(cand, key)));
@@ -18,7 +19,7 @@ const useAlphabetScroller = (sortedList: SongType[] | ArtistType[], byTitle: boo
 
     if (isArtists(sortedList)) {
       const list = sortedList.reduce((map, { artist }) => {
-        const letter = artist[0].toLocaleUpperCase();
+        const letter = stripLeadingArticle(artist).charAt(0).toLocaleUpperCase();
         if (/[0-9]/.test(letter)) {
           map['#'] = [];
         } else {
@@ -33,7 +34,7 @@ const useAlphabetScroller = (sortedList: SongType[] | ArtistType[], byTitle: boo
     }
 
     const list = sortedList.reduce((map, { artist, title }) => {
-      const sortKey = byTitle ? title : artist;
+      const sortKey = byTitle ? title : stripLeadingArticle(artist);
       const letter = sortKey.charAt(0).toLocaleUpperCase();
       if (/[0-9]/.test(letter)) {
         map['#'] = [];
@@ -48,7 +49,7 @@ const useAlphabetScroller = (sortedList: SongType[] | ArtistType[], byTitle: boo
   }, [sortedList, byTitle]);
 
   const addToRefMap = (name: string) => (instance: HTMLElement) => {
-    const letter = name.charAt(0).toLocaleUpperCase();
+    const letter = stripLeadingArticle(name).charAt(0).toLocaleUpperCase();
     if (/[0-9]/.test(letter)) {
       instance && letterRefMap.current['#']?.push(instance);
       return;

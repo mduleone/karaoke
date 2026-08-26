@@ -9,7 +9,7 @@ import type { ArtistType, SongType } from '../types/song';
 import { useKaraokeSearchContext } from '../context/karaoke';
 import styles from './SongList.module.scss';
 import useAlphabetScroller from '../hooks/useAlphabetScroller';
-import { normalizeForSearch } from '../utils/string';
+import { compareArtists, normalizeForSearch } from '../utils/string';
 
 const songSorterByTitle = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
   const titleCompare = titleA.localeCompare(titleB);
@@ -17,11 +17,11 @@ const songSorterByTitle = ({ title: titleA, artist: artistA }, { title: titleB, 
     return titleCompare;
   }
 
-  return artistA.localeCompare(artistB);
+  return compareArtists(artistA, artistB);
 };
 
 const songSorterByArtist = ({ title: titleA, artist: artistA }, { title: titleB, artist: artistB }) => {
-  const artistCompare = artistA.localeCompare(artistB);
+  const artistCompare = compareArtists(artistA, artistB);
   if (artistCompare !== 0) {
     return artistCompare;
   }
@@ -29,7 +29,7 @@ const songSorterByArtist = ({ title: titleA, artist: artistA }, { title: titleB,
   return titleA.localeCompare(titleB);
 };
 
-const artistSorter = ({ artist: artistA }, { artist: artistB }) => artistA.localeCompare(artistB);
+const artistSorter = ({ artist: artistA }, { artist: artistB }) => compareArtists(artistA, artistB);
 const TOP_OFFSET = 208;
 
 const SongList: React.FC<{ songs: SongType[] }> = ({ songs }) => {
