@@ -2533,7 +2533,7 @@
     "title": "Paralyzer",
     "notes": "",
     "username": "matt",
-    "favorite": true,
+    "favorite": false,
     "duet": false,
     "learn": false,
     "retry": false,
