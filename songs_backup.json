@@ -1312,6 +1312,22 @@
     "deletedAt": null
   },
   {
+    "id": "c2b918c3-e791-4b78-85ce-8cca340c4a83",
+    "artist": "Bonnie Tyler",
+    "title": "Total Eclipse Of The Heart",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": true,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-09-13T03:13:10.980Z",
+    "updatedAt": "2026-09-13T03:13:10.980Z",
+    "deletedAt": null
+  },
+  {
     "id": "0aa553f0-21dc-4769-b97d-a9a87c6e59c4",
     "artist": "Book of Mormon",
     "title": "You and Me (But Mostly Me)",
@@ -2029,6 +2045,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "00d1bede-0a6f-4c92-b06b-6f6df1d6851b",
+    "artist": "Duncan Sheik",
+    "title": "Barely Breathing",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-09-12T22:15:35.822Z",
+    "updatedAt": "2026-09-12T22:15:35.822Z",
     "deletedAt": null
   },
   {
