@@ -6784,6 +6784,22 @@
     "deletedAt": null
   },
   {
+    "id": "28d8c789-2cf7-42c0-9699-1991b162c0bf",
+    "artist": "The Strokes",
+    "title": "Last Night",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": true,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-14T01:14:31.977Z",
+    "updatedAt": "2026-10-14T01:14:31.977Z",
+    "deletedAt": null
+  },
+  {
     "id": "a5e51879-0da4-4e4d-8853-868211f93ba5",
     "artist": "The Struts",
     "title": "Could Have Been Me",
