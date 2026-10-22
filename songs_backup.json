@@ -1061,7 +1061,7 @@
     "title": "All the Small Things",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
@@ -2592,6 +2592,22 @@
     "deletedAt": null
   },
   {
+    "id": "f34b28e4-f46a-4e19-a31a-ff46dbfb8136",
+    "artist": "Fleetwood Mac",
+    "title": "The Chain",
+    "notes": "",
+    "username": "danielle",
+    "favorite": true,
+    "duet": true,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-22T02:26:25.690Z",
+    "updatedAt": "2026-10-22T02:26:25.690Z",
+    "deletedAt": null
+  },
+  {
     "id": "822ecdf4-0ef8-4bc0-82f6-e61d81732cc1",
     "artist": "Flogging Molly",
     "title": "Drunken Lullabies",
@@ -2909,6 +2925,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "2e6853c7-1a43-4b00-8a45-22492ea100db",
+    "artist": "Frankie Vaill & The Four Seasons",
+    "title": "Can’t Take My Eyes Off You",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": true,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-22T02:46:51.163Z",
+    "updatedAt": "2026-10-22T02:46:51.163Z",
     "deletedAt": null
   },
   {
@@ -3973,7 +4005,7 @@
     "title": "The Gambler",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
