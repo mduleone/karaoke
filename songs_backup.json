@@ -848,6 +848,22 @@
     "deletedAt": null
   },
   {
+    "id": "77da3ff7-c3a0-49d8-8b41-7080448ffbba",
+    "artist": "Billy Joel",
+    "title": "Captain Jack",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-27T18:36:49.534Z",
+    "updatedAt": "2026-10-27T18:36:49.534Z",
+    "deletedAt": null
+  },
+  {
     "id": "1e5a4e30-67c8-49bc-a552-acd301b6e467",
     "artist": "Billy Joel",
     "title": "It’s Still Rock and Roll to Me",
