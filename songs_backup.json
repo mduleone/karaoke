@@ -369,7 +369,7 @@
   },
   {
     "id": "bcd19dba-7585-4f01-aae4-c78ae303aee5",
-    "artist": "Avcii",
+    "artist": "Avcii Ft Aloe Black",
     "title": "Wake me up",
     "notes": "",
     "username": "matt",
@@ -1248,6 +1248,22 @@
     "deletedAt": null
   },
   {
+    "id": "bd9e4170-d9e1-4776-8570-95dc47cc1a32",
+    "artist": "Bon Jovi",
+    "title": "Born To Run",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-29T01:33:56.707Z",
+    "updatedAt": "2026-10-29T01:33:56.707Z",
+    "deletedAt": null
+  },
+  {
     "id": "23876bc8-5f07-45e5-8512-ed2937292f65",
     "artist": "Bon Jovi",
     "title": "It’s My Life",
@@ -1456,6 +1472,22 @@
     "deletedAt": null
   },
   {
+    "id": "29578369-64e5-4243-b04f-438179c86497",
+    "artist": "Britney Spears",
+    "title": "Hit Me Baby One More Time",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-29T01:21:22.037Z",
+    "updatedAt": "2026-10-29T01:21:22.037Z",
+    "deletedAt": null
+  },
+  {
     "id": "60ab961e-d709-4a9a-8350-b3780b1051ee",
     "artist": "Bruce Springsteen",
     "title": "Born to Run",
@@ -1630,6 +1662,38 @@
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
     "deletedAt": null
+  },
+  {
+    "id": "ce46d13b-d260-460b-ada8-7005de75084c",
+    "artist": "Cece Pennington",
+    "title": "Finally",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-28T23:58:22.022Z",
+    "updatedAt": "2026-10-28T23:58:22.022Z",
+    "deletedAt": null
+  },
+  {
+    "id": "36c60b4f-9112-4197-8f28-36034f7a66b6",
+    "artist": "Cece Pennington",
+    "title": "Finally",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-28T23:58:22.834Z",
+    "updatedAt": "2026-10-28T23:58:22.834Z",
+    "deletedAt": "2026-10-29T01:23:12.978Z"
   },
   {
     "id": "244e8627-2626-451f-8f8a-bcdf2940e64d",
@@ -4496,6 +4560,22 @@
     "deletedAt": null
   },
   {
+    "id": "f5c650ca-9504-4c1d-a70b-d3b234fda400",
+    "artist": "Meatloaf",
+    "title": "Paradise By The Dashboard Light",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": true,
+    "learn": false,
+    "retry": false,
+    "avoid": true,
+    "tags": [],
+    "createdAt": "2026-10-29T01:22:41.283Z",
+    "updatedAt": "2026-10-29T01:22:41.283Z",
+    "deletedAt": null
+  },
+  {
     "id": "02da847e-534f-4a35-bad8-6e28a4d9a799",
     "artist": "Men at Work",
     "title": "Down Under",
@@ -6272,6 +6352,22 @@
     "deletedAt": null
   },
   {
+    "id": "18403ed2-9e64-4a12-85f2-aea284eeb44e",
+    "artist": "Streetlight Manifesto",
+    "title": "Keasby Nights",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-29T01:50:27.467Z",
+    "updatedAt": "2026-10-29T01:50:27.467Z",
+    "deletedAt": null
+  },
+  {
     "id": "e9a8940f-d96e-41d0-b934-1821fdbdd24d",
     "artist": "Streetlight Manifesto",
     "title": "Point / Counterpoint",
@@ -6325,7 +6421,7 @@
     "title": "Caress Me Down",
     "notes": "",
     "username": "matt",
-    "favorite": false,
+    "favorite": true,
     "duet": false,
     "learn": false,
     "retry": false,
