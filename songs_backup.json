@@ -3536,6 +3536,22 @@
     "deletedAt": null
   },
   {
+    "id": "91391fe1-edf4-43df-80f9-14ab7c149d75",
+    "artist": "Gwen Stefani",
+    "title": "Just A Girl",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-31T03:45:00.925Z",
+    "updatedAt": "2026-10-31T03:45:00.925Z",
+    "deletedAt": null
+  },
+  {
     "id": "51af435a-6043-47a1-a8bf-7281ab84406a",
     "artist": "Hamilton",
     "title": "Alexander Hamilton",
@@ -6592,6 +6608,22 @@
     "deletedAt": null
   },
   {
+    "id": "abb9a922-6d41-4b1a-a4b2-84bf9670c248",
+    "artist": "Tears For Fears",
+    "title": "Mad World",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-10-31T03:46:25.863Z",
+    "updatedAt": "2026-10-31T03:46:25.863Z",
+    "deletedAt": null
+  },
+  {
     "id": "1294297e-b646-45e7-a365-14343f0cb744",
     "artist": "Teddy Swims",
     "title": "Lose Control",
@@ -7677,7 +7709,7 @@
     "tags": [],
     "createdAt": "2026-07-16T00:21:45.873Z",
     "updatedAt": "2026-07-16T00:21:45.873Z",
-    "deletedAt": null
+    "deletedAt": "2026-10-31T03:34:03.328Z"
   },
   {
     "id": "86197ed2-3982-4ee5-ad8f-1be6c10ea60a",
