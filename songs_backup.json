@@ -2080,6 +2080,22 @@
     "deletedAt": null
   },
   {
+    "id": "b1120451-0ce3-4507-aa9c-7ac15b1d2806",
+    "artist": "Def Leopard",
+    "title": "Pour Some Sugar On Me",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-11-08T05:45:00.753Z",
+    "updatedAt": "2026-11-08T05:45:00.753Z",
+    "deletedAt": null
+  },
+  {
     "id": "4db6b897-ebaf-4fe3-be6e-b87e8c130c86",
     "artist": "Del Amitri",
     "title": "Roll To Me",
@@ -6669,6 +6685,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "f04357f6-8af0-4c9c-8e9b-31b4a27dc5ec",
+    "artist": "The Animals",
+    "title": "House Of The Rising Sun",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-11-08T04:28:31.197Z",
+    "updatedAt": "2026-11-08T04:28:31.197Z",
     "deletedAt": null
   },
   {
