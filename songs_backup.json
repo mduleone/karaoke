@@ -2080,6 +2080,22 @@
     "deletedAt": null
   },
   {
+    "id": "0445045b-f437-4a20-9c7f-c24f7067e7a3",
+    "artist": "Def Leopard",
+    "title": "Pour Some Sugar",
+    "notes": "",
+    "username": "danielle",
+    "favorite": false,
+    "duet": true,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-11-08T18:48:34.138Z",
+    "updatedAt": "2026-11-08T18:48:34.138Z",
+    "deletedAt": null
+  },
+  {
     "id": "b1120451-0ce3-4507-aa9c-7ac15b1d2806",
     "artist": "Def Leopard",
     "title": "Pour Some Sugar On Me",
