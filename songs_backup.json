@@ -4256,6 +4256,22 @@
     "deletedAt": null
   },
   {
+    "id": "021b70d8-0bb7-4d9f-9320-15f8c2156ea5",
+    "artist": "Lenny Kravitz",
+    "title": "American Woman",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": false,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-11-21T03:40:53.080Z",
+    "updatedAt": "2026-11-21T03:40:53.080Z",
+    "deletedAt": null
+  },
+  {
     "id": "19f7193d-d2e7-4fd9-9fcb-b696d8289f61",
     "artist": "Lifehouse",
     "title": "Hanging By A Moment",
@@ -7821,6 +7837,22 @@
     "tags": [],
     "createdAt": "2025-12-17T06:39:24.688Z",
     "updatedAt": "2025-12-17T06:39:24.688Z",
+    "deletedAt": null
+  },
+  {
+    "id": "a62659c0-6ba4-48a7-ad0a-71ce002a364d",
+    "artist": "ZZ Top",
+    "title": "Sharp Dressed Man",
+    "notes": "",
+    "username": "matt",
+    "favorite": false,
+    "duet": false,
+    "learn": true,
+    "retry": false,
+    "avoid": false,
+    "tags": [],
+    "createdAt": "2026-11-21T06:58:54.265Z",
+    "updatedAt": "2026-11-21T06:58:54.265Z",
     "deletedAt": null
   }
 ]
